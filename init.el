@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/10/20 14:58:38 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/10/20 15:08:42 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -106,3 +106,5 @@
 
 ;; Only works for newer versions of emacs
 (load-theme 'manoj-dark t)
+
+;; Still don't know how to make font-lock-mode and show-paren-mode default
