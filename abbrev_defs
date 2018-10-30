@@ -14,7 +14,7 @@
 (define-abbrev-table 'c-mode-abbrev-table
   '(
     ("df" "define" nil 3)
-    ("in" "include" nil 8)
+    ("incl" "include" nil 8)
    ))
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
@@ -61,6 +61,8 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
+(define-abbrev-table 'select-tags-table-mode-abbrev-table '())
+
 (define-abbrev-table 'special-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
@@ -72,3 +74,6 @@
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+
+(define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+

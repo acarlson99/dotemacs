@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/10/21 17:22:24 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/10/30 11:50:47 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -104,8 +104,11 @@
       (message "%s" file)
       (delete-file file))))
 
+(setq-default transient-mark-mode t)
+(setq-default font-lock-mode t)
+(setq-default show-paren-mode t)
+
 ;; Only works for newer versions of emacs
 (load-theme 'manoj-dark t)
-(setq-default abbrev-mode t)
 
 ;; Still don't know how to make font-lock-mode and show-paren-mode default
