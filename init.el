@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/01 22:22:58 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/02 15:01:36 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -45,82 +45,38 @@
 
 ;*******************************************************************************;
 
-(defun move-text-internal (arg)
-   (cond
-    ((and mark-active transient-mark-mode)
-     (if (> (point) (mark))
-            (exchange-point-and-mark))
-     (let ((column (current-column))
-              (text (delete-and-extract-region (point) (mark))))
-       (forward-line arg)
-       (move-to-column column t)
-       (set-mark (point))
-       (insert text)
-       (exchange-point-and-mark)
-       (setq deactivate-mark nil)))
-    (t
-     (beginning-of-line)
-     (when (or (> arg 0) (not (bobp)))
-       (forward-line)
-       (when (or (< arg 0) (not (eobp)))
-            (transpose-lines arg))
-       (forward-line -1)))))
+(setq config_files "~/.emacs.d/files")
+(setq load-path (append (list nil config_files) load-path))
 
-;; Move text up and down
-(defun move-text-down (arg)
-   "Move region (transient-mark-mode active) or current line
-  arg lines down."
-   (interactive "*p")
-   (move-text-internal arg))
-
-(defun move-text-up (arg)
-   "Move region (transient-mark-mode active) or current line
-  arg lines up."
-   (interactive "*p")
-   (move-text-internal (- arg)))
-
-(global-set-key (kbd "C-x C-p") 'move-text-up)
-(global-set-key (kbd "C-x C-n") 'move-text-down)
-(global-set-key (kbd "C-c a") 'font-lock-mode)
+(load "move_text.el")
+(load "highlighting.el")
+(load "backup_redirect.el")
 
 ;; Set line and column numbers
 (setq line-number-mode t)
 (setq column-number-mode t)
 
-;; Redirects emacs backups
-(setq backup-directory-alist
-	  `((".*" . , "~/.emacs.d/backups")))
-(setq auto-save-file-name-transforms
-	  `((".*" , "~/.emacs.d/backups" t)))
-
-;; Purges files not accessed in a week
-(message "Deleting old backup files...")
-(let ((week (* 60 60 24 7))
-      (current (float-time (current-time))))
-  (dolist (file (directory-files "~/.emacs.d/backups" t))
-    (when (and (backup-file-name-p file)
-               (> (- current (float-time (nth 5 (file-attributes file))))
-                  week))
-      (message "%s" file)
-      (delete-file file))))
+;; Set hotkeys for moving text
+(global-set-key (kbd "C-x C-p") 'move-text-up)
+(global-set-key (kbd "C-x C-n") 'move-text-down)
 
 ;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
-(add-hook 'c-mode-hook 'font-lock-mode)
-(add-hook 'c-mode-hook 'abbrev-mode)
-(add-hook 'c-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'abbrev-mode)
+(add-hook 'prog-mode-hook 'font-lock-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'hl-todo-mode)
 
 ;; Only available in gui.  Allows cmd-[ and cmd-] to swich windows like in terminal
-(global-set-key (kbd "s-[") 'back-window)
-(global-set-key (kbd "s-]") 'other-window)
 
 (defun back-window ()
   (interactive)
   (other-window -1))
+
+(global-set-key (kbd "s-[") 'back-window)
+(global-set-key (kbd "s-]") 'other-window)
 
 ;; Only works for newer versions of emacs
 (if (version< emacs-version "25")
 	()
   (load-theme 'manoj-dark t)
   (global-linum-mode 1))
-
-;; Still don't know how to make font-lock-mode and show-paren-mode default
