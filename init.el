@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/02 15:07:19 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/02 15:22:34 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -59,6 +59,8 @@
   (load "highlighting.el")
   (add-hook 'prog-mode-hook 'hl-todo-mode))
 
+;; Disable startup screen
+(setq inhibit-startup-screen t)
 
 ;; Set line and column numbers
 (setq line-number-mode t)
@@ -81,4 +83,3 @@
 
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
-
