@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/10/30 11:50:47 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/01 22:22:58 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -104,11 +104,23 @@
       (message "%s" file)
       (delete-file file))))
 
-(setq-default transient-mark-mode t)
-(setq-default font-lock-mode t)
-(setq-default show-paren-mode t)
+;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
+(add-hook 'c-mode-hook 'font-lock-mode)
+(add-hook 'c-mode-hook 'abbrev-mode)
+(add-hook 'c-mode-hook 'show-paren-mode)
+
+;; Only available in gui.  Allows cmd-[ and cmd-] to swich windows like in terminal
+(global-set-key (kbd "s-[") 'back-window)
+(global-set-key (kbd "s-]") 'other-window)
+
+(defun back-window ()
+  (interactive)
+  (other-window -1))
 
 ;; Only works for newer versions of emacs
-(load-theme 'manoj-dark t)
+(if (version< emacs-version "25")
+	()
+  (load-theme 'manoj-dark t)
+  (global-linum-mode 1))
 
 ;; Still don't know how to make font-lock-mode and show-paren-mode default
