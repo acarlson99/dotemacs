@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/02 15:01:36 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/02 15:07:19 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -49,8 +49,16 @@
 (setq load-path (append (list nil config_files) load-path))
 
 (load "move_text.el")
-(load "highlighting.el")
 (load "backup_redirect.el")
+
+;; Version specific
+(if (version< emacs-version "25")
+	()
+  (load-theme 'manoj-dark t)
+  (global-linum-mode 1)
+  (load "highlighting.el")
+  (add-hook 'prog-mode-hook 'hl-todo-mode))
+
 
 ;; Set line and column numbers
 (setq line-number-mode t)
@@ -64,7 +72,6 @@
 (add-hook 'prog-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'font-lock-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
-(add-hook 'prog-mode-hook 'hl-todo-mode)
 
 ;; Only available in gui.  Allows cmd-[ and cmd-] to swich windows like in terminal
 
@@ -75,8 +82,3 @@
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
 
-;; Only works for newer versions of emacs
-(if (version< emacs-version "25")
-	()
-  (load-theme 'manoj-dark t)
-  (global-linum-mode 1))
