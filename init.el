@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/02 15:22:34 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/03 16:17:39 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -50,6 +50,7 @@
 
 (load "move_text.el")
 (load "backup_redirect.el")
+(load "window_movement.el")
 
 ;; Version specific
 (if (version< emacs-version "25")
@@ -66,20 +67,17 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
-;; Set hotkeys for moving text
+;; Set hotkeys for...
+;; moving text
 (global-set-key (kbd "C-x C-p") 'move-text-up)
 (global-set-key (kbd "C-x C-n") 'move-text-down)
+;; whitespace cleanup
+(global-set-key (kbd "C-c w") 'whitespace-cleanup)
+;; changing panes in GUI
+(global-set-key (kbd "s-[") 'back-window)
+(global-set-key (kbd "s-]") 'other-window)
 
 ;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
 (add-hook 'prog-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'font-lock-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
-
-;; Only available in gui.  Allows cmd-[ and cmd-] to swich windows like in terminal
-
-(defun back-window ()
-  (interactive)
-  (other-window -1))
-
-(global-set-key (kbd "s-[") 'back-window)
-(global-set-key (kbd "s-]") 'other-window)
