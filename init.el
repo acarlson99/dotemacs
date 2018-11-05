@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/03 16:17:39 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/04 22:13:06 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -51,6 +51,8 @@
 (load "move_text.el")
 (load "backup_redirect.el")
 (load "window_movement.el")
+(load "tabbar.el")
+
 
 ;; Version specific
 (if (version< emacs-version "25")
@@ -80,4 +82,5 @@
 ;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
 (add-hook 'prog-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'font-lock-mode)
+(add-hook 'text-mode-hook 'font-lock-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
