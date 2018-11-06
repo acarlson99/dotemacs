@@ -15,6 +15,7 @@
   '(
     ("df" "define" nil 3)
     ("incl" "include" nil 8)
+    ("rtn" "return" nil 1)
    ))
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
@@ -52,6 +53,8 @@
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'package-menu-mode-abbrev-table '())
 
 (define-abbrev-table 'pike-mode-abbrev-table
   '(

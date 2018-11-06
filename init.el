@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/04 22:13:06 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/05 22:44:45 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -44,6 +44,12 @@
 
 
 ;*******************************************************************************;
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
 (setq config_files "~/.emacs.d/files")
 (setq load-path (append (list nil config_files) load-path))
