@@ -1,12 +1,12 @@
 ;*******************************************************************************;
-;                                                                               ;
+0;95;0c;                                                                               ;
 ;                                                          :::      ::::::::    ;
 ;    dotemacs                                            :+:      :+:    :+:    ;
 ;                                                      +:+ +:+         +:+      ;
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/05 23:13:13 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/07 14:21:44 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -51,22 +51,22 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(setq config_files "~/.emacs.d/files")
+(setq config_files "~/.emacs.d/srcs")
 (setq load-path (append (list nil config_files) load-path))
 
 (load "move_text.el")
 (load "backup_redirect.el")
 (load "window_movement.el")
-(load "tabbar.el")
+(load "highlighting.el")
 
+;; Theme
+(load-theme 'manoj-dark t)
 
-;; Version specific
-(if (version< emacs-version "25")
-	()
-  (load-theme 'manoj-dark t)
-  (global-linum-mode 1)
-  (load "highlighting.el")
-  (add-hook 'prog-mode-hook 'hl-todo-mode))
+;; Line numbers
+(global-linum-mode 1)
+
+;; HOLD TODO NEXT THEM PROG OKAY DONT FAIL DONE NOTE KLUDGE HACK TEMP FIXME XXX XXXX highlighting
+(add-hook 'prog-mode-hook 'hl-todo-mode)
 
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
@@ -88,7 +88,7 @@
 ;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
 (add-hook 'prog-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'font-lock-mode)
-(add-hook 'text-mode-hook 'font-lock-mode)
+(add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
 (custom-set-variables
