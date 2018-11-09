@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/08 22:44:32 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/08 23:00:34 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -14,6 +14,7 @@
 ;; (setq config_files "/usr/share/emacs/site-lisp/")
 ;; (setq load-path (append (list nil config_files) load-path))
 
+;; Load general features files
 (setq config_files "~/.emacs.d/dump/")
 (setq load-path (append (list nil config_files) load-path))
 
@@ -22,8 +23,8 @@
 (load "comments.el")
 (load "header.el")
 
-;; (autoload 'php-mode "php-mode" "Major mode for editing PHP code" t)
-;; (add-to-list 'auto-mode-alist '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
+(autoload 'php-mode "php-mode" "Major mode for editing PHP code" t)
+(add-to-list 'auto-mode-alist '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
 
 ; Set default emacs configuration
 (set-language-environment "UTF-8")
@@ -59,7 +60,7 @@
 (load "window_movement.el")
 (load "highlighting.el")
 (load "column-marker.el")
-(load "my_c_config.el")
+(load "my_prog_config.el")
 
 ;; Theme
 (load-theme 'manoj-dark t)
@@ -74,24 +75,14 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
-;; Set hotkeys for...
-;; moving text
-(global-set-key (kbd "C-x C-p") 'move-text-up)
-(global-set-key (kbd "C-x C-n") 'move-text-down)
-;; whitespace cleanup
-(global-set-key (kbd "C-c w") 'whitespace-cleanup)
-;; changing panes in GUI
+;; Change panes in GUI
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
 
-;; setting modes
-(add-hook 'prog-mode-hook 'abbrev-mode)
-(add-hook 'prog-mode-hook 'font-lock-mode)
+;; Set modes
+(add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
+(add-hook 'prog-mode-hook 'my_prog_config)
 (add-hook 'org-mode-hook 'font-lock-mode)
-(add-hook 'prog-mode-hook 'show-paren-mode)
-(add-hook 'prog-mode-hook 'hl-todo-mode)
-(add-hook 'c-mode-hook (lambda () (interactive) (column-marker-3 80)))
-(add-hook 'c-mode-hook 'my_c_config)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
