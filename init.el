@@ -1,12 +1,12 @@
 ;*******************************************************************************;
-0;95;0c;                                                                               ;
+;                                                                               ;
 ;                                                          :::      ::::::::    ;
 ;    dotemacs                                            :+:      :+:    :+:    ;
 ;                                                      +:+ +:+         +:+      ;
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/07 14:21:44 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/08 22:44:32 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -58,15 +58,14 @@
 (load "backup_redirect.el")
 (load "window_movement.el")
 (load "highlighting.el")
+(load "column-marker.el")
+(load "my_c_config.el")
 
 ;; Theme
 (load-theme 'manoj-dark t)
 
 ;; Line numbers
 (global-linum-mode 1)
-
-;; HOLD TODO NEXT THEM PROG OKAY DONT FAIL DONE NOTE KLUDGE HACK TEMP FIXME XXX XXXX highlighting
-(add-hook 'prog-mode-hook 'hl-todo-mode)
 
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
@@ -85,11 +84,14 @@
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
 
-;; Turns on font lock mode, abbrev mode, and show paren mode! YES!
+;; setting modes
 (add-hook 'prog-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'font-lock-mode)
 (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'hl-todo-mode)
+(add-hook 'c-mode-hook (lambda () (interactive) (column-marker-3 80)))
+(add-hook 'c-mode-hook 'my_c_config)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
