@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/08 23:00:34 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/11 17:30:00 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -61,6 +61,7 @@
 (load "highlighting.el")
 (load "column-marker.el")
 (load "my_prog_config.el")
+(load "lorem-ipsum.el")
 
 ;; Theme
 (load-theme 'manoj-dark t)
