@@ -1,15 +1,14 @@
-;*******************************************************************************;
-;                                                                               ;
-;                                                          :::      ::::::::    ;
-;    dotemacs                                            :+:      :+:    :+:    ;
-;                                                      +:+ +:+         +:+      ;
-;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
-;                                                  +#+#+#+#+#+   +#+            ;
-;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/28 18:17:00 by acarlson         ###   ########.fr        ;
-;                                                                               ;
-;*******************************************************************************;
-
+;******************************************************************************;
+;                                                                              ;
+;                                                         :::      ::::::::    ;
+;    init.el                                            :+:      :+:    :+:    ;
+;                                                     +:+ +:+         +:+      ;
+;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
+;                                                  +#+#+#+#+#+   +#+           ;
+;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
+;    Updated: 2018/11/28 18:33:45 by acarlson         ###   ########.fr        ;
+;                                                                              ;
+;******************************************************************************;
 ; Load general features files
 ;; (setq config_files "/usr/share/emacs/site-lisp/")
 ;; (setq load-path (append (list nil config_files) load-path))
@@ -61,6 +60,7 @@
 (load "highlighting.el")
 (load "column-marker.el")
 (load "my_c_config.el")
+(load "my_prog_config.el")
 (load "lorem-ipsum.el")
 
 ;; Theme
@@ -82,6 +82,7 @@
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
+(add-hook 'prog-mode-hook 'my_prog_config)
 (add-hook 'c-mode-hook 'my_c_config)
 (add-hook 'org-mode-hook 'font-lock-mode)
 
