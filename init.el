@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2018/11/25 14:58:21 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/11/28 18:17:00 by acarlson         ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -60,7 +60,7 @@
 (load "window_movement.el")
 (load "highlighting.el")
 (load "column-marker.el")
-(load "my_prog_config.el")
+(load "my_c_config.el")
 (load "lorem-ipsum.el")
 
 ;; Theme
@@ -82,7 +82,7 @@
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
-(add-hook 'prog-mode-hook 'my_prog_config)
+(add-hook 'c-mode-hook 'my_c_config)
 (add-hook 'org-mode-hook 'font-lock-mode)
 
 (custom-set-variables
