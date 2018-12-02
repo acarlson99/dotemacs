@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/11/30 15:50:20 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/01 16:21:13 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -85,12 +85,6 @@
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
 
-;; Set modes
-(add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
-(add-hook 'prog-mode-hook 'my_prog_config)
-(add-hook 'c-mode-hook 'my_c_config)
-(add-hook 'org-mode-hook 'font-lock-mode)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -98,10 +92,21 @@
  ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
- '(package-selected-packages (quote ())))
+ '(package-selected-packages (quote (auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; auto-complete-mode settings
+(ac-config-default)
+(setq ac-use-menu-map t)
+(add-to-list 'ac-modes 'prog-mode)
+
+;; Set modes
+(add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
+(add-hook 'prog-mode-hook 'my_prog_config)
+(add-hook 'c-mode-hook 'my_c_config)
+(add-hook 'org-mode-hook 'font-lock-mode)
