@@ -59,6 +59,7 @@ dkms.conf
 # Emacs stuff
 \#*
 *~
+/backups
 /elpa
 /eshell
 /games
