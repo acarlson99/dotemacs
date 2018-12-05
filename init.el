@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/03 16:21:14 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/04 13:36:06 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -92,7 +92,7 @@
  ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
- '(package-selected-packages (quote (elpy auto-complete))))
+ '(package-selected-packages (quote (evil elpy auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,3 +110,5 @@
 (add-hook 'prog-mode-hook 'my_prog_config)
 (add-hook 'c-mode-hook 'my_c_config)
 (add-hook 'org-mode-hook 'font-lock-mode)
+(require 'evil)
+(evil-mode 1)
