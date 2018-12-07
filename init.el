@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/06 22:10:20 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/06 23:07:55 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -77,8 +77,10 @@
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
 
-;; Disable scroll bar
-(scroll-bar-mode -1)
+;; Disable scroll bar in GUI
+(if (window-system)
+	(scroll-bar-mode -1)
+  )
 
 ;; Set line and column numbers
 (setq line-number-mode t)
