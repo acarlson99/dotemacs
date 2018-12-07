@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/04 13:36:06 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/06 22:10:20 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -77,6 +77,9 @@
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
 
+;; Disable scroll bar
+(scroll-bar-mode -1)
+
 ;; Set line and column numbers
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -92,7 +95,7 @@
  ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
- '(package-selected-packages (quote (evil elpy auto-complete))))
+ '(package-selected-packages (quote (magit evil elpy auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
