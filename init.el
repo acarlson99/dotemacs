@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/07 17:48:16 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/08 12:43:58 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -54,17 +54,18 @@
 (setq config_files "~/.emacs.d/srcs")
 (setq load-path (append (list nil config_files) load-path))
 
+(require 'column-marker)
+(require 'lorem-ipsum)
+(require 'escreen)
+(require 'evil)
+(evil-mode 1)
+
 (load "move_text.el")
 (load "backup_redirect.el")
 (load "window_movement.el")
 (load "highlighting.el")
 (load "my_c_config.el")
 (load "my_prog_config.el")
-
-(require 'column-marker)
-(require 'lorem-ipsum)
-(require 'evil)
-(evil-mode 1)
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -92,6 +93,22 @@
 ;; Change panes in GUI
 (global-set-key (kbd "s-[") 'back-window)
 (global-set-key (kbd "s-]") 'other-window)
+
+;; Escreen hotkeys
+(add-hook 'escreen-goto-screen-hook
+		  'escreen-enable-number-mode-if-more-than-one-screen)
+(global-set-key (kbd "M-0") 'escreen-goto-screen-0)
+(global-set-key (kbd "M-1") 'escreen-goto-screen-1)
+(global-set-key (kbd "M-2") 'escreen-goto-screen-2)
+(global-set-key (kbd "M-3") 'escreen-goto-screen-3)
+(global-set-key (kbd "M-4") 'escreen-goto-screen-4)
+(global-set-key (kbd "M-5") 'escreen-goto-screen-5)
+(global-set-key (kbd "M-6") 'escreen-goto-screen-6)
+(global-set-key (kbd "M-7") 'escreen-goto-screen-7)
+(global-set-key (kbd "M-8") 'escreen-goto-screen-8)
+(global-set-key (kbd "M-9") 'escreen-goto-screen-9)
+(global-set-key (kbd "C->") 'escreen-goto-next-screen)
+(global-set-key (kbd "C-<") 'escreen-goto-prev-screen)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
