@@ -11,9 +11,9 @@
   ;; (set-face-underline  'hl-line t)
 
   ;; sick modes
-  (abbrev-mode)
-  (font-lock-mode)
-  (hl-todo-mode)
-  (hl-line-mode)
-  (show-paren-mode)
+  (abbrev-mode t)
+  (font-lock-mode t)
+  (hl-todo-mode t)
+  (hl-line-mode t)
+  (show-paren-mode t)
   )

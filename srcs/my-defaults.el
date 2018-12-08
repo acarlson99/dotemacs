@@ -14,3 +14,21 @@
                   week))
       (message "%s" file)
       (delete-file file))))
+
+;; Theme
+(load-theme 'manoj-dark t)
+
+;; Line numbers
+(global-linum-mode 1)
+
+;; Disable startup screen
+(setq inhibit-startup-screen t)
+
+;; Disable scroll bar in GUI
+(if (window-system)
+	(scroll-bar-mode -1)
+  )
+
+;; Set line and column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
