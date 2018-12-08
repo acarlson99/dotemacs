@@ -1,4 +1,4 @@
-(defun my_prog_config()
+(defun my-prog-config()
   "For use in 'prog-mode-hook'."
   ;; moving text
   (global-set-key (kbd "C-x C-p") 'move-text-up)

@@ -1,4 +1,4 @@
-(defun my_c_config()
+(defun my-c-config()
   "For use in 'c-mode-hook'."
   ;; keyboard macros
   (global-set-key (kbd "<backtab>") 'kmacro-start-macro-or-insert-counter)

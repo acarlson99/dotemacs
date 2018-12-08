@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/08 14:24:32 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/08 15:41:35 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -80,6 +80,7 @@
 (load "my-hotkeys.el")
 (load "my-prog-config.el")
 (load "my-c-config.el")
+(load "my-term-config.el")
 
 (defun lipsum-load (arg)
   "Load lorem-ipsum.el"
@@ -99,6 +100,7 @@
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
-(add-hook 'prog-mode-hook 'my_prog_config)
-(add-hook 'c-mode-hook 'my_c_config)
+(add-hook 'prog-mode-hook 'my-prog-config)
+(add-hook 'c-mode-hook 'my-c-config)
 (add-hook 'org-mode-hook 'font-lock-mode)
+(add-hook 'term-mode-hook 'my-term-config)
