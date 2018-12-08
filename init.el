@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/06 23:07:55 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/07 17:48:16 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -58,10 +58,13 @@
 (load "backup_redirect.el")
 (load "window_movement.el")
 (load "highlighting.el")
-(load "column-marker.el")
 (load "my_c_config.el")
 (load "my_prog_config.el")
-(load "lorem-ipsum.el")
+
+(require 'column-marker)
+(require 'lorem-ipsum)
+(require 'evil)
+(evil-mode 1)
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -115,5 +118,3 @@
 (add-hook 'prog-mode-hook 'my_prog_config)
 (add-hook 'c-mode-hook 'my_c_config)
 (add-hook 'org-mode-hook 'font-lock-mode)
-(require 'evil)
-(evil-mode 1)
