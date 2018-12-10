@@ -37,8 +37,8 @@
   (other-window -1))
 
 ;; Change panes in GUI
-(global-set-key (kbd "s-[") 'back-window)
-(global-set-key (kbd "s-]") 'other-window)
+(global-set-key (kbd "C-{") 'back-window)
+(global-set-key (kbd "C-}") 'other-window)
 
 ;; Escreen settings
 (add-hook 'escreen-goto-screen-hook
