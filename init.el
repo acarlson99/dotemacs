@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/08 15:41:35 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/10 00:02:35 by marvin           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -58,7 +58,7 @@
  ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
- '(package-selected-packages (quote (magit evil elpy auto-complete))))
+ '(package-selected-packages (quote (magit elpy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -66,16 +66,27 @@
  ;; If there is more than one, they won't work right.
  )
 
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+						 ("marmalade" . "http://marmalade-repo.org/packages/")
+						 ("melpa" . "http://melpa.milkbox.net/packages/")))
+
 (setq config_files "~/.emacs.d/srcs")
 (setq load-path (append (list nil config_files) load-path))
 
 (require 'column-marker)
 (require 'hl-todo)
-(require 'ahk-mode)
-(require 'evil)
-(evil-mode 1)
+(require 'xahk-mode)
 (require 'escreen)
 (escreen-install)
+;; Turn on evil mode if it is installed
+(when (require 'evil nil 'noerror)
+  (evil-mode 1))
+;; Set auto-complete-mode settings if installed
+(when (require 'auto-complete nil 'noerror)
+  (ac-config-default)
+  (setq ac-use-menu-map t)
+  (add-to-list 'ac-modes 'prog-mode))
 
 (load "my-defaults.el")
 (load "my-hotkeys.el")
@@ -88,16 +99,6 @@
   (interactive "p")
   (require 'lorem-ipsum)
   )
-
-(require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-						 ("marmalade" . "http://marmalade-repo.org/packages/")
-						 ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-;; auto-complete-mode settings
-(ac-config-default)
-(setq ac-use-menu-map t)
-(add-to-list 'ac-modes 'prog-mode)
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
