@@ -1,7 +1,7 @@
 # .emacs.d/
 
-```
-clone https://github.com/bombblob/dotemacs.git ~/.emacs.d
+```bash
+git clone https://github.com/bombblob/dotemacs.git ~/.emacs.d
 ```
 
 ## Included packages:
@@ -24,7 +24,7 @@ Highlights TODO, FIXME, and a few other keywords
 
 Inserts lorem ipsum text by sentence, paragraph, etc.
 
-```M-x lipsum-load``` loads lorem-ipsum.el
+`M-x lipsum-load` loads lorem-ipsum.el
 
 ### [xahk-mode.el](http://xahlee.info/mswin/emacs_autohotkey_mode.html):
 
@@ -34,7 +34,7 @@ autohotkey mode
 
 * [undo-tree](https://www.emacswiki.org/emacs/UndoTree) - Makes emacs undo work more intuitively
 
-* [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu
+* [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu :ok_hand:
 
 * [magit](https://magit.vc/) - Git version control interface
 

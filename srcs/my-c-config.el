@@ -6,5 +6,4 @@
   ;; whitespace cleanup
   (global-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting
-  (global-set-key (kbd "C-c c") 'uncomment-region)
-  )
+  (global-set-key (kbd "C-c c") 'uncomment-region))

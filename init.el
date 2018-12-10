@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/10 00:21:12 by marvin           ###   ########.fr        ;
+;    Updated: 2018/12/10 13:28:21 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -81,7 +81,8 @@
 (escreen-install)
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
-  (evil-mode 1))
+  (evil-mode 1)
+  (evil-set-initial-state 'term-mode 'emacs))
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
   (ac-config-default)
@@ -97,8 +98,7 @@
 (defun lipsum-load (arg)
   "Load lorem-ipsum.el"
   (interactive "p")
-  (require 'lorem-ipsum)
-  )
+  (require 'lorem-ipsum))
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))

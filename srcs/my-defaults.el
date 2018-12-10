@@ -26,8 +26,7 @@
 
 ;; Disable scroll bar in GUI
 (if (window-system)
-	(scroll-bar-mode -1)
-  )
+	(scroll-bar-mode -1))
 
 ;; Set line and column numbers
 (setq line-number-mode t)
