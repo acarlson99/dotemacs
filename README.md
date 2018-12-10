@@ -47,3 +47,5 @@ Automatic backups are redirected to ~/.emacs.d/backups
 All backups in ~/.emacs.d/backups are purged after a week
 
 isearch set to case sensitive
+
+dump from 42siliconvalley
