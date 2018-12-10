@@ -35,3 +35,7 @@
 
 ;; Make search case sensetive
 (setq-default case-fold-search nil)
+
+;; Highlight current line
+(global-hl-line-mode 1)
+(set-face-foreground 'hl-line nil)
