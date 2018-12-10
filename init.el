@@ -71,6 +71,7 @@
 
 (require 'column-marker)
 (require 'hl-todo)
+(require 'ahk-mode)
 (require 'evil)
 (evil-mode 1)
 (require 'escreen)
