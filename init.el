@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/10 13:28:21 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/11 11:30:42 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -58,7 +58,9 @@
  ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
- '(package-selected-packages (quote (evil magit elpy))))
+ '(package-selected-packages
+   (quote
+	(all-the-icons neotree auto-complete evil magit elpy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -74,26 +76,33 @@
 (setq config_files "~/.emacs.d/srcs")
 (setq load-path (append (list nil config_files) load-path))
 
+(load "my-defaults.el")
+(load "my-hotkeys.el")
+(load "my-prog-config.el")
+(load "my-c-config.el")
+(load "my-term-config.el")
+
 (require 'column-marker)
 (require 'hl-todo)
 (require 'xahk-mode)
 (require 'escreen)
 (escreen-install)
+
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
-  (evil-set-initial-state 'term-mode 'emacs))
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'neotree-mode 'emacs))
+
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
   (ac-config-default)
   (setq ac-use-menu-map t)
   (add-to-list 'ac-modes 'prog-mode))
 
-(load "my-defaults.el")
-(load "my-hotkeys.el")
-(load "my-prog-config.el")
-(load "my-c-config.el")
-(load "my-term-config.el")
+;; Set neotree settings if installed
+(when (require 'neotree)
+  (global-set-key [f8] 'neotree-toggle))
 
 (defun lipsum-load (arg)
   "Load lorem-ipsum.el"

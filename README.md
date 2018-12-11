@@ -34,11 +34,15 @@ autohotkey mode
 
 * [undo-tree](https://www.emacswiki.org/emacs/UndoTree) - Makes emacs undo work more intuitively
 
+* [neotree](https://github.com/jaypei/emacs-neotree) - File tree plugin
+
+* [all-the-icons](https://github.com/domtronn/all-the-icons.el) - All of the icons
+
 * [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu :ok_hand:
 
 * [magit](https://magit.vc/) - Git version control interface
 
-* [evil](https://www.emacswiki.org/emacs/Evil) - Provides vim features
+* [evil](https://www.emacswiki.org/emacs/Evil) - Provides vim-like features
 
 # Notes:
 
