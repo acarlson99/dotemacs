@@ -8,27 +8,31 @@ git clone https://github.com/bombblob/dotemacs.git ~/.emacs.d
 
 ### [column-marker.el](https://www.emacswiki.org/emacs/ColumnMarker):
 
-Allows for character highlighting
+Minor mode allowing column highlighting
 
 The 80th character in prog-mode is highlighted as per the 80 column rule
 
+### [nlinum.el](http://elpa.gnu.org/packages/nlinum.html)
+
+Minor mode like linum-mode, but uses jit-lock infrastructure to avoid some bugs
+
+About as fast or faster than linum.el (hopefully)
+
 ### [escreen.el](https://www.emacswiki.org/emacs/EmacsScreen):
 
-Allows multiple tabs with different layouts
+Minor mode that allows multiple tabs with different layouts
 
 ### [hl-todo-mode.el](https://github.com/tarsius/hl-todo):
 
-Highlights TODO, FIXME, and a few other keywords
+Minor mode to highlight TODO, FIXME, and a few other keywords
 
 ### [lorem-ipsum.el](https://www.emacswiki.org/emacs/LoremIpsum):
 
 Inserts lorem ipsum text by sentence, paragraph, etc.
 
-`M-x lipsum-load` loads lorem-ipsum.el
-
 ### [xahk-mode.el](http://xahlee.info/mswin/emacs_autohotkey_mode.html):
 
-autohotkey mode
+Major mode for autohotkey programming
 
 ## Recommended packages:
 

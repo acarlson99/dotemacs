@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/11 11:30:42 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/11 14:14:15 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -60,7 +60,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(all-the-icons neotree auto-complete evil magit elpy))))
+	(neotree all-the-icons auto-complete evil magit elpy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -76,17 +76,19 @@
 (setq config_files "~/.emacs.d/srcs")
 (setq load-path (append (list nil config_files) load-path))
 
+(require 'column-marker)
+(require 'nlinum)
+(require 'hl-todo)
+(require 'lorem-ipsum)
+(require 'xahk-mode)
+(require 'escreen)
+(escreen-install)
+
 (load "my-defaults.el")
 (load "my-hotkeys.el")
 (load "my-prog-config.el")
 (load "my-c-config.el")
 (load "my-term-config.el")
-
-(require 'column-marker)
-(require 'hl-todo)
-(require 'xahk-mode)
-(require 'escreen)
-(escreen-install)
 
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
@@ -101,13 +103,8 @@
   (add-to-list 'ac-modes 'prog-mode))
 
 ;; Set neotree settings if installed
-(when (require 'neotree)
+(when (require 'neotree nil 'noerror)
   (global-set-key [f8] 'neotree-toggle))
-
-(defun lipsum-load (arg)
-  "Load lorem-ipsum.el"
-  (interactive "p")
-  (require 'lorem-ipsum))
 
 ;; Set modes
 (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))

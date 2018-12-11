@@ -19,7 +19,17 @@
 (load-theme 'manoj-dark t)
 
 ;; Line numbers
-(global-linum-mode 1)
+(global-nlinum-mode 1)
+
+;; Preset `nlinum-format' for minimum width.
+(defun my-nlinum-mode-hook ()
+  (when nlinum-mode
+    (setq-local nlinum-format
+                (concat "%" (number-to-string
+                             ;; Guesstimate number of buffer lines.
+                             (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
+                        "d"))))
+(add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)
 
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
