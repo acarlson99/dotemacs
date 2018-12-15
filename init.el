@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/11 14:14:15 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/15 14:58:22 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -100,7 +100,8 @@
 (when (require 'auto-complete nil 'noerror)
   (ac-config-default)
   (setq ac-use-menu-map t)
-  (add-to-list 'ac-modes 'prog-mode))
+  (add-to-list 'ac-modes 'prog-mode)
+  (add-to-list 'ac-modes 'makefile-bsdmake-mode))
 
 ;; Set neotree settings if installed
 (when (require 'neotree nil 'noerror)
