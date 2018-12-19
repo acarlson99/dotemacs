@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/15 14:58:22 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/19 14:27:47 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -60,13 +60,14 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(neotree all-the-icons auto-complete evil magit elpy))))
+	(neotree all-the-icons auto-complete evil magit elpy)))
+ '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(trailing-whitespace ((t (:background "purple4")))))
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -94,7 +95,8 @@
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
   (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'neotree-mode 'emacs))
+  (evil-set-initial-state 'neotree-mode 'emacs)
+  (evil-set-initial-state 'help-mode 'emacs))
 
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
