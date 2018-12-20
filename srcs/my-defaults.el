@@ -51,3 +51,4 @@
 
 ;; Set fill column indicator defaults
 (setq fci-rule-column 80)
+(setq fci-rule-width 1)
