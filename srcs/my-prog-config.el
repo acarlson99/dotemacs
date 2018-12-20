@@ -9,4 +9,5 @@
   (font-lock-mode t)
   (hl-todo-mode t)
   (hl-line-mode t)
-  (show-paren-mode t))
+  (show-paren-mode t)
+  (fci-mode))

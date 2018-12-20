@@ -48,3 +48,6 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 (set-face-foreground 'hl-line nil)
+
+;; Set fill column indicator defaults
+(setq fci-rule-column 80)
