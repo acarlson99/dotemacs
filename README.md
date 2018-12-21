@@ -12,6 +12,14 @@ Minor mode allowing column highlighting
 
 The 80th character in prog-mode is highlighted as per the 80 column rule
 
+EDIT: removed this in favor of fci-mode
+
+### [fill-column-indicator.el](https://www.emacswiki.org/emacs/FillColumnIndicator)
+
+Minor mode to display vertical line on some column
+
+NOTE: fci-mode is weird and glitchy when used in conjunction with auto-complete-mode.  It is still usable, but it can be visually confusing
+
 ### [nlinum.el](http://elpa.gnu.org/packages/nlinum.html)
 
 Minor mode like linum-mode, but uses jit-lock infrastructure to avoid some bugs
@@ -22,7 +30,7 @@ About as fast or faster than linum.el (hopefully)
 
 Minor mode that allows multiple tabs with different layouts
 
-### [hl-todo-mode.el](https://github.com/tarsius/hl-todo):
+### [hl-todo.el](https://github.com/tarsius/hl-todo):
 
 Minor mode to highlight TODO, FIXME, and a few other keywords
 
