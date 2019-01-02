@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2018/12/20 20:42:11 by acarlson         ###   ########.fr        ;
+;    Updated: 2018/12/22 15:09:16 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -60,7 +60,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(neotree all-the-icons auto-complete evil magit elpy)))
+	(go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
