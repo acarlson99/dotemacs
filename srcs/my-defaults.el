@@ -49,6 +49,9 @@
 (global-hl-line-mode 1)
 (set-face-foreground 'hl-line nil)
 
+;; Line wrap
+(global-visual-line-mode 1)
+
 ;; Set fill column indicator defaults
 (setq fci-rule-column 80)
 (setq fci-rule-width 1)
