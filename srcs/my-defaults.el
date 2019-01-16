@@ -1,3 +1,6 @@
+;; Make sure backup directory exists
+(if (not (file-directory-p "~/.emacs.d/backups"))
+	(make-directory "~/.emacs.d/backups"))
 ;; Redirects emacs backups
 (setq backup-directory-alist
 	  `((".*" . , "~/.emacs.d/backups")))

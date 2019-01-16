@@ -12,13 +12,13 @@ Minor mode allowing column highlighting
 
 The 80th character in prog-mode is highlighted as per the 80 column rule
 
-EDIT: removed this in favor of fci-mode
+**EDIT**: removed in favor of fci-mode
 
 ### [fill-column-indicator.el](https://www.emacswiki.org/emacs/FillColumnIndicator)
 
 Minor mode to display vertical line on some column
 
-NOTE: fci-mode is weird and glitchy when used in conjunction with auto-complete-mode.  It is still usable, but it can be visually confusing
+**NOTE**: fci-mode can be visually confusing when used in conjunction with auto-complete-mode
 
 ### [nlinum.el](http://elpa.gnu.org/packages/nlinum.html)
 
