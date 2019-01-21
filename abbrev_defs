@@ -13,6 +13,9 @@
 
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
+    ("df" "define" nil 0)
+    ("incl" "include" nil 0)
+    ("rtn" "return" nil 0)
    ))
 
 (define-abbrev-table 'c-mode-abbrev-table
