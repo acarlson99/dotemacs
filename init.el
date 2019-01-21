@@ -115,6 +115,6 @@
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
 (add-hook 'prog-mode-hook 'my-prog-config)
 (add-hook 'c-mode-hook 'my-c-config)
-(add-hook 'c++-mode-hook 'my-c-config)
+(add-hook 'c++-mode-hook 'my-c-config)	; TODO: change this when they become more distinct
 (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'term-mode-hook 'my-term-config)

@@ -14,7 +14,7 @@
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
     ("df" "define" nil 0)
-    ("incl" "include" nil 0)
+    ("incl" "include" nil 1)
     ("rtn" "return" nil 0)
    ))
 
@@ -102,9 +102,7 @@
     ("incl" "import" nil 0)
    ))
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
