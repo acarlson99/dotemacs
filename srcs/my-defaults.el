@@ -10,13 +10,13 @@
 ;; Purges files not accessed in a week
 (message "Deleting old backup files...")
 (let ((week (* 60 60 24 7))
-      (current (float-time (current-time))))
+	  (current (float-time (current-time))))
   (dolist (file (directory-files "~/.emacs.d/backups" t))
-    (when (and (backup-file-name-p file)
-               (> (- current (float-time (nth 5 (file-attributes file))))
-                  week))
-      (message "%s" file)
-      (delete-file file))))
+	(when (and (backup-file-name-p file)
+			   (> (- current (float-time (nth 5 (file-attributes file))))
+				  week))
+	  (message "%s" file)
+	  (delete-file file))))
 
 ;; Theme
 (load-theme 'manoj-dark t)
@@ -27,11 +27,11 @@
 ;; Preset `nlinum-format' for minimum width.
 (defun my-nlinum-mode-hook ()
   (when nlinum-mode
-    (setq-local nlinum-format
-                (concat "%" (number-to-string
-                             ;; Guesstimate number of buffer lines.
-                             (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
-                        "d"))))
+	(setq-local nlinum-format
+				(concat "%" (number-to-string
+							 ;; Guesstimate number of buffer lines.
+							 (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
+						"d"))))
 (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)
 
 ;; Disable startup screen
@@ -54,7 +54,3 @@
 
 ;; Line wrap
 (global-visual-line-mode 1)
-
-;; Set fill column indicator defaults
-(setq fci-rule-column 80)
-(setq fci-rule-width 1)

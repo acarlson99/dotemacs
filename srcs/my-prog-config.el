@@ -4,10 +4,14 @@
   (global-set-key (kbd "C-x C-p") 'move-text-up)
   (global-set-key (kbd "C-x C-n") 'move-text-down)
 
+  ;; Set fill column indicator defaults
+  (setq fci-rule-column 80)
+  (setq fci-rule-width 1)
+
   ;; sick modes
   (abbrev-mode t)
   (font-lock-mode t)
   (hl-todo-mode t)
-  (hl-line-mode t)
+  ;;  (hl-line-mode t)
   (show-paren-mode t)
   (fci-mode))

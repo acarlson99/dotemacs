@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/01/20 20:31:36 by john             ###   ########.fr        ;
+;    Updated: 2019/01/21 08:38:22 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -86,12 +86,6 @@
 (require 'escreen)
 (escreen-install)
 
-(load "my-defaults.el")
-(load "my-hotkeys.el")
-(load "my-prog-config.el")
-(load "my-c-config.el")
-(load "my-term-config.el")
-
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
@@ -111,10 +105,17 @@
 (when (require 'neotree nil 'noerror)
   (global-set-key [f8] 'neotree-toggle))
 
+(load "my-defaults.el")
+(load "my-hotkeys.el")
+(load "my-prog-config.el")
+(load "my-c-config.el")
+(load "my-c++-config.el")
+(load "my-term-config.el")
+
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
 (add-hook 'prog-mode-hook 'my-prog-config)
 (add-hook 'c-mode-hook 'my-c-config)
-(add-hook 'c++-mode-hook 'my-c-config)	; TODO: change this when they become more distinct
+(add-hook 'c++-mode-hook 'my-c++-config)
 (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'term-mode-hook 'my-term-config)
