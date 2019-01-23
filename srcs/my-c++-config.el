@@ -2,7 +2,8 @@
 (defun hpp (name)
     "Add Coplien form to .hpp for C++ Classes painlessly"
     (interactive "sClass name: ")
-    (insert "\n#ifndef "(upcase name)"_H\n# define "(upcase name)"_H\n")
+    (insert "\n#ifndef "(upcase name)"_HPP\n# define "(upcase name)"_HPP\n")
+	(insert "\n")
     (insert "# include <iostream>\n# include <string>\n# include <stdexcept>\n\n")
     (insert "class "name" {\n\npublic:\n")
     (insert "\t"name"( std::string );\n")
