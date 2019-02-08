@@ -1,8 +1,8 @@
 (defun my-prog-config()
   "For use in 'prog-mode-hook'."
   ;; moving text
-  (global-set-key (kbd "C-x C-p") 'move-text-up)
-  (global-set-key (kbd "C-x C-n") 'move-text-down)
+  (local-set-key (kbd "C-x C-p") 'move-text-up)
+  (local-set-key (kbd "C-x C-n") 'move-text-down)
 
   ;; Set fill column indicator defaults
   (setq fci-rule-column 80)

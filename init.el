@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/02/06 19:11:57 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/02/08 15:30:40 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -74,7 +74,7 @@
 						 ("marmalade" . "http://marmalade-repo.org/packages/")
 						 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(setq config_files "~/.emacs.d/srcs")
+(setq config_files "~/.emacs.d/lisp")
 (setq load-path (append (list nil config_files) load-path))
 
 (require 'column-marker)
@@ -114,6 +114,7 @@
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
+;; commented out in favor of fci-mode
 (add-hook 'prog-mode-hook 'my-prog-config)
 (add-hook 'c-mode-hook 'my-c-config)
 (add-hook 'c++-mode-hook 'my-c++-config)

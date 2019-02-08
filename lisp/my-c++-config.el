@@ -23,7 +23,7 @@
     (insert name"::~"name"( void ) { }\n")
     (insert name"& "name"::operator=( "name" const &) { return *this; }\n")
 )
-(defun class (name)
+(defun class-insert (name)
     "Coplien Form Caller"
     (interactive "s: ")
     (if (equal (file-name-extension(buffer-file-name)) "hpp")
@@ -51,7 +51,7 @@
     (insert nest"::"name"Exception& "nest"::"name"Exception::operator=( "name"Exception const &) { return *this; }\n")
     (insert "const char* "nest"::"name"Exception::what( void ) const throw() {\n\treturn \"ERR_MSG\";\n}\n")
 )
-(defun eclass (name nest)
+(defun exception-insert (name nest)
     "Exception Coplien Form Caller"
     (interactive "sException Name: \nsNested in class: ")
     (if (equal (file-name-extension(buffer-file-name)) "hpp")
@@ -63,9 +63,11 @@
 (defun my-c++-config()
   "For use in 'c++-mode-hook'."
   ;; template exception insertion stuff from Steven
-  (global-set-key (kbd "C-c t i") 'class)
-  (global-set-key (kbd "C-c t e") 'eclass)
+  (local-set-key (kbd "C-c t i") 'class-insert)
+  (local-set-key (kbd "C-c t e") 'exception-insert)
+  ;; better comments
+  (local-set-key (kbd "C-c C-c") 'comment-norminette)
   ;; whitespace cleanup
-  (global-set-key (kbd "C-c w") 'whitespace-cleanup)
+  (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting
-  (global-set-key (kbd "C-c c") 'uncomment-region))
+  (local-set-key (kbd "C-c c") 'uncomment-region))
