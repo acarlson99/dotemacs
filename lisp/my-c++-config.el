@@ -56,7 +56,7 @@
   (insert newNest name"Exception::"name"Exception( "name"Exception const & cp) { *this = cp; }\n")
   (insert newNest name"Exception::~"name"Exception( void ) throw() { }\n")
   (insert newNest name"Exception& "newNest name"Exception::operator=( "name"Exception const &) { return *this; }\n")
-  (insert "const char* "newNest name"Exception::what( void ) const throw() {\n\treturn \ name"\";\n}\n")
+  (insert "const char* "newNest name"Exception::what( void ) const throw() {\n\treturn \""name"\";\n}\n")
   )
 
 (defun c++-insert-exception (name nest)
