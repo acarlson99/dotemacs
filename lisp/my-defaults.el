@@ -37,7 +37,7 @@
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
 
-;; Disable scroll bar in GUI
+;; Disable scroll bar and toolbar in GUI
 (if (window-system)
 	(progn
 	(tool-bar-mode -1)
