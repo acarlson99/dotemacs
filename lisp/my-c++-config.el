@@ -2,7 +2,7 @@
 (defun c++-insert-class-header (name)
   "Add Coplien form to .hpp for C++ Classes painlessly"
   (interactive "sClass name: ")
-  (insert "\n#ifndef "(upcase name)"_HPP\n# define "(upcase name)"_HPP\n")
+  (insert "#ifndef "(upcase name)"_HPP\n# define "(upcase name)"_HPP\n")
   (insert "\n")
   ;; (insert "# include <iostream>\n# include <string>\n# include <stdexcept>\n\n")
   (insert "class "name" {\n\npublic:\n")
@@ -17,7 +17,7 @@
 (defun c++-insert-class-src (name)
   "Add Coplien form to .cpp for C++ Classes painlessly"
   (interactive "sClass name: ")
-  (insert "\n#include \""name".hpp\"\n\n")
+  (insert "#include \""name".hpp\"\n\n")
   ;; (insert name"::"name"( std::string ) : { }\n")
   (insert name"::"name"( void ) { }\n")
   (insert name"::"name"( "name" const & cp) { *this = cp; }\n")
