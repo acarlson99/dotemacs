@@ -34,10 +34,22 @@
 	)
   )
 
+(defun c-protect-header (name)
+  "Insert inclusion protection"
+  (interactive "sInclusion protection name: ")
+  (if (equal name "")
+	  (setq name (upcase (concat (file-name-base) "_" (file-name-extension(buffer-file-name)))))
+	(setq name (upcase name))
+	)
+  (insert "#ifndef " name "\n# define " name "\n\n#endif")
+  )
+
 (defun my-c-config()
   "For use in 'c-mode-hook'."
+  ;; header protection
+  (local-set-key (kbd "C-c C-p") 'c-protect-header)
   ;; better comments
-  (local-set-key (kbd "C-c C-c") 'comment-norminette) ;; wtf why no work
+  (local-set-key (kbd "C-c C-c") 'comment-norminette)
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting

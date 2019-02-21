@@ -73,6 +73,8 @@
   ;; template exception insertion stuff from Steven
   (local-set-key (kbd "C-c i i") 'c++-insert-class)
   (local-set-key (kbd "C-c i e") 'c++-insert-exception)
+  ;; header protection
+  (local-set-key (kbd "C-c C-p") 'c-protect-header)
   ;; better comments
   (local-set-key (kbd "C-c C-c") 'comment-norminette)
   ;; whitespace cleanup
