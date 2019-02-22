@@ -55,3 +55,6 @@
 (global-set-key (kbd "C-c 9") 'escreen-goto-screen-9)
 (global-set-key (kbd "C-c >") 'escreen-goto-next-screen)
 (global-set-key (kbd "C-c <") 'escreen-goto-prev-screen)
+
+;; My god this is amazing! Man pages on command! Com-man-d pages
+(global-set-key [(f5)] (lambda () (interactive) (manual-entry (current-word))))
