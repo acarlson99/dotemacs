@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/02/16 17:16:26 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/02/22 23:54:28 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -60,7 +60,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
