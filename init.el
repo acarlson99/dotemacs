@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/02/22 23:54:28 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/03/01 19:56:45 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -104,6 +104,11 @@
 ;; Set neotree settings if installed
 (when (require 'neotree nil 'noerror)
   (global-set-key [f8] 'neotree-toggle))
+
+;; Set global undo tree
+;; C-x u is amazing
+(when (require 'undo-tree nil 'noerror)
+  (global-undo-tree-mode))
 
 (load "my-defaults.el")
 (load "my-hotkeys.el")
