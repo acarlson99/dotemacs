@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/03/01 19:56:45 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/03/06 15:05:12 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -14,8 +14,7 @@
 ;; (setq load-path (append (list nil config_files) load-path))
 
 ;; Load general features files
-(setq config_files "~/.emacs.d/dump/")
-(setq load-path (append (list nil config_files) load-path))
+(setq load-path (append (list nil "~/.emacs.d/dump/") load-path))
 
 (load "list.el")
 (load "string.el")
@@ -60,7 +59,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -74,8 +73,9 @@
 						 ("marmalade" . "http://marmalade-repo.org/packages/")
 						 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(setq config_files "~/.emacs.d/lisp")
-(setq load-path (append (list nil config_files) load-path))
+;; (setq config_files "~/.emacs.d/lisp")
+;; (setq load-path (append (list nil config_files) load-path))
+(setq load-path (append (list nil "~/.emacs.d/lisp") load-path))
 
 (require 'column-marker)
 (require 'fill-column-indicator)
@@ -109,6 +109,10 @@
 ;; C-x u is amazing
 (when (require 'undo-tree nil 'noerror)
   (global-undo-tree-mode))
+
+;; Set global flycheck
+(when (require 'flycheck nil 'noerror)
+  (global-flycheck-mode))
 
 (load "my-defaults.el")
 (load "my-hotkeys.el")

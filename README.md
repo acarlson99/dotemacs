@@ -52,11 +52,15 @@ Major mode for autohotkey programming
 
 * [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu :ok_hand:
 
+* [flycheck](https://www.flycheck.org/) - Linting and syntax checking.  May require other packages (pylint, etc) to be useful depending on language
+
 * [magit](https://magit.vc/) - Git version control interface
 
 * [evil](https://www.emacswiki.org/emacs/Evil) - Provides vim-like features
 
 # Notes:
+
+__DO NOT WORRY IF YOUR BACKUPS SEEM TO BE MISSING__
 
 Automatic backups are redirected to ~/.emacs.d/backups
 
