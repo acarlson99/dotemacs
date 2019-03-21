@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/03/07 21:31:28 by marvin           ###   ########.fr        ;
+;    Updated: 2019/03/15 17:17:03 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -62,7 +62,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -131,6 +131,7 @@
 (load "my-prog-config.el")
 (load "my-c-config.el")
 (load "my-c++-config.el")
+(load "my-ruby-config.el")
 (load "my-term-config.el")
 
 ;; Set modes
@@ -139,5 +140,6 @@
 (add-hook 'prog-mode-hook 'my-prog-config)
 (add-hook 'c-mode-hook 'my-c-config)
 (add-hook 'c++-mode-hook 'my-c++-config)
+(add-hook 'ruby-mode-hook 'my-ruby-config)
 (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'term-mode-hook 'my-term-config)
