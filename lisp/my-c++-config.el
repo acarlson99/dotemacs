@@ -75,8 +75,8 @@
   (local-set-key (kbd "C-c i e") 'c++-insert-exception)
   ;; header protection
   (local-set-key (kbd "C-c C-p") 'c-protect-header)
-  ;; better comments
-  (local-set-key (kbd "C-c C-c") 'comment-norminette)
+  ;; Norm comments
+  ; (local-set-key (kbd "C-c C-c") 'comment-norminette)	; removed because annoying
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting
