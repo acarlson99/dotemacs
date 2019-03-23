@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/03/15 17:17:03 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/03/23 15:11:35 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -62,7 +62,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -94,7 +94,12 @@
   (evil-mode 1)
   (evil-set-initial-state 'term-mode 'emacs)
   (evil-set-initial-state 'neotree-mode 'emacs)
-  (evil-set-initial-state 'help-mode 'emacs))
+  (evil-set-initial-state 'help-mode 'emacs)
+
+  (when (require 'evil-numbers nil 'noerror)
+	(define-key evil-normal-state-map (kbd "C-c C-a") 'evil-numbers/inc-at-pt)
+	(define-key evil-normal-state-map (kbd "C-c C-x") 'evil-numbers/dec-at-pt)
+	))
 
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
