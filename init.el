@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/03/25 14:27:24 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/03/25 14:30:45 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -140,6 +140,7 @@
 (load "my-c++-config.el")
 (load "my-ruby-config.el")
 (load "my-term-config.el")
+(load "my-web-config.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -150,3 +151,4 @@
 (add-hook 'ruby-mode-hook 'my-ruby-config)
 (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'term-mode-hook 'my-term-config)
+(add-hook 'web-mode-hook 'my-web-config)
