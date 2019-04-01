@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/04/01 12:38:23 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/04/01 14:16:45 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -143,6 +143,7 @@
 (load "my-term-config.el")
 (load "my-web-config.el")
 (load "my-php-config.el")
+(load "my-sql-config.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
