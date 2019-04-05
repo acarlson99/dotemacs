@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/04/01 14:16:45 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/04/05 15:59:31 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -89,6 +89,8 @@
 (require 'escreen)
 (escreen-install)
 (require 'sql-upcase)
+
+(require 'project-start)
 
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
