@@ -58,8 +58,8 @@
 		  (message ".git file exists.  Skipping git-init-project")
 		(progn
 		  (if (shell-command (format "git init && git add . && git commit -m \"First commit\" && git remote add origin %s && git push -u origin master" repo-url))
-			  (message "PUSH FAILED")
-			(message "push successful")))))))
+			  (message "push successful")
+			(message "PUSH FAILED")))))))
 
 (defun project-start-c ()
   "Start a c project."
