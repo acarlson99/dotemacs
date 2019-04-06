@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/04/05 15:59:31 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/04/05 16:59:47 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -62,7 +62,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(cargo svg-clock svg-mode-line-themes php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(go-autocomplete go-gopath go-imports golint cargo svg-clock svg-mode-line-themes php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
