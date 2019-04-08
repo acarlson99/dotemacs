@@ -1,6 +1,6 @@
 ;; Coplien form for c++ coding ease
 (defun c++-insert-class-header (name)
-  "Add Coplien form to .hpp for C++ Classes painlessly"
+  "Insert Coplien form class to .hpp.  Insert class NAME."
   (interactive "sClass name: ")
   (insert "#ifndef "(upcase name)"_HPP\n# define "(upcase name)"_HPP\n")
   (insert "\n")
@@ -15,7 +15,7 @@
   )
 
 (defun c++-insert-class-src (name)
-  "Add Coplien form to .cpp for C++ Classes painlessly"
+  "Insert Coplien form class to .cpp.  Insert class NAME."
   (interactive "sClass name: ")
   (insert "#include \""name".hpp\"\n\n")
   ;; (insert name"::"name"( std::string ) : { }\n")
@@ -26,7 +26,7 @@
   )
 
 (defun c++-insert-class (name)
-  "Coplien Form Caller"
+  "Class Coplien form caller.  Insert class NAME to buffer."
   (interactive "sClass name: ")
   (if (equal (file-name-extension(buffer-file-name)) "hpp")
 	  (c++-insert-class-header name))
@@ -35,7 +35,7 @@
   )
 
 (defun c++-insert-exception-header (name nest)
-  "Add Coplien form to .hpp for C++ Exceptions painlessly"
+  "Insert Coplien form exceptions to .hpp.  Insert exception NAME in class NEST."
   (interactive "sClass name: \nsNested in: ")
   (insert "\tclass "name"Exception : public std::exception {\n\tpublic:\n")
   (insert "\t\t"name"Exception( void );\n")
@@ -47,7 +47,7 @@
   )
 
 (defun c++-insert-exception-src (name nest)
-  "Add Coplien form to .cpp for C++ Exceptions painlessly"
+  "Insert Coplien form exceptions to .hpp.  Insert exception NAME in class NEST."
   (interactive "sClass name: \nsNested in: ")
   (if (string= nest "")
 	  (setq newNest "")
@@ -60,7 +60,7 @@
   )
 
 (defun c++-insert-exception (name nest)
-  "Exception Coplien Form Caller"
+  "Exception Coplien form caller.  Insert exception NAME in class NEST."
   (interactive "sException Name: \nsNested in class: ")
   (if (equal (file-name-extension(buffer-file-name)) "hpp")
 	  (c++-insert-exception-header name nest))
@@ -76,7 +76,7 @@
   ;; header protection
   (local-set-key (kbd "C-c C-p") 'c-protect-header)
   ;; Norm comments
-  ; (local-set-key (kbd "C-c C-c") 'comment-norminette)	; removed because annoying
+  ;; (local-set-key (kbd "C-c C-c") 'comment-norminette)	; removed because annoying
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting

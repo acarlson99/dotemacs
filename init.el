@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
 ;                                                  +#+#+#+#+#+   +#+           ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/04/05 16:59:47 by acarlson         ###   ########.fr        ;
+;    Updated: 2019/04/08 14:07:00 by acarlson         ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 ; Load general features files
@@ -146,6 +146,7 @@
 (load "my-web-config.el")
 (load "my-php-config.el")
 (load "my-sql-config.el")
+(load "my-go-config.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -159,3 +160,4 @@
 (add-hook 'web-mode-hook 'my-web-config)
 (add-hook 'php-mode-hook 'my-php-config)
 (add-hook 'sql-mode-hook 'my-sql-config)
+(add-hook 'go-mode-hook 'my-go-config)
