@@ -56,3 +56,6 @@
 
 ;; Line wrap
 (global-visual-line-mode 1)
+
+;; Disable annoying bell
+(setq ring-bell-function 'ignore)
