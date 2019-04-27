@@ -111,8 +111,10 @@
 
 (define-abbrev-table 'scheme-mode-abbrev-table
   '(
-    ("df" "define" nil 0)
-    ("nq" "null?" nil 0)
+    ("df" "define" nil 1)
+    ("iq" "integer?" nil 0)
+    ("lq" "list?" nil 1)
+    ("nq" "null?" nil 2)
    ))
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
