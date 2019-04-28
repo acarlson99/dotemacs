@@ -107,17 +107,22 @@
     ("incl" "import" nil 0)
    ))
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'scheme-mode-abbrev-table
   '(
-    ("df" "define" nil 1)
+    ("df" "define" nil 3)
     ("ip" "integer?" nil 0)
     ("lp" "list?" nil 1)
-    ("np" "null?" nil 2)
+    ("mod" "modulo" nil 0)
+    ("np" "null?" nil 4)
    ))
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
+
+(define-abbrev-table 'sh-mode-abbrev-table '())
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
 
