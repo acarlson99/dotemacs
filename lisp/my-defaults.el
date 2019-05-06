@@ -1,6 +1,7 @@
 ;; Make sure backup directory exists
 (if (not (file-directory-p "~/.emacs.d/backups"))
 	(make-directory "~/.emacs.d/backups"))
+
 ;; Redirects emacs backups
 (setq backup-directory-alist
 	  `((".*" . , "~/.emacs.d/backups")))
@@ -40,8 +41,8 @@
 ;; Disable scroll bar and toolbar in GUI
 (if (window-system)
 	(progn
-	(tool-bar-mode -1)
-	(scroll-bar-mode -1)))
+	  (tool-bar-mode -1)
+	  (scroll-bar-mode -1)))
 
 ;; Set line and column numbers
 (setq line-number-mode t)

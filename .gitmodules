@@ -1,0 +1,3 @@
+[submodule "tramp"]
+	path = tramp
+	url = git://git.savannah.gnu.org/tramp.git
