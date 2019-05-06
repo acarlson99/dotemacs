@@ -8,7 +8,9 @@
 		(if (shell-command (concat "~/go/bin/goreturns " buffer-file-name) 1)
 			(save-buffer) ;; success
 		  (error "ERROR: Save failed.  Panic"))) ;; failure
-	(error "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to install")))
+	(if (y-or-n-p "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to install?")
+		(shell-command "go get -v github.com/sqs/goreturns"))))
+	;; (error "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to install")))
 
 (defun my-go-config ()
   "For use in 'go-mode-hook'."
