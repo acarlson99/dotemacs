@@ -1,7 +1,7 @@
 # .emacs.d/
 
 ```bash
-git clone https://github.com/bombblob/dotemacs.git ~/.emacs.d
+git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 ```
 
 ## Included packages:
