@@ -1,17 +1,8 @@
-;******************************************************************************;
-;                                                                              ;
-;                                                         :::      ::::::::    ;
-;    init.el                                            :+:      :+:    :+:    ;
-;                                                     +:+ +:+         +:+      ;
-;    by: thor <thor@42.fr>                           +#+  +:+       +#+        ;
-;                                                  +#+#+#+#+#+   +#+           ;
-;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#             ;
-;    Updated: 2019/05/29 16:38:59 by acarlson         ###   ########.fr        ;
-;                                                                              ;
-;******************************************************************************;
-; Load general features files
-;; (setq config_files "/usr/share/emacs/site-lisp/")
-;; (setq load-path (append (list nil config_files) load-path))
+;;; package -- summary:
+;; init.el
+;;; Commentary:
+;; init file
+;;; Code:
 
 ;; Load general features files
 (setq load-path (append (list nil "~/.emacs.d/dump/") load-path))
@@ -36,13 +27,6 @@
 (setq-default c-default-style "linux")
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
 							64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
-
-;; Load user configuration
-;; (if (file-exists-p "~/.myemacs") (load-file "~/.myemacs"))
-
-
-
-;******************************************************************************;
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -77,8 +61,6 @@
 						 ("marmalade" . "http://marmalade-repo.org/packages/")
 						 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-;; (setq config_files "~/.emacs.d/lisp")
-;; (setq load-path (append (list nil config_files) load-path))
 (setq load-path (append (list nil "~/.emacs.d/lisp") load-path))
 
 (require 'column-marker)
@@ -93,61 +75,6 @@
 
 (require 'project-start)
 
-;; Turn on evil mode if it is installed
-(when (require 'evil nil 'noerror)
-  (evil-mode 1)
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'neotree-mode 'emacs)
-  (evil-set-initial-state 'help-mode 'emacs)
-
-  (when (require 'evil-numbers nil 'noerror)
-	(define-key evil-normal-state-map (kbd "C-c C-a") 'evil-numbers/inc-at-pt)
-	(define-key evil-normal-state-map (kbd "C-c C-x") 'evil-numbers/dec-at-pt)
-	))
-
-;; Set auto-complete-mode settings if installed
-(when (require 'auto-complete nil 'noerror)
-  (ac-config-default)
-  (setq ac-use-menu-map t)
-  (add-to-list 'ac-modes 'prog-mode)
-  (add-to-list 'ac-modes 'makefile-bsdmake-mode)
-  (add-to-list 'ac-modes 'makefile-gmake-mode))
-
-;; Set neotree settings if installed
-(when (require 'neotree nil 'noerror)
-  (global-set-key [f8] 'neotree-toggle))
-
-;; Set global undo tree
-;; C-x u is amazing
-(when (require 'undo-tree nil 'noerror)
-  (global-undo-tree-mode))
-
-;; Set global flycheck
-(when (require 'flycheck nil 'noerror)
-  (global-flycheck-mode))
-
-;; Set file extensions for glsl
-(when (require 'glsl-mode nil 'noerror)
-  (autoload 'glsl-mode "glsl-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
-  (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
-  (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
-  (add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode)))
-
-(when (require 'nasm-mode nil 'noerror)
-  (add-to-list 'auto-mode-alist '("\\.s\\'" . nasm-mode)))
-
-;; If this fails run "autoconf && ./configure && make" up in that directory
-
-(if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile"))
-	(progn
-	  (setq load-path (append (list nil "~/.emacs.d/tramp/lisp") load-path))
-	  (require 'tramp)
-	  (require 'tramp-compat)
-	  (setq tramp-default-method "ssh")))
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))	;; TODO: make auto-mode-alist file
-
 (load "my-defaults.el")
 (load "my-hotkeys.el")
 (load "my-prog-config.el")
@@ -159,6 +86,7 @@
 (load "my-php-config.el")
 (load "my-sql-config.el")
 (load "my-go-config.el")
+(load "autoload.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -173,3 +101,15 @@
 (add-hook 'php-mode-hook 'my-php-config)
 (add-hook 'sql-mode-hook 'my-sql-config)
 (add-hook 'go-mode-hook 'my-go-config)
+
+;; If this fails run "autoconf && ./configure && make" up in that directory
+(if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile"))
+	(progn
+	  (setq load-path (append (list nil "~/.emacs.d/tramp/lisp") load-path))
+	  (require 'tramp)
+	  (require 'tramp-compat)
+	  (setq tramp-default-method "ssh"))
+  (error "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
+
+(provide 'init)
+;;; init.el ends here

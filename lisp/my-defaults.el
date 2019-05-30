@@ -1,3 +1,38 @@
+;; Turn on evil mode if it is installed
+(when (require 'evil nil 'noerror)
+  (evil-mode 1)
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'neotree-mode 'emacs)
+  (evil-set-initial-state 'help-mode 'emacs)
+
+  (when (require 'evil-numbers nil 'noerror)
+	(define-key evil-normal-state-map (kbd "C-c C-a") 'evil-numbers/inc-at-pt)
+	(define-key evil-normal-state-map (kbd "C-c C-x") 'evil-numbers/dec-at-pt)
+	))
+
+;; Set auto-complete-mode settings if installed
+(when (require 'auto-complete nil 'noerror)
+  (ac-config-default)
+  (setq ac-use-menu-map t)
+  (add-to-list 'ac-modes 'prog-mode)
+  (add-to-list 'ac-modes 'makefile-bsdmake-mode)
+  (add-to-list 'ac-modes 'makefile-gmake-mode)
+  (add-to-list 'ac-modes 'makefile-mode)
+  (add-to-list 'ac-modes 'nasm-mode))
+
+;; Set neotree settings if installed
+(when (require 'neotree nil 'noerror)
+  (global-set-key [f8] 'neotree-toggle))
+
+;; Set global undo tree
+;; C-x u is amazing
+(when (require 'undo-tree nil 'noerror)
+  (global-undo-tree-mode))
+
+;; Set global flycheck
+(when (require 'flycheck nil 'noerror)
+  (global-flycheck-mode))
+
 ;; Make sure backup directory exists
 (if (not (file-directory-p "~/.emacs.d/backups"))
 	(make-directory "~/.emacs.d/backups"))
