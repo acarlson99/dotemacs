@@ -8,6 +8,7 @@
 
 ;; Assembly
 (when (require 'nasm-mode nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
   (add-to-list 'auto-mode-alist '("\\.s\\'" . nasm-mode)))
 
 ;; Web stuff

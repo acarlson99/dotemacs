@@ -6,8 +6,8 @@
   (evil-set-initial-state 'help-mode 'emacs)
 
   (when (require 'evil-numbers nil 'noerror)
-	(define-key evil-normal-state-map (kbd "C-c C-a") 'evil-numbers/inc-at-pt)
-	(define-key evil-normal-state-map (kbd "C-c C-x") 'evil-numbers/dec-at-pt)
+	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)
 	))
 
 ;; Set auto-complete-mode settings if installed
