@@ -33,6 +33,10 @@
 (when (require 'flycheck nil 'noerror)
   (global-flycheck-mode))
 
+;; set S-x to helm-M-x
+(when (require 'helm nil 'noerror)
+  (global-set-key (kbd "s-x") 'helm-M-x))
+
 ;; Make sure backup directory exists
 (if (not (file-directory-p "~/.emacs.d/backups"))
 	(make-directory "~/.emacs.d/backups"))
