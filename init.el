@@ -86,7 +86,7 @@
 (load "my-php-config.el")
 (load "my-sql-config.el")
 (load "my-go-config.el")
-(load "autoload.el")
+(load "fileextensionstuff.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
