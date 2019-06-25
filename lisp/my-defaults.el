@@ -2,8 +2,10 @@
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
   (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs)
   (evil-set-initial-state 'neotree-mode 'emacs)
   (evil-set-initial-state 'help-mode 'emacs)
+  (evil-set-initial-state 'comint-mode 'emacs)
 
   (when (require 'evil-numbers nil 'noerror)
 	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
