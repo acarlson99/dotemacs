@@ -10,7 +10,7 @@ git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 
 * [neotree](https://github.com/jaypei/emacs-neotree) - File tree plugin
 
-* [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu :ok_hand
+* [auto-complete](https://www.emacswiki.org/emacs/AutoComplete) - Powerful autocompletion with a popup menu :ok_hand:
 
 * [flycheck](https://www.flycheck.org/) - Linting and syntax checking.  May require other packages (pylint, etc) to be useful depending on language
 
