@@ -15,7 +15,7 @@
 (autoload 'php-mode "php-mode" "Major mode for editing PHP code" t)
 (add-to-list 'auto-mode-alist '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
 
-; Set default emacs configuration
+										; Set default emacs configuration
 (set-language-environment "UTF-8")
 (setq-default font-lock-global-modes nil)
 (setq-default line-number-mode nil)
@@ -26,7 +26,7 @@
 (setq-default c-basic-offset 4)
 (setq-default c-default-style "linux")
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
-							64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+								64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -46,7 +46,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(slime erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports golint cargo svg-clock svg-mode-line-themes php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree all-the-icons auto-complete evil magit elpy)))
+	(slime erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports golint cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -61,13 +61,12 @@
 						 ("marmalade" . "http://marmalade-repo.org/packages/")
 						 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(setq load-path (append (list nil "~/.emacs.d/lisp") load-path))
+(setq load-path (append (list nil "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 
-(require 'column-marker)
+;; (require 'column-marker)
 (require 'fill-column-indicator)
 (require 'nlinum)
 (require 'hl-todo)
-(require 'lorem-ipsum)
 (require 'xahk-mode)
 (require 'escreen)
 (escreen-install)
@@ -75,19 +74,18 @@
 
 (require 'project-start)
 
-(load "my-defaults.el")
-(load "my-hotkeys.el")
-(load "my-prog-config.el")
-(load "my-c-config.el")
-(load "my-c++-config.el")
-(load "my-ruby-config.el")
-(load "my-term-config.el")
-(load "my-web-config.el")
-(load "my-php-config.el")
-(load "my-sql-config.el")
-(load "my-go-config.el")
-(load "my-slime-config.el")
-(load "fileextensionstuff.el")
+(load "defaults.el")
+(load "hotkeys.el")
+(load "prog-config.el")
+(load "c-config.el")
+(load "c++-config.el")
+(load "ruby-config.el")
+(load "term-config.el")
+(load "web-config.el")
+(load "php-config.el")
+(load "sql-config.el")
+(load "go-config.el")
+(load "slime-config.el")
 
 ;; Set modes
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -110,7 +108,7 @@
 	  (require 'tramp)
 	  (require 'tramp-compat)
 	  (setq tramp-default-method "ssh"))
-  (error "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
+  (print "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
 
 (provide 'init)
 ;;; init.el ends here

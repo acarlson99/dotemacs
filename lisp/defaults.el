@@ -1,3 +1,28 @@
+(setq initial-scratch-message "\
+;;                        (\n\
+;;                          )     (\n\
+;;                   ___...(-------)-....___\n\
+;;               .-\"\"       )    (          \"\"-.\n\
+;;         .-'``'|-._             )         _.-|\n\
+;;        /  .--.|   `\"\"---...........---\"\"`   |\n\
+;;       /  /    |                             |\n\
+;;       |  |    |                             |\n\
+;;        \\  \\   |                             |\n\
+;;         `\\ `\\ |                             |\n\
+;;           `\\ `|                             |\n\
+;;           _/ /\\                             /\n\
+;;          (__/  \\                           /\n\
+;;       _..---\"\"` \\                         /`\"\"---.._\n\
+;;    .-'           \\                       /          '-.\n\
+;;   :               `-.__             __.-'              :\n\
+;;   :                  ) \"\"---...---\"\" (                 :\n\
+;;    '._               `\"--...___...--\"`              _.'\n\
+;;      \\\"\"--..__                              __..--\"\"/\n\
+;;       '._     \"\"\"----.....______.....----\"\"\"     _.'\n\
+;;          `\"\"--..,,_____            _____,,..--\"\"`\n\
+;;                        `\"\"\"----\"\"\"`\n\
+")
+
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
@@ -6,11 +31,11 @@
   (evil-set-initial-state 'neotree-mode 'emacs)
   (evil-set-initial-state 'help-mode 'emacs)
   (evil-set-initial-state 'comint-mode 'emacs)
+  (evil-set-initial-state 'slime-repl-mode 'emacs)
 
   (when (require 'evil-numbers nil 'noerror)
 	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)
-	))
+	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)))
 
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
@@ -22,10 +47,6 @@
   (add-to-list 'ac-modes 'makefile-mode)
   (add-to-list 'ac-modes 'nasm-mode))
 
-;; Set neotree settings if installed
-(when (require 'neotree nil 'noerror)
-  (global-set-key [f8] 'neotree-toggle))
-
 ;; Set global undo tree
 ;; C-x u is amazing
 (when (require 'undo-tree nil 'noerror)
@@ -34,10 +55,6 @@
 ;; Set global flycheck
 (when (require 'flycheck nil 'noerror)
   (global-flycheck-mode))
-
-;; set S-x to helm-M-x
-(when (require 'helm nil 'noerror)
-  (global-set-key (kbd "s-x") 'helm-M-x))
 
 ;; Make sure backup directory exists
 (if (not (file-directory-p "~/.emacs.d/backups"))
@@ -68,6 +85,7 @@
 
 ;; Preset `nlinum-format' for minimum width.
 (defun my-nlinum-mode-hook ()
+  "Recommended nlinum-mode function for nlinum-mode."
   (when nlinum-mode
 	(setq-local nlinum-format
 				(concat "%" (number-to-string
@@ -101,3 +119,22 @@
 
 ;; Disable annoying bell
 (setq ring-bell-function 'ignore)
+
+;; auto-mode-alist file extension stuff
+
+;; glsl
+(when (require 'glsl-mode nil 'noerror)
+  (autoload 'glsl-mode "glsl-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode)))
+
+;; Assembly
+(when (require 'nasm-mode nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
+  (add-to-list 'auto-mode-alist '("\\.s\\'" . nasm-mode)))
+
+;; Web stuff
+(when (require 'web-mode nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
