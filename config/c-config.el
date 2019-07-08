@@ -36,7 +36,7 @@
 
 (defun c-protect-header (name)
   "Insert inclusion protection"
-  (interactive "sInclusion protection name: ")
+  (interactive "sInclusion protection name(blank for FILENAME_EXT): ")
   (if (equal name "")
 	  (setq name (upcase (concat (file-name-base) "_" (file-name-extension(buffer-file-name)))))
 	(setq name (upcase name))
