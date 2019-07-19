@@ -20,9 +20,12 @@
 
 (define-abbrev-table 'c-mode-abbrev-table
   '(
-    ("df" "define" nil 3)
-    ("incl" "include" nil 10)
+    ("df" "define" nil 6)
+    ("i" "ii" nil 14)
+    ("incl" "include" nil 14)
+    ("j" "jj" nil 1)
     ("rtn" "return" nil 1)
+    ("unsg" "unsigned" nil 1)
    ))
 
 (define-abbrev-table 'change-log-mode-abbrev-table '())
@@ -59,7 +62,13 @@
 
 (define-abbrev-table 'gomoku-mode-abbrev-table '())
 
+(define-abbrev-table 'grep-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-major-mode-abbrev-table '())
+
 (define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
 (define-abbrev-table 'idl-mode-abbrev-table '())
 
@@ -85,6 +94,8 @@
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
+(define-abbrev-table 'nasm-mode-abbrev-table '())
+
 (define-abbrev-table 'neotree-mode-abbrev-table '())
 
 (define-abbrev-table 'objc-mode-abbrev-table
@@ -94,6 +105,8 @@
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 
@@ -131,6 +144,16 @@
 (define-abbrev-table 'sh-mode-abbrev-table '())
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
+
+(define-abbrev-table 'sldb-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-connection-list-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-inspector-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-thread-control-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-xref-mode-abbrev-table '())
 
 (define-abbrev-table 'snippet-mode-abbrev-table '())
 

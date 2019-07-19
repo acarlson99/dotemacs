@@ -72,3 +72,4 @@ TAGS
 /tramp
 /.org-id-locations
 /var
+/projectile*
