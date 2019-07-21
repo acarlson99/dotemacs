@@ -1,16 +1,22 @@
-(defun go-updade-and-save ()
+(defun go-update-and-save ()
   "Run goreturns to update buffer, includes, etc and save result."
   (interactive)
   (save-excursion
-	(if (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns"))
+	(if (executable-find "goreturns")
 		(progn
 		  (save-buffer)
 		  (erase-buffer)
-		  (if (shell-command (concat "~/go/bin/goreturns " buffer-file-name) 1)
+		  (if (shell-command (concat "goreturns " buffer-file-name) 1)
 			  (message "Success") ;; success
-			(error "ERROR: Save failed.  Panic"))) ;; failure
-	  (if (y-or-n-p "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to install?")
-		  (shell-command "go get -v github.com/sqs/goreturns")))))
+			(error "ERROR: goreturns failed.  Panic"))) ;; failure
+	  (progn
+		(if (not (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns")))
+			(if (y-or-n-p "Executable 'goreturns' does not exist or is not executable.  Run 'go get -v github.com/sqs/goreturns' to install? ")
+				(if (eq (shell-command "go get -v github.com/sqs/goreturns") 0)
+					(message "Successfully go got")
+				  (error "Command 'go get -v github.com/sqs/goreturns' failed"))))
+		(if (y-or-n-p "Add ~/go/bin/goreturns to exec-path? ")
+			(setq exec-path (append exec-path '("~/go/bin/goreturns"))))))))
 
 (defun go-errcatch ()
   "Insert go error catch."
@@ -25,9 +31,9 @@
 
 (defun my-go-config ()
   "For use in 'go-mode-hook'."
-  (local-set-key (kbd "C-x C-a") 'go-updade-and-save)
+  (local-set-key (kbd "C-x C-a") 'go-update-and-save)
   ;; (if (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns"))
-  ;; 	  (local-set-key (kbd "C-x C-a") 'go-updade-and-save)
+  ;; 	  (local-set-key (kbd "C-x C-a") 'go-update-and-save)
   ;; 	(local-set-key (kbd "C-x C-a") (lambda () (interactive) (message "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to unstall"))))
   ;; go error check
   (local-set-key (kbd "C-c C-e") 'go-errcatch)
