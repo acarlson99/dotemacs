@@ -4,7 +4,7 @@
 git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 ```
 
-## Recommended packages
+## Neat packages
 
 * [undo-tree](https://www.emacswiki.org/emacs/UndoTree) - Makes emacs undo work more intuitively
 
@@ -19,6 +19,8 @@ git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 * [evil](https://www.emacswiki.org/emacs/Evil) - Provides vim-like features
 
 * [tramp](https://www.emacswiki.org/emacs/TrampMode) - Open and edit remote files
+
+* [counsel spotify](https://github.com/Lautaro-Garcia/counsel-spotify) - Handy Emacs Spotify interface if you're into that sort of thing
 
 ## Included packages
 
@@ -58,3 +60,5 @@ All backups in ~/.emacs.d/backups are purged after a week
 isearch set to case sensitive
 
 dump from 42siliconvalley
+
+Actually read config files and figure out what is going on
