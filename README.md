@@ -22,6 +22,8 @@ git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 
 * [counsel spotify](https://github.com/Lautaro-Garcia/counsel-spotify) - Handy Emacs Spotify interface if you're into that sort of thing
 
+* [projectile](https://github.com/bbatsov/projectile) - Excellent project management tool
+
 ## Included packages
 
 * [column-marker.el](https://www.emacswiki.org/emacs/ColumnMarker)  
@@ -62,3 +64,5 @@ isearch set to case sensitive
 dump from 42siliconvalley
 
 Actually read config files and figure out what is going on
+
+Imports shell PATH from default shell
