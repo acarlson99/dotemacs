@@ -45,10 +45,10 @@
 (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 
 ;; Load general features files
-(load "list.el")
-(load "string.el")
-(load "comments.el")
-(load "header.el")
+(require 'list)
+(require 'string)
+(require 'comments)
+(require 'header)
 
 ;; Other packages
 ;; (require 'column-marker)			; Commented out in favor of fci
@@ -63,10 +63,10 @@
 (require 'project-start)
 
 ;; default stuff
-(load "default.el")
+(require 'defaults)
+(load "prune-backups.el")
 (load "cosmetic.el")
 (load "mode-settings.el")
-(load "prune-backups.el")
 (load "hotkeys.el")
 
 ;; configs
