@@ -1,0 +1,66 @@
+;; Turn on evil mode if it is installed
+(when (require 'evil nil 'noerror)
+  (evil-mode 1)
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs)
+  (evil-set-initial-state 'neotree-mode 'emacs)
+  (evil-set-initial-state 'help-mode 'emacs)
+  (evil-set-initial-state 'comint-mode 'emacs)
+  (evil-set-initial-state 'slime-repl-mode 'emacs)
+
+  (when (require 'evil-numbers nil 'noerror)
+	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)))
+
+;; Set auto-complete-mode settings if installed
+(when (require 'auto-complete nil 'noerror)
+  (ac-config-default)
+  (setq ac-use-menu-map t)
+  (add-to-list 'ac-modes 'prog-mode)
+  (add-to-list 'ac-modes 'makefile-bsdmake-mode)
+  (add-to-list 'ac-modes 'makefile-gmake-mode)
+  (add-to-list 'ac-modes 'makefile-mode)
+  (add-to-list 'ac-modes 'nasm-mode))
+
+;; Set global undo tree
+;; C-x u is amazing
+(when (require 'undo-tree nil 'noerror)
+  (global-undo-tree-mode))
+
+;; Set global flycheck
+(when (require 'flycheck nil 'noerror)
+  (global-flycheck-mode))
+
+;; projectile project management
+(when (require 'projectile nil 'noerror)
+  (projectile-mode +1)
+  (setq projectile-project-search-path '("~/projects/"))
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+;; load slime stuff properly
+(when (require 'slime nil 'noerror)
+  (progn
+	(setq inferior-lisp-program (executable-find "sbcl"))
+	(setq slime-contribs '(slime-fancy))))
+
+;; Preset `nlinum-format' for minimum width.
+(when (require 'nlinum nil 'noerror)
+  (defun my-nlinum-mode-hook ()
+	"Recommended nlinum-mode function for nlinum-mode."
+	(when nlinum-mode
+	  (setq-local nlinum-format
+				  (concat "%" (number-to-string
+							   ;; Guesstimate number of buffer lines.
+							   (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
+						  "d"))))
+  (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook))
+
+;; If this fails run "autoconf && ./configure && make" up in that directory
+(if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile"))
+	(progn
+	  (setq load-path (append (list nil "~/.emacs.d/tramp/lisp") load-path))
+	  (require 'tramp)
+	  (require 'tramp-compat)
+	  (setq tramp-default-method "ssh"))
+  (print "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
