@@ -63,4 +63,4 @@
 	  (require 'tramp)
 	  (require 'tramp-compat)
 	  (setq tramp-default-method "ssh"))
-  (print "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
+  (message "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
