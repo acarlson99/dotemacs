@@ -23,10 +23,7 @@
 (define-abbrev-table 'c-mode-abbrev-table
   '(
     ("df" "define" nil 10)
-    ("i" "ii" nil 42)
     ("incl" "include" nil 17)
-    ("j" "jj" nil 8)
-    ("k" "kk" nil 2)
     ("rtn" "return" nil 2)
     ("unsg" "unsigned" nil 7)
    ))
@@ -73,7 +70,6 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("l" "ll" nil 2)
    ))
 
 (define-abbrev-table 'glsl-mode-abbrev-table '())
@@ -149,7 +145,12 @@
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'prog-mode-abbrev-table '())
+(define-abbrev-table 'prog-mode-abbrev-table '(
+    ("i" "ii" nil 42)
+    ("j" "jj" nil 9)
+    ("k" "kk" nil 2)
+    ("l" "ll" nil 2)
+))
 
 (define-abbrev-table 'python-mode-abbrev-table
   '(
