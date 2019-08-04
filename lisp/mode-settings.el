@@ -41,7 +41,7 @@
 ;; load slime stuff properly
 (when (require 'slime nil 'noerror)
   (progn
-	(setq inferior-lisp-program (executable-find "sbcl"))
+	(setq inferior-lisp-program (or (executable-find "sbcl") (executable-find "clisp") (executable-find "sbcl.exe") (executable-find "clisp.exe")))
 	(setq slime-contribs '(slime-fancy))))
 
 ;; Preset `nlinum-format' for minimum width.

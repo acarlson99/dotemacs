@@ -60,14 +60,12 @@
 (escreen-install)
 (require 'sql-upcase)
 
-(require 'project-start)
-
 ;; default stuff
 (require 'defaults)
+(require 'globals)
 (load "prune-backups.el")
 (load "cosmetic.el")
 (load "mode-settings.el")
-(load "hotkeys.el")
 
 ;; configs
 (load "prog-config.el")

@@ -1,4 +1,4 @@
-;; TODO: fix this function
+;; TODO: fix.  Breaks with long or massively indented line
 (defun comment-norminette ()
   "Redefinition of block commenting to appease Norminette."
   (interactive)
@@ -7,22 +7,22 @@
 			(rs (region-beginning))
 			(re (region-end))
 			(e 0))
-		(let ((i s))
-		  (progn
-			(exchange-point-and-mark)
-			(setq e (line-number-at-pos))
-			(if (> s e) (setq s  (prog1 e (setq e  s))))
-			(goto-line s)
-			(beginning-of-line)
-			(insert "/*\n")
-			(while (< i e)
-			  (progn
-				(beginning-of-line)
-				(insert "** ")
-				(setq i (+ i 1))
-				(next-line)))
-			(beginning-of-line)
-			(insert "*/\n"))))
+		(progn
+		  (exchange-point-and-mark)
+		  (setq e (line-number-at-pos))
+		  (if (> s e) (setq s (prog1 e (setq e  s))))
+		  (let ((i s))
+			(progn (goto-line s)
+				   (beginning-of-line)
+				   (insert "/*\n")
+				   (while (< i e)
+					 (progn
+					   (beginning-of-line)
+					   (insert "** ")
+					   (setq i (+ i 1))
+					   (next-line)))
+				   (beginning-of-line)
+				   (insert "*/\n")))))
 	(progn
 	  (beginning-of-line)
 	  (insert "/*\n**")
