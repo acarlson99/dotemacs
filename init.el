@@ -17,12 +17,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-	("11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
+    ("11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports golint cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
+    (bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports golint cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -34,8 +34,8 @@
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-						 ("marmalade" . "http://marmalade-repo.org/packages/")
-						 ("melpa" . "http://melpa.milkbox.net/packages/")))
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; append shell (SHELL) path to path and exec-path.  Set path
 (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
@@ -60,14 +60,12 @@
 (escreen-install)
 (require 'sql-upcase)
 
-(require 'project-start)
-
 ;; default stuff
 (require 'defaults)
+(require 'globals)
 (load "prune-backups.el")
 (load "cosmetic.el")
 (load "mode-settings.el")
-(load "hotkeys.el")
 
 ;; configs
 (load "prog-config.el")

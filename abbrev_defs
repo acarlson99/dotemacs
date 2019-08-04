@@ -13,6 +13,8 @@
   '(
    ))
 
+(define-abbrev-table 'bison-mode-abbrev-table '())
+
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
     ("df" "define" nil 0)
@@ -73,6 +75,7 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("df" "define" nil 3)
     ("l" "ll" nil 2)
    ))
 
@@ -99,6 +102,8 @@
 (define-abbrev-table 'java-mode-abbrev-table
   '(
    ))
+
+(define-abbrev-table 'jison-mode-abbrev-table '())
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())
 
@@ -175,11 +180,19 @@
 
 (define-abbrev-table 'sldb-mode-abbrev-table '())
 
+(define-abbrev-table 'slime-compiler-notes-mode-abbrev-table '())
+
 (define-abbrev-table 'slime-connection-list-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-fuzzy-completions-mode-abbrev-table '())
 
 (define-abbrev-table 'slime-inspector-mode-abbrev-table '())
 
 (define-abbrev-table 'slime-thread-control-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-trace-dialog--detail-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-trace-dialog-mode-abbrev-table '())
 
 (define-abbrev-table 'slime-xref-mode-abbrev-table '())
 

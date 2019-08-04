@@ -1,5 +1,3 @@
-;; TODO: set bison settings.  Change evil '=' to bison-tab
-
 ;; Turn on evil mode if it is installed
 (when (require 'evil nil 'noerror)
   (evil-mode 1)
@@ -40,12 +38,10 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-;; TODO: fix slime enter
-;; TODO: fix 'no such file or directory, lisp'
 ;; load slime stuff properly
 (when (require 'slime nil 'noerror)
   (progn
-	(setq inferior-lisp-program (executable-find "sbcl"))
+	(setq inferior-lisp-program (or (executable-find "sbcl") (executable-find "clisp") (executable-find "sbcl.exe") (executable-find "clisp.exe")))
 	(setq slime-contribs '(slime-fancy))))
 
 ;; Preset `nlinum-format' for minimum width.
