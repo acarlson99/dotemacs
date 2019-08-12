@@ -1,4 +1,4 @@
-(defun my-prog-config()
+(defun prog-config ()
   "For use in 'prog-mode-hook'."
   ;; moving text
   (local-set-key (kbd "C-x C-p") 'move-text-up)
@@ -15,3 +15,5 @@
   ;;  (hl-line-mode t)
   (show-paren-mode t)
   (fci-mode))
+
+(provide 'prog-config)

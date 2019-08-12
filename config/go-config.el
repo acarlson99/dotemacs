@@ -1,14 +1,10 @@
-(defun go-update-and-save ()
+(defun go-run-goreturns ()
   "Run goreturns to update buffer, includes, etc and save result."
   (interactive)
   (save-excursion
 	(if (executable-find "goreturns")
-		(progn
-		  (save-buffer)
-		  (erase-buffer)
-		  (if (shell-command (concat "goreturns " buffer-file-name) 1)
-			  (message "Success") ;; success
-			(error "ERROR: goreturns failed.  Panic"))) ;; failure
+		  (if (not (shell-command-on-region (point-min) (point-max) "goreturns" t t))
+			  (error "ERROR: goreturns failed.  Panic"))
 	  (progn
 		(if (not (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns")))
 			(if (y-or-n-p "Executable 'goreturns' does not exist or is not executable.  Run 'go get -v github.com/sqs/goreturns' to install? ")
@@ -29,11 +25,11 @@
   (indent-for-tab-command)
   (insert "\n"))
 
-(defun my-go-config ()
+(defun go-config ()
   "For use in 'go-mode-hook'."
-  (local-set-key (kbd "C-x C-a") 'go-update-and-save)
+  (local-set-key (kbd "C-x C-a") 'go-run-goreturns)
   ;; (if (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns"))
-  ;; 	  (local-set-key (kbd "C-x C-a") 'go-update-and-save)
+  ;; 	  (local-set-key (kbd "C-x C-a") 'go-run-goreturns)
   ;; 	(local-set-key (kbd "C-x C-a") (lambda () (interactive) (message "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to unstall"))))
   ;; go error check
   (local-set-key (kbd "C-c C-e") 'go-errcatch)
@@ -43,3 +39,5 @@
   (local-set-key (kbd "C-c C-c") 'comment-region)
   ;; uncommenting
   (local-set-key (kbd "C-c c") 'uncomment-region))
+
+(provide 'go-config)

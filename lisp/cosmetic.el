@@ -130,3 +130,5 @@
 
 ;; Disable annoying bell
 (setq ring-bell-function 'ignore)
+
+(provide 'cosmetic)

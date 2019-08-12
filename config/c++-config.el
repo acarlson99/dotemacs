@@ -63,16 +63,12 @@
   (if (equal (file-name-extension(buffer-file-name)) "cpp")
 	  (c++-insert-exception-src name nest)))
 
-(defun my-c++-config()
+(defun c++-config ()
   "For use in 'c++-mode-hook'."
+  (when (require 'c-config nil 'noerror)
+	(c-config))
   ;; template exception insertion stuff from Steven
   (local-set-key (kbd "C-c i i") 'c++-insert-class)
-  (local-set-key (kbd "C-c i e") 'c++-insert-exception)
-  ;; header protection
-  (local-set-key (kbd "C-c C-p") 'c-protect-header)
-  ;; Norm comments
-  ;; (local-set-key (kbd "C-c C-c") 'comment-norminette)	; removed because annoying
-  ;; whitespace cleanup
-  (local-set-key (kbd "C-c w") 'whitespace-cleanup)
-  ;; uncommenting
-  (local-set-key (kbd "C-c c") 'uncomment-region))
+  (local-set-key (kbd "C-c i e") 'c++-insert-exception))
+
+(provide 'c++-config)

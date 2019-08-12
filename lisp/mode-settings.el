@@ -57,10 +57,10 @@
   (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook))
 
 ;; If this fails run "autoconf && ./configure && make" up in that directory
-(if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile"))
+(if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile") (require 'tramp nil 'noerror) (require 'tramp-compat nil 'noerror))
 	(progn
 	  (setq load-path (append (list nil "~/.emacs.d/tramp/lisp") load-path))
-	  (require 'tramp)
-	  (require 'tramp-compat)
 	  (setq tramp-default-method "ssh"))
-  (message "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist.  Perhaps run 'autoconf && ./configure && make'"))
+  (message "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist and that tramp and tramp-compat are available.  Perhaps run 'autoconf && ./configure && make'"))
+
+(provide 'mode-settings)
