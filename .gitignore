@@ -69,7 +69,7 @@ TAGS
 /url/
 /.tutor/
 /session.*
-/tramp
 /.org-id-locations
 /var
 /projectile*
+/transient
