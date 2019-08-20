@@ -27,7 +27,7 @@
 
 (defun go-config ()
   "For use in 'go-mode-hook'."
-  (local-set-key (kbd "C-x C-a") 'go-run-goreturns)
+  (local-set-key (kbd "C-c f") 'go-run-goreturns)
   ;; (if (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns"))
   ;; 	  (local-set-key (kbd "C-x C-a") 'go-run-goreturns)
   ;; 	(local-set-key (kbd "C-x C-a") (lambda () (interactive) (message "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to unstall"))))

@@ -102,9 +102,6 @@
 ;; Theme
 (load-theme 'manoj-dark t)
 
-;; Line numbers
-(global-nlinum-mode 1)
-
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
 
@@ -113,13 +110,6 @@
 	(progn
 	  (tool-bar-mode -1)
 	  (scroll-bar-mode -1)))
-
-;; Set line and column numbers
-(setq line-number-mode t)
-(setq column-number-mode t)
-
-;; Make search case sensetive
-(setq-default case-fold-search nil)
 
 ;; Highlight current line
 (global-hl-line-mode 1)

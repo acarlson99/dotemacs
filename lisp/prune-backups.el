@@ -1,3 +1,5 @@
+(message "BEGIN PRUNE-BACKUPS")
+
 ;; Make sure backup directory exists
 (if (not (file-directory-p "~/.emacs.d/backups"))
 	(make-directory "~/.emacs.d/backups"))
@@ -18,3 +20,5 @@
 				  week))
 	  (message "%s" file)
 	  (delete-file file))))
+
+(message "END PRUNE-BACKUPS")

@@ -7,6 +7,7 @@
   (evil-set-initial-state 'help-mode 'emacs)
   (evil-set-initial-state 'comint-mode 'emacs)
   (evil-set-initial-state 'slime-repl-mode 'emacs)
+  (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
   (when (require 'evil-numbers nil 'noerror)
 	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
