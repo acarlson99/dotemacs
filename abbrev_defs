@@ -26,7 +26,7 @@
   '(
     ("df" "define" nil 10)
     ("incl" "include" nil 17)
-    ("rtn" "return" nil 2)
+    ("rtn" "return" nil 3)
     ("unsg" "unsigned" nil 7)
    ))
 
@@ -46,7 +46,10 @@
 
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
-(define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
+(define-abbrev-table 'emacs-lisp-mode-abbrev-table
+  '(
+    ("df" "defun" nil 1)
+   ))
 
 (define-abbrev-table 'epa-info-mode-abbrev-table '())
 
@@ -70,11 +73,16 @@
 
 (define-abbrev-table 'gfm-view-mode-abbrev-table '())
 
-(define-abbrev-table 'global-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'global-abbrev-table '())
 
 (define-abbrev-table 'glsl-mode-abbrev-table '())
+
+(define-abbrev-table 'go-mode-abbrev-table
+  '(
+    ("rtn" "return" nil 1)
+   ))
+
+(define-abbrev-table 'godoc-mode-abbrev-table '())
 
 (define-abbrev-table 'gomoku-mode-abbrev-table '())
 
@@ -149,12 +157,13 @@
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'prog-mode-abbrev-table '(
-    ("i" "ii" nil 42)
-    ("j" "jj" nil 9)
+(define-abbrev-table 'prog-mode-abbrev-table
+  '(
+    ("i" "ii" nil 43)
+    ("j" "jj" nil 10)
     ("k" "kk" nil 2)
     ("l" "ll" nil 2)
-))
+   ))
 
 (define-abbrev-table 'python-mode-abbrev-table
   '(

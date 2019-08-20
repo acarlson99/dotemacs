@@ -42,10 +42,10 @@
 (defun c-clang-format (&optional style)
   "Run clang-format with STYLE on buffer or region."
   (interactive "P")
-  (if (equal style "")
+  (if (not style)
 	  (setq style "llvm"))
   (if (executable-find "clang-format")
-	  (if (not (shell-command-on-region (point-min) (point-max) "clang-format" t t))
+	  (if (not (shell-command-on-region (point-min) (point-max) (concat "clang-format -style=" style) t t))
 		  (error "Command clang-format failed"))
 	(message "clang-format not found")))
 
