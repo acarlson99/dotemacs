@@ -1,18 +1,18 @@
-(defun go-run-goreturns ()
-  "Run goreturns to update buffer, includes, etc and save result."
-  (interactive)
-  (save-excursion
-	(if (executable-find "goreturns")
-		  (if (not (shell-command-on-region (point-min) (point-max) "goreturns" t t))
-			  (error "ERROR: goreturns failed.  Panic"))
-	  (progn
-		(if (not (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns")))
-			(if (y-or-n-p "Executable 'goreturns' does not exist or is not executable.  Run 'go get -v github.com/sqs/goreturns' to install? ")
-				(if (eq (shell-command "go get -v github.com/sqs/goreturns") 0)
-					(message "Successfully go got")
-				  (error "Command 'go get -v github.com/sqs/goreturns' failed"))))
-		(if (y-or-n-p "Add ~/go/bin/goreturns to exec-path? ")
-			(setq exec-path (append exec-path '("~/go/bin/goreturns"))))))))
+;; (defun go-run-goreturns ()
+;;   "Run goreturns to update buffer, includes, etc and save result."
+;;   (interactive)
+;;   (save-excursion
+;;	(if (executable-find "goreturns")
+;;		(if (not (shell-command-on-region (point-min) (point-max) "goreturns" t t))
+;;			(error "ERROR: goreturns failed.  Panic"))
+;;	  (progn
+;;		(if (not (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns")))
+;;			(if (y-or-n-p "Executable 'goreturns' does not exist or is not executable.  Run 'go get -v github.com/sqs/goreturns' to install? ")
+;;				(if (eq (shell-command "go get -v github.com/sqs/goreturns") 0)
+;;					(message "Successfully go got")
+;;				  (error "Command 'go get -v github.com/sqs/goreturns' failed"))))
+;;		(if (y-or-n-p "Add ~/go/bin/goreturns to exec-path? ")
+;;			(setq exec-path (append exec-path '("~/go/bin/goreturns"))))))))
 
 (defun go-errcatch ()
   "Insert go error catch."
@@ -25,16 +25,27 @@
   (indent-for-tab-command)
   (insert "\n"))
 
+(if on-nfs-p
+	(setenv "GOPATH" "/tmp/go/")
+	(setenv "GOPATH" "~/go/"))
+
+(with-eval-after-load 'go-mode
+  (require 'go-autocomplete))
+
 (defun go-config ()
   "For use in 'go-mode-hook'."
-  (local-set-key (kbd "C-c f") 'go-run-goreturns)
-  ;; (if (and (file-exists-p "~/go/bin/goreturns") (file-executable-p "~/go/bin/goreturns"))
-  ;; 	  (local-set-key (kbd "C-x C-a") 'go-run-goreturns)
-  ;; 	(local-set-key (kbd "C-x C-a") (lambda () (interactive) (message "~/go/bin/goreturns does not exist or does not have execute permissions.  Run 'go get -v github.com/sqs/goreturns' to unstall"))))
+  ;; (local-set-key (kbd "C-c f") 'go-run-goreturns)
+  ;; These do the same thing, but the latter is probably better than my hack
+  (add-hook 'before-save-hook 'gofmt-before-save)
   ;; go error check
   (local-set-key (kbd "C-c C-e") 'go-errcatch)
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
+  ;; Godef jump key binding
+  (local-set-key [(f5)] 'godef-jump)
+  ;; (local-set-key (kbd "M-.") 'godef-jump)
+  ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
+  ;; C-t pops tag
   ;; commenting
   (local-set-key (kbd "C-c C-c") 'comment-region)
   ;; uncommenting

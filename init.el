@@ -22,7 +22,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
+	(exec-path-from-shell powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-autocomplete go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -37,10 +37,19 @@
 						 ("marmalade" . "http://marmalade-repo.org/packages/")
 						 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;; TODO: find better way to determine filesystem
+;; oh no nfs
+(setq on-nfs-p (cl-search "/nfs/" (getenv "HOME")))
+
 ;; append shell (SHELL) path to path and exec-path.  Set path
-(let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-  (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
-  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))
+;; (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+;;   (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
+;;   (setq exec-path (append exec-path (split-string path-from-shell path-separator))))
+;; does the same thing (I think) as above code, but probably better because I didn't write it
+;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
+(let ((exec-path-from-shell-check-startup-files))
+  (when (memq window-system '(mac ns x))
+	(exec-path-from-shell-initialize)))
 
 (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 

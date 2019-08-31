@@ -9,6 +9,8 @@
   (evil-set-initial-state 'slime-repl-mode 'emacs)
   (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
+  (define-key evil-insert-state-map (kbd "C-a") 'evil-beginning-of-visual-line)
+
   (when (require 'evil-numbers nil 'noerror)
 	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)))
@@ -17,6 +19,7 @@
 (when (require 'auto-complete nil 'noerror)
   (ac-config-default)
   (setq ac-use-menu-map t)
+  (add-hook 'go-mode-hook 'auto-complete-for-go)
   (add-to-list 'ac-modes 'prog-mode)
   (add-to-list 'ac-modes 'makefile-bsdmake-mode)
   (add-to-list 'ac-modes 'makefile-gmake-mode)
