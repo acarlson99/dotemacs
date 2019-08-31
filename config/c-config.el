@@ -56,7 +56,11 @@
   ;; (c-toggle-comment-style -1)							; Commented out for norminette
   ;; Norm comments
   ;; (local-set-key (kbd "C-c C-c") 'comment-norminette)	; removed because annoying
-  (local-set-key (kbd "C-c f") 'c-clang-format)
+  ;; using package to clang format by default
+  (local-set-key (kbd "C-c f")
+				 (if (require 'clang-format nil 'noerror)
+					 'clang-format
+				   'c-clang-format))
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; uncommenting
