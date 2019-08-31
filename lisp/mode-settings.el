@@ -19,7 +19,7 @@
 (when (require 'auto-complete nil 'noerror)
   (ac-config-default)
   (setq ac-use-menu-map t)
-  (add-hook 'go-mode-hook 'auto-complete-for-go)
+  ;; (add-hook 'go-mode-hook 'auto-complete-for-go)
   (add-to-list 'ac-modes 'prog-mode)
   (add-to-list 'ac-modes 'makefile-bsdmake-mode)
   (add-to-list 'ac-modes 'makefile-gmake-mode)

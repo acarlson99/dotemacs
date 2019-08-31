@@ -32,6 +32,8 @@
 (with-eval-after-load 'go-mode
   (require 'go-autocomplete))
 
+(setq gofmt-command "goreturns")
+
 (defun go-config ()
   "For use in 'go-mode-hook'."
   ;; (local-set-key (kbd "C-c f") 'go-run-goreturns)
