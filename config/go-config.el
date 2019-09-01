@@ -25,9 +25,11 @@
   (indent-for-tab-command)
   (insert "\n"))
 
-(if on-nfs-p
-	(setenv "GOPATH" "/tmp/go/")
-	(setenv "GOPATH" "~/go/"))
+(if (not (getenv "GOPATH"))
+	(setenv "GOPATH" (if on-nfs-p
+						 "/tmp/go"
+					   (concat
+						(getenv "HOME") "/go"))))
 
 (with-eval-after-load 'go-mode
   (require 'go-autocomplete))
