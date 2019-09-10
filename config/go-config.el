@@ -19,7 +19,7 @@
   (interactive)
   (insert "if err != nil {")
   (indent-for-tab-command)
-  (insert "\npanic(1) // TODO: address error")
+  (insert "\npanic(err) // TODO: address error")
   (indent-for-tab-command)
   (insert "\n}")
   (indent-for-tab-command)
@@ -27,7 +27,7 @@
 
 (if on-nfs-p
 	(setenv "GOPATH" "/tmp/go/")
-	(setenv "GOPATH" "~/go/"))
+  (setenv "GOPATH" "~/go/"))
 
 (with-eval-after-load 'go-mode
   (require 'go-autocomplete))
@@ -44,13 +44,7 @@
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup)
   ;; Godef jump key binding
-  (local-set-key [(f5)] 'godef-jump)
-  ;; (local-set-key (kbd "M-.") 'godef-jump)
-  ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
   ;; C-t pops tag
-  ;; commenting
-  (local-set-key (kbd "C-c C-c") 'comment-region)
-  ;; uncommenting
-  (local-set-key (kbd "C-c c") 'uncomment-region))
+  (local-set-key [(f5)] 'godef-jump))
 
 (provide 'go-config)

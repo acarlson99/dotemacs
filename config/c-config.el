@@ -62,8 +62,6 @@
 					 'clang-format
 				   'c-clang-format))
   ;; whitespace cleanup
-  (local-set-key (kbd "C-c w") 'whitespace-cleanup)
-  ;; uncommenting
-  (local-set-key (kbd "C-c c") 'uncomment-region))
+  (local-set-key (kbd "C-c w") 'whitespace-cleanup))
 
 (provide 'c-config)
