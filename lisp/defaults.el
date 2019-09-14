@@ -27,6 +27,8 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
 (global-set-key (kbd "DEL") 'backward-delete-char)
+(global-set-key (kbd "<end>") 'end-of-visual-line)
+(global-set-key (kbd "<home>") 'beginning-of-visual-line)
 (setq-default c-backspace-function 'backward-delete-char)
 (setq-default c-basic-offset 4)
 (setq-default c-default-style "linux")
