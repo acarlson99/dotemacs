@@ -161,8 +161,6 @@
   '(
     ("i" "ii" nil 43)
     ("j" "jj" nil 10)
-    ("k" "kk" nil 2)
-    ("l" "ll" nil 2)
    ))
 
 (define-abbrev-table 'python-mode-abbrev-table
