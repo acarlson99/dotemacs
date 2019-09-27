@@ -42,10 +42,8 @@
 (defun c-clang-format (&optional style)
   "Run clang-format with STYLE on buffer or region."
   (interactive "P")
-  (if (not style)
-	  (setq style "llvm"))
   (if (executable-find "clang-format")
-	  (if (not (shell-command-on-region (point-min) (point-max) (concat "clang-format -style=" style) t t))
+	  (if (not (shell-command-on-region (point-min) (point-max) "clang-format" t t))
 		  (error "Command clang-format failed"))
 	(message "clang-format not found")))
 
@@ -59,7 +57,7 @@
   ;; using package to clang format by default
   (local-set-key (kbd "C-c f")
 				 (if (require 'clang-format nil 'noerror)
-					 'clang-format
+					 'clang-format-buffer
 				   'c-clang-format))
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup))

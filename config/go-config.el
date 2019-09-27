@@ -22,8 +22,7 @@
   (insert "\npanic(err) // TODO: address error")
   (indent-for-tab-command)
   (insert "\n}")
-  (indent-for-tab-command)
-  (insert "\n"))
+  (indent-for-tab-command))
 
 (if (not (getenv "GOPATH"))
 	(setenv "GOPATH" (if on-nfs-p
