@@ -59,6 +59,9 @@
 				 (if (require 'clang-format nil 'noerror)
 					 'clang-format-buffer
 				   'c-clang-format))
+  ;; clang-format on save
+  (if (executable-find "clang-format")
+	  (add-hook 'before-save-hook 'clang-format-buffer nil t))
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup))
 
