@@ -22,3 +22,5 @@ IndentWidth: 4
 
 TabWidth: 4
 UseTab: Always
+
+BreakBeforeBinaryOperators: NonAssignment
