@@ -48,9 +48,6 @@ Minor mode to highlight TODO, FIXME, and a few other keywords
 * [sql-upcase.el](https://www.emacswiki.org/emacs/SqlUpcase)  
 Minor mode to convert lowercase SQL keywords to uppercase
 
-* [xahk-mode.el](http://xahlee.info/mswin/emacs_autohotkey_mode.html)  
-Major mode for autohotkey programming
-
 # Notes
 
 __DO NOT WORRY IF YOUR BACKUPS SEEM TO BE MISSING__

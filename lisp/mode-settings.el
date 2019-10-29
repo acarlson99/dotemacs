@@ -1,5 +1,6 @@
 ;; Turn on evil mode if it is installed
-(when (require 'evil nil 'noerror)
+(cond
+ ((require 'evil nil 'noerror)
   (evil-mode 1)
   (evil-set-initial-state 'term-mode 'emacs)
   (evil-set-initial-state 'eshell-mode 'emacs)
@@ -14,6 +15,9 @@
   (when (require 'evil-numbers nil 'noerror)
 	(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 	(define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)))
+ ((require 'xah-fly-keys nil 'noerror)
+  (xah-fly-keys-set-layout "qwerty")
+  (xah-fly-keys 1)))
 
 ;; Set auto-complete-mode settings if installed
 (when (require 'auto-complete nil 'noerror)
