@@ -20,9 +20,11 @@ git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 
 * [tramp](https://www.emacswiki.org/emacs/TrampMode) - Open and edit remote files
 
-* [counsel spotify](https://github.com/Lautaro-Garcia/counsel-spotify) - Handy Emacs Spotify interface if you're into that sort of thing
-
 * [projectile](https://github.com/bbatsov/projectile) - Excellent project management tool
+
+* [exec-path-from-shell](https://github.com/purcell/exec-path-from-shell) - Import shell path var
+
+* [gnu-elpa-keyring-update](https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html) - Access gnu elpa packages
 
 ## Included packages
 
