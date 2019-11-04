@@ -106,10 +106,10 @@
 (setq inhibit-startup-screen t)
 
 ;; Disable scroll bar and toolbar in GUI
-(if (window-system)
-	(progn
-	  (tool-bar-mode -1)
-	  (scroll-bar-mode -1)))
+;; (if (window-system)
+;; 	(progn
+;; 	  (tool-bar-mode -1)
+;; 	  (scroll-bar-mode -1)))
 
 ;; Highlight current line
 (global-hl-line-mode 1)

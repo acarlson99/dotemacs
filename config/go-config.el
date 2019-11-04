@@ -14,6 +14,11 @@
 ;;		(if (y-or-n-p "Add ~/go/bin/goreturns to exec-path? ")
 ;;			(setq exec-path (append exec-path '("~/go/bin/goreturns"))))))))
 
+;; Install these packages:
+;; go get -u github.com/mdempsky/gocode
+;; go get -u github.com/rogpeppe/godef
+;; go get -u github.com/sqs/goreturns
+
 (defun go-errcatch ()
   "Insert go error catch."
   (interactive)
@@ -31,7 +36,7 @@
 						(getenv "HOME") "/go"))))
 
 (with-eval-after-load 'go-mode
-  (require 'go-autocomplete))
+  (require 'go-autocomplete nil 'noerror))
 
 (setq gofmt-command "goreturns")
 
