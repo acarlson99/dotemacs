@@ -11,6 +11,7 @@
 
 (define-abbrev-table 'awk-mode-abbrev-table
   '(
+    ("rtn" "return" nil 1)
    ))
 
 (define-abbrev-table 'bison-mode-abbrev-table '())
@@ -64,6 +65,8 @@
 (define-abbrev-table 'evil-list-view-mode-abbrev-table '())
 
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
+
+(define-abbrev-table 'flycheck-error-message-mode-abbrev-table '())
 
 (define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
 
@@ -159,7 +162,7 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table
   '(
-    ("i" "ii" nil 43)
+    ("i" "ii" nil 59)
     ("j" "jj" nil 10)
    ))
 
@@ -168,7 +171,9 @@
     ("incl" "import" nil 0)
    ))
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'scheme-mode-abbrev-table
   '(
