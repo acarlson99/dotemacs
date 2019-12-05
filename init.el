@@ -44,18 +44,15 @@
 (setq on-nfs-p (cl-search "/nfs/" (getenv "HOME")))
 
 ;; append shell (SHELL) path to path and exec-path.  Set path
-;; (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-;;   (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
-;;   (setq exec-path (append exec-path (split-string path-from-shell path-separator))))
-;; does the same thing (I think) as above code, but probably better because I didn't write it
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
 (if (require 'exec-path-from-shell nil 'noerror)
 	(let ((exec-path-from-shell-check-startup-files))
-	  (when (memq window-system '(mac ns x))
-		(exec-path-from-shell-initialize)))
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-	(setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
-	(setq exec-path (append exec-path (split-string path-from-shell path-separator)))))
+	  (exec-path-from-shell-initialize))
+  (progn
+	(message "exec-path-from-shell not found.  Loading weird janky version")
+	(let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -c 'echo $PATH'"))))
+	  (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
+	  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))))
 
 (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 
