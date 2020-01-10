@@ -100,7 +100,7 @@
   (setq initial-scratch-message (nth (random (length l)) l)))
 
 ;; Theme
-(load-theme 'manoj-dark t)
+(load-theme my-default-dark-theme t)
 
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
@@ -112,7 +112,9 @@
 ;; 	  (scroll-bar-mode -1)))
 
 ;; Highlight current line
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
+
+;; disable foreground highlighting
 (set-face-foreground 'hl-line nil)
 
 ;; Line wrap

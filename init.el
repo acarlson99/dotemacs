@@ -17,12 +17,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-	("11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
- '(gud-gdb-command-name "gdb --annotate=1")
+	("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
+ '(frame-brackground-mode (quote dark))
+ '(gud-gdb-command-name "gdb --annotate=1" t)
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(markdown-mode xah-fly-keys flycheck-ocaml gnu-elpa-keyring-update erlstack-mode clang-format exec-path-from-shell powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
+	(gruber-darker-theme load-theme-buffer-local markdown-mode xah-fly-keys flycheck-ocaml gnu-elpa-keyring-update erlstack-mode clang-format exec-path-from-shell powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -55,6 +56,12 @@
 	  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))))
 
 (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
+
+(setq my-default-dark-theme 'manoj-dark)
+(setq my-default-light-theme 'adwaita)
+
+(when (require 'gruber-darker-theme nil 'noerror)
+  (setq my-default-dark-theme 'gruber-darker))
 
 ;; Load general features files
 (require 'list)

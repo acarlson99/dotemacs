@@ -12,7 +12,7 @@
   (abbrev-mode t)
   (font-lock-mode t)
   (hl-todo-mode t)
-  ;;  (hl-line-mode t)
+  (hl-line-mode 1)
   (show-paren-mode t)
   (fci-mode))
 
