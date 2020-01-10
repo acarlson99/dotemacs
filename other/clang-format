@@ -27,3 +27,8 @@ BreakBeforeBinaryOperators: NonAssignment
 
 AlignConsecutiveMacros: true
 IndentPPDirectives: AfterHash
+
+# NOTE: ignores comments formatted like this
+# but not like this
+CommentPragmas: '^ ?[A-Z]+: '
+ReflowComments: true
