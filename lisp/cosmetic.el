@@ -114,9 +114,6 @@
 ;; Highlight current line
 ;; (global-hl-line-mode 1)
 
-;; disable foreground highlighting
-(set-face-foreground 'hl-line nil)
-
 ;; Line wrap
 (global-visual-line-mode 1)
 
