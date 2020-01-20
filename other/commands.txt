@@ -1,0 +1,3 @@
+# generate tags
+
+find . -type f -iname "*.[cht]pp" | etags -

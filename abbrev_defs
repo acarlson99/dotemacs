@@ -21,6 +21,7 @@
     ("df" "define" nil 0)
     ("incl" "include" nil 1)
     ("rtn" "return" nil 0)
+    ("unsg" "unsigned" nil 0)
    ))
 
 (define-abbrev-table 'c-mode-abbrev-table
@@ -42,6 +43,8 @@
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
 (define-abbrev-table 'dsssl-mode-abbrev-table '())
+
+(define-abbrev-table 'edebug-eval-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
@@ -91,7 +94,11 @@
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
+(define-abbrev-table 'helm-grep-mode-abbrev-table '())
+
 (define-abbrev-table 'helm-major-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-occur-mode-abbrev-table '())
 
 (define-abbrev-table 'help-mode-abbrev-table '())
 
@@ -162,7 +169,7 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table
   '(
-    ("i" "ii" nil 59)
+    ("i" "ii" nil 73)
     ("j" "jj" nil 10)
    ))
 
@@ -171,9 +178,7 @@
     ("incl" "import" nil 0)
    ))
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'scheme-mode-abbrev-table
   '(
