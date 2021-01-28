@@ -21,6 +21,89 @@
 ;;                It tended to be an inedible meal. "
 ;;                                       -- Jack Prelutsky
 --------------------------------------------------------------------------------
+;;                         _..--+~/@-~--.
+;;                     _-=~      (  .   "}
+;;                  _-~     _.--=.\ \""""
+;;                _~      _-       \ \_\
+;;               =      _=          '--'
+;;              '      =                             .
+;;             :      :       ____                   '=_. ___
+;;        ___  |      ;                            ____ '~--.~.
+;;             ;      ;                               _____  } |
+;;          ___=       \ ___ __     __..-...__           ___/__/__
+;;             :        =_     _.-~~          ~~--.__
+;;        _____ \         ~-+-~                   ___~=_______
+;;             ~@#~~ == ...______ __ ___ _--~~--_
+;; Plesiosaur                                          -r.millward-
+;;
+;;
+;;            " Swish! Swish! Swish! Swish!
+;;              Plesiosaurus swam over the ocean,
+;;              It caused a commotion wherever it went,
+;;              A reptile cretaceous,
+;;              Its habits voracious,
+;;              It never paid income tax, phone bills or rent."
+;;                                  -- Jack Prelutsky
+--------------------------------------------------------------------------------
+;;                                         .--.
+;;                                        {(^^)}
+;;                       __..._         _.''''a`._
+;;                   _.-'      '~-._.-~~     (  .__}
+;;                _-~                       _.`--j|
+;;             _-~     _         /^\    _.-~     &|
+;;          _-~     ,-~ ~-.      \\ ) .~
+;;        .'       {       )      \\|'
+;;      .'         {       /  _.-' |:
+;;    .'            \     /.-'     \\
+;;  .'        __.-~.=\   /          `}
+;; ;      _.-~   / ./ |  }
+;; {    _.'     / /   | /
+;; {    =      {=+__  | :
+;;  :   :_      `-- = \,_`-.
+;;   `.   '=_                     -r.millward-
+;;      '-.___'_::='
+;;
+;; Corythosaur
+;;
+;;
+;;            " Corythosaurus, long ago,
+;;              Wandered to and wandered fro,
+;;              Ambled in and ambled out,
+;;              Munching as it went about.
+;;
+;;              Corythosaurus, moved with grace,
+;;              It had a duck-bill on its face,
+;;              It had a helmet on its head,
+;;              Could have used some brains instead. "
+;;                                         -- Jack Prelutsky
+--------------------------------------------------------------------------------
+;;                          .       .
+;;                         / `.   .' \
+;;                 .---.  <    > <    >  .---.
+;;                 |    \  \ - ~ ~ - /  /    |
+;;                  ~-..-~             ~-..-~
+;;              \~~~\.'                    `./~~~/
+;;               \__/                        \__/
+;;                /                  .-    .  \
+;;         _._ _.-    .-~ ~-.       /       }   \/~~~/
+;;     _.-'q  }~     /       }     {        ;    \__/
+;;    {'__,  /      (       /      {       /      `. ,~~|   .     .
+;;     `''''='~~-.__(      /_      |      /- _      `..-'   \\   //
+;;                 / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'
+;;                {   \  +\         \  =\ (        ~ - . _ _ _..---~
+;;                |  | {   }         \   \_\
+;;               '---.o___,'       .o___,'       -r.millward-
+;;
+;; Stegosaurus
+;;
+;;            " Stegosaurus was a creature uncontentious and benign,
+;;              And the row of armoured plates upon its back
+;;              Failed to guard its tender belly
+;;              Or protect its flimsy spine:
+;;              Stegosaurus often wound up as a snack,
+;;              Stegosaurus often wound up as a snack. "
+;;                                        -- Jack Prelutsky
+--------------------------------------------------------------------------------
 ;;                         (
 ;;                           )     (
 ;;                    ___...(-------)-....___
@@ -39,7 +122,7 @@
 ;;    :               `-.__             __.-'              :
 ;;    :                  ) ""---...---"" (                 :
 ;;     '._               `"--...___...--"`              _.'
-;;   jgs \""--..__                              __..--""/
+;;       \""--..__                              __..--""/
 ;;        '._     """----.....______.....----"""     _.'
 ;;           `""--..,,_____            _____,,..--""`
 ;;                         `"""----"""`
@@ -95,30 +178,6 @@
 ;;    .  *.             You are here.
 ;;  . .    .               .             *.                         .
 --------------------------------------------------------------------------------
-;;
-;;                                 BRHKKKKHRB
-;;                            R9UwOsHyjNHrQHsC999R
-;;                         Q$p{Ry>BxgGSM}ySK*S%e%6F$Q
-;;                       HGHE*ulRus(!:_--_:!*}sSRiH3vk9
-;;                     R5H>}AQs*`              `*ySsH2=hR
-;;                    EG  Hyke"            :\i{x+~_C5H  GU
-;;                   pE   Q3N  g%s|\**rlCXR      WK>!H   KG
-;;                  Hh   R%                         g"H   Pg
-;;                  yM  BuW                         l "B  Wy
-;;                 Ne   $h                         5   9   2B
-;;                 Rk   2(SgW                     R'   3   SN
-;;                 Ne   p,yu}u3XG9K6$AheyuuuSR   B^    9   2B
-;;                  yM  B*_leeeeuC{Cu2eeeee:  ;UWs    ;B  Wy
-;;                  HS   R, -!|xy2eeyyeeee*   _Rh`   'g   A#
-;;                   Eq   R^     ```  `^es    XQ.   ^H   KG
-;;                    9P   Mu,         iu'   \M^  ,yB  WP$
-;;                     R5g   Mw*.     ^e:   :Rx.\3N   Q5R
-;;                       HGH   B3vu\~"x|,,~!u5uUA   KGK
-;;                         R$pOFlspiGNCegu5C}S=xl5p$R
-;;                            R9EqExSRyRHCEil3EG9R
-;;                                 WRgHKKHgRW
-;;
---------------------------------------------------------------------------------
 ;;                                             .~))>>             ___
 ;;                                           .~))>>)))>>      .-~))>>
 ;;                                         .~)))))>>       .-~))>>)>
@@ -150,6 +209,26 @@
 ;;                                              :    ,'
 ;;                                              ~~~~~
 --------------------------------------------------------------------------------
+;; B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@@@@@@@QQQ#gQNQQQQ@@@@@@@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@@@Q#BzNHBjKQr&QlQoXBQ@@@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@N#ejJ@mOc/\>\\\vq6QoQjW@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@NNuXQoi'           '?DmKwyN@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@H@@Q$8x,        ,|2U6F;;9Q@@d@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@K@@@&Q@@@QgOU9d#@@@@@@@@Qvq@@@O@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@&Q@@NQ@@@@@@@@@@@@@@@@@@@@#`q@@Qg@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@O@@@6@@@@@@@@@@@@@@@@@@@@@, _@@@O@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@O@@@|OQ@@@@@@@@@@@@@@@@@@7  `@@@O@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@O@@@^umSX9OHHdKkmaazoQ@@$   :@@@O@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@WQ@@D`;Fk666666666j`  PQ`   O@@Qg@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@K@@@e` `,;^^;;rSE'  :@:  `w@@@O@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@D@@@Q^       `e^  `Qx  ;Q@@@H@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@#N@@@#7,    cv   FO,v#@@@##@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@N#@@QxDu^zj\*i=$oPX@@#N@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@@@QBOyQeB@z@]9Xv#eU#Q@@@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@@@@@@@QQQQBQ#QQQQ@@@@@@@@@@@@@@@@@@@@@@@@@@B
+;; B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B
+--------------------------------------------------------------------------------
 ;; WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 ;; WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 ;; WWWWWWWWWWWWWWWWWWWP'dP'dWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
@@ -170,10 +249,218 @@
 ;; :::::::'.....:.. ::::::::'......:. :::::::::'....::.`::::::::::::
 ;; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ;; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-;; Flag of Wales     By Richard Kirk
+--------------------------------------------------------------------------------
+;;                  .--,
+;;   .-.    __,,,__/    |
+;;  /   \-'`        `-./_
+;; |    |               `)
+;;   \   `             `\ ;
+;;  /       ,        ,    |
+;; |      /         : O /_
+;; |          O  .--;__   '.
+;; |                (  )`.  |
+;;  \                 `-` /  |
+;;   \          ,_  _.-./`  /
+;;    \          \``-.(    /
+;;   |           '---'   /--.
+;;  ,--\___..__        _.'   /--.
+;;  \          `-._  _`/    '    '.
+;;  .' ` ' .       ``    '        .
+--------------------------------------------------------------------------------
+;;                                   \
+;;                                   `\,/
+;;                                   .-'-.
+;;                                  '     `
+;;                                  `.   .'
+;;                           `._  .-~     ~-.   _,'
+;;                            ( )'           '.( )
+;;              `._    _       /               .'
+;;               ( )--' `-.  .'                 ;
+;;          .    .'        '.;                  ()
+;;           `.-.`           '                 .'
+;; ----*-----;                                .'
+;;           .`-'.           ,                `.
+;;          '    '.        .';                  ()
+;;               (_)-   .-'  `.                 ;
+;;              ,'   `-'       \               `.
+;;                            (_).           .'(_)
+;;                           .'   '-._   _.-'    `.
+;;                                  .'   `.
+;;                                  '     ;
+;;                                   `-,-'
+;;                                    /`\
+;;                                  /`
+--------------------------------------------------------------------------------
+;;                                 .-------.
+;;                                 |(~\o/~)|
+;;                               _.||\/X\/||._
+;;                            ,-"  || \ / ||  "-,
+;;                          ,’  () ||o X o|| ()  ’,
+;;                         / ()  ,-|| / \ ||-,  () \
+;;                        : o  ,’  ||/\X/\||  ’,  o ;
+;;                     .----------._)~   ~(_.----------.
+;;                     |\/)~~(\/\   (~\ /~)   /\/)~~(\/|
+;;                     |(X () X) >o  >-X-<  o< (X () X)|
+;;                     |/\)__(/\/  _(_/|\_)_  \/\)__(/\|
+;;                     ’----------’ )     ( ’----------’
+;;                        ; o  ’,  ||\/~\/||  ,’  o ;
+;;                         \ ()  ’-|| \o/ ||-’  () /
+;;                          ’,  () |(~\ /~)| ()  ,’
+;;                            ’-._ ||\/X\/|| _.-’
+;;                                ’|| \ / ||’
+;;                                 ||  X  ||
+;;                                 ||\(/\/||
+;;                                 ||=)O(=||
+;;                                 ||/\/)\||
+;;                                 ||  X  ||
+;;                                 || / \ ||
+;;                                 ||/\X/\||
+;;                                 |(_/o\_)|
+;;                                 ’._____.’
+--------------------------------------------------------------------------------
+;;                _nnnn_
+;;               dGGGGMMb
+;;              @p~qp~~qMb
+;;              M|@||@) M|
+;;              @,----.JM|
+;;             JS^\__/  qKL
+;;            dZP        qKRb
+;;           dZP          qKKb
+;;          fZP            SMMb
+;;          HZM            MMMM
+;;          FqM            MMMM
+;;        __| ".        |\dS"qML
+;;        |    `.       | `' \Zq
+;;       _)      \.___.,|     .'
+;;       \____   )MMMMMP|   .'
+;;            `-'       '--'
+--------------------------------------------------------------------------------
+;;                                                  /
+;;                               _,.------....___,.’ ’,.-.
+;;                            ,-’          _,.--"        |
+;;                          ,’         _.-’              .
+;;                         /   ,     ,’                   ‘
+;;                        .   /     /                     ‘‘.
+;;                        |  |     .                       \.\
+;;              ____      |___._.  |       __               \ ‘.
+;;            .’    ‘---""       ‘‘"-.--"’‘  \               .  \
+;;           .  ,            __               ‘              |   .
+;;           ‘,’         ,-"’  .               \             |    L
+;;          ,’          ’    _.’                -._          /    |
+;;         ,‘-.    ,".   ’--’                      >.      ,’     |
+;;        . .’\’   ‘-’       __    ,  ,-.         /  ‘.__.-      ,’
+;;        ||:, .           ,’  ;  /  / \ ‘        ‘.    .      .’/
+;;        j|:D  \          ’--’  ’ ,’_  . .         ‘.__, \   , /
+;;       / L:_  |                 .  "’ :_;                ‘.’.’
+;;       .    ""’                  """""’                    V
+;;        ‘.                                 .    ‘.   _,..  ‘
+;;          ‘,_   .    .                _,-’/    .. ‘,’   __  ‘
+;;           ) \‘._        ___....----"’  ,’   .’  \ |   ’  \  .
+;;          /   ‘. "‘-.--"’         _,’ ,’     ’---’ |    ‘./  |
+;;         .   _  ‘""’--.._____..--"   ,             ’         |
+;;         | ." ‘. ‘-.                /-.           /          ,
+;;         | ’._.’    ‘,_            ;  /         ,’          .
+;;        .’          /| ‘-.        . ,’         ,           ,
+;;        ’-.__ __ _,’,’    ’‘-..___;-...__   ,.’\ ____.___.’
+;;        ‘"^--’..’   ’-’-^-’"--    ’-^-’‘.’’"""""‘.,^.’.--’
+--------------------------------------------------------------------------------
+;;                       __...----...__
+;;                    .-' -=;::;::`;:::`-.
+;;                 .-'"; `-;:"";`-;   ,;;'`-.
+;;               .''";;:     ,..   `.;;. .';;'.
+;;              /  ,;;::,     '--'  ,.;: ::  .;:\
+;;             ..- .; ;:,;,,.,   ,  ;;: ::;;:..;:.
+;;            ;   ;    .;::,    ;:.;:::::::::;., ;
+;;            |;. :      ;:;       `-;:::::-'""  |
+;;            | ;,'  ,;::     ;.     `-;::  `;:::|
+;;            ;`-;.   ,;:  ,;; `.  ."";,     ;;, ;
+;;            '. ."".,        "".    ,;:;  '.,;::.
+;;             `.                              .'
+;;               `.                          .'
+;;                 `-.                    .-'
+;;                    ""--...______...--""
+;;
+;;             ______.._      _..________    _____
+;; __.._.-.'""".: ::::  '-._.',;::::::.;:'--' ,..;`-.--...___
+;; ;:::,.  ,;::::  ::    `-. ,.;::::... .; ,;::::::. ,;:::;.,
+;; ;::::::::::::::  :::  ::. ,;:::::. ,:: .,;:::... ,;::::.,;
+;;  ,.;:::::., .;::. :::: ::. ,;::: ,:::   .;:::::::., ,.;:::
+;;   :::::::.., ,;:: ,;:::. ,.;":::.:::  ,.;:::::::;.,..,;:::
+;; :::::.., .;:::::.,.:; ______.......___ ,.;::::::::;.., .,:
+;; ____.....------"""""""""---.,;:::::::,""--......__________
+;; :::::'                                     `,;;::::. ,;:::
+;;      ,;:.         .:,                ,.;            ,__,;.
+;;                            -.                 .-..
+;;   .-..      ._.         ._.    ,;'       __   '--'
+;;   '--'
+--------------------------------------------------------------------------------
+;;                           #MOEeajF]x1xJ{u2ekDN
+;;                       NDPoeXwmeauz7L\\/L7v]F}zv2hN
+;;                   Q&Ea6khEPwu\r;:::::_~,,,,,:;?LzvLuq
+;;                 N9wq996kEX7^;;;;:::::_~,,,,,’’’’’:^i7/]N
+;;               ReqKKq9$6ku=;;;r??^::::_~:;;:,’’’’.---,*i/ch
+;;             BmOOOKKq9$6S^^;rumeeZJ;:::7juuFv~’’’.---‘‘’^//7D
+;;            wkHdOOKKq9$m?^^;iwmeeZa|::;yjufF]^’’’.---‘‘‘‘’;\|S
+;;          QaDDHdOOKKq9$}^^^;^iaeeS\:::_*zuuJ|,’’’.---‘‘‘‘‘‘_|\\Q
+;;         QeRDDHdOOKKq9$z^^^;;;;;;:::::_~,~~,,’’’’.---‘‘‘‘‘‘ -||LQ
+;;         oRRDDHdOOKKq9$yr^^;;;;;;:|{S2]|:,,,,’’’’.---‘‘‘‘‘‘  ’*|\
+;;        eHRRDDHdOOKKq9$k7^^;;;;;;raaoS2j\,,,,’’’’.---‘‘‘‘‘‘   ’||e
+;;       Da&RRDDHdOOKKq9$6X*^;;;;;;;2aoS2ur,,,,’’’’.---‘‘‘‘‘‘    r|*Q
+;;       e&&RRDDHdOOKKq9$66m7;;;;;;:;*\\?:,,,,,’’’’.---‘‘‘‘‘‘    ,|?o
+;;       jM&RRDDHdOOKKq9$6kEPoi^;;;:::::_~,,,,,’’’’.---‘‘‘‘‘‘    ‘=|/
+;;       yM&RRDDHdOOKKq9$6kEEPXmf7?^;:::_~,,,,,’’’’.---‘‘‘‘‘‘     ;?r
+;;       oM&RRDDHdOOKKq9$6kEEPXXmeeZaojuFzc|^",’’’’.---‘‘‘‘‘‘     ;|;
+;;       eM&RRDDHdOOKKq9$6kEEPXwmeeZaaoS2jjuuFv;,’’.---‘‘‘‘‘‘    ‘>?*
+;;       hM&RRDDHdOOKKq9$6kEEPXwmeeZa]iL7ujufFF}z;’.---‘‘‘‘‘‘    ’|?{
+;;       RX&RRDDHdOOKKq9$6kEEPXwmeeo;:::_:iufF]}{x\,---‘‘‘‘‘‘    ^|rD
+;;        kHRRDDHdOOKKq9$6kEEPXwmee}::::_~rufF]}{xJ/.--‘‘‘‘‘‘   ’||S
+;;         mRRDDHdOOKKq9$6kEEPXwmeeZi^:::?]uuF]}{xJz:--‘‘‘‘‘‘  ’*||
+;;         QPRDDHdOOKKq9$6kEEPXwmeeZaouFjyjuuF]}{xJz;--‘‘‘‘‘‘ ‘*||8
+;;          QeDDHdOOKKq9$6kEEPX]=;;rvooS2i^:":={{xJz;--‘‘‘‘‘‘,?\|Q
+;;            mKHdOOKKq9$6kEEPJ;;;;::ioS{~,,,,,?{xJz,--‘‘‘‘‘:\\zQ
+;;             8PdOOKKq9$6kEEP2r;;;:;}oSu:,,,,,i{xJ>---‘‘-;\/\X
+;;               KXOKKq9$6kEEPXet7izoaoSSu7?*\1}tv;’---’;/i\S
+;;                 Dw6q9$6kEEPXwmeeZaaoS2jjuuF]t|,’.,;\7L7d
+;;                   BOew$kEEPXwmeeZaaoS2jjuFLr::^?cv7vmQ
+;;                      QD9aaPXwmeeZaaoSju{vivJ]{7xadQ
+;;                           #8OPeojF]x1xx}uSekR#
+--------------------------------------------------------------------------------
+;;                            -:*vJzvvvlv1zxc>:-
+;;                       `^]O#qz?*|zyoZZoy}vvi\xakur-
+;;                    ,zDQNJriLumf?'-,?qNRRRW#QD2>^uQMu:
+;;                 -/MQB9>\6RqHKkXUq:   \#RRRRRR8NQkr>PBNt.
+;;               'aQ#MD>cR$wwwwwwwwwD^   7NRRRRRRRR8#&r^ddBa,
+;;             'FQNRNZ:RqwwwmmmmmmmwXM'   ORRRRRRRRRRRB9,wKKBe-
+;;            ,NQRRNo;#Pwwmmmmmmmmmwwku   :BRRRRRRRRRRRgN'mqUHB;
+;;           ^QNRRgj:QPwmmmmmmmmmmmmmwg    {gRRRRRRRRRRRg#-O969Q7
+;;          ?QWRRR#'#kwwmmmmmmmmmmmmmXR     U&RRRRRRRRRRR#a~N6UUQF
+;;         ;@WRRRNvcBwwmmmmmmmmmmmmmwK/';   `8RRRRRRRRRRR8Q`m6UUUQL
+;;        `QNRRRRB:UDwmmmmmmmmmmmmmwkP;D9e   ~#RRRRRRRRRRRQ:\O6UU9Q,
+;;        zQRRRRRQ,qDwmmmmmmmmmmmmwE9:Rww9u   iNRRRRRRRRRRQ;|O666U89
+;;       `QNRRRRRQ"FgwmmmmmmmmmmwwUm'DXwmwH*   ogRRRRRRRR8Q.j9666U6@.
+;;       ;@RRRRRRBc;QwwmmmmmmmmwXKF`6Pwmmww&,   XWRRRRRRRgd-g6U66UUQ?
+;;       \@RRRRRRN#rFMXwmmmmmmwwdL j$wmmmwwXH`   ENRRRRR8Q~oO6U66U6#x
+;;       \@RRRRRR&@x/UDwwmmmwXwH? 7Kwwmmmmmwkm    yN8&RRQ?|R6U666U6#J
+;;       ;@8RRRRRRQ@ivkRXwwwwwH= ^DwwmmmmmmwwO|    egR&Q?:&666666U6Q*
+;;       `QNRRRRRRN@O;maN9wwXH; :RXwwmmmmmmmmwM,    wBO,-g6UU666U6U@-
+;;        /QRRRRRRRQHZhJ^/dH9' 'RwwwmmmmmmmmmwXH`  _;;,,eK6U6666UUWk
+;;         ##RRRRRRQR6$R   ;zRBDXXwmmmmmmmmwwwXdRv/'  PrQ666666U6qQ'
+;;         ,QNRRRRRQxeK6R;    '>1Z$DRHdddDRdh27;`    `PvQ66666UUUQ=
+;;          ;QgRRRRgBezg@@QBBBBgqu^--:M|,_7eDBBQgwv=zRjkg666UUU6QJ
+;;           :QNRRRRR##Q@##QQ@Q####96``  9NddKUejUDN@QWK6U66UU9Q/
+;;            -KQ8RRRR&@PQMq&^      |' `         `9m]OUU6UUU6DN:
+;;              rBBRRRRNQHg#B;'     'Q:q         rjdD666666HB{`
+;;                \NQMRRRRWgNQBP\i  "Q*Q:  ./BDgBQBRUUU66D#J-
+;;                  ;6Q#8RRRR&Bqr#-  `     ~*Bg6U6U666KNDL`
+;;                    `?XBQN8RNgjav|k\?;>>X\vN9UU69R#Kv,
+;;                        ,|oO#QQWq~D`N`F,DeQ&g#Hez;`
+;;                             `,;?ctFy2yfz/r:'
 #+end_text
 
 #+begin_src emacs-lisp :var v=ascii-art
-  (let '(l (split-string v "--------------------------------------------------------------------------------\n"))
-	(setq initial-scratch-message (nth (random (length l)) l)))
+(let ((l (split-string v "--------------------------------------------------------------------------------\n")))
+  (setq initial-scratch-message (nth (random (length l)) l)))
+  ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
+  ;; (replace-regexp-in-string "^" ";; " s)
+  ;; (setq initial-scratch-message (car (reverse l))))
 #+end_src

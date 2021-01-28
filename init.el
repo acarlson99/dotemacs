@@ -64,10 +64,10 @@
 
 ;; (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 
-(let '(load-path
+(let ((load-path
 	   (append
 		(list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config")
-		load-path))
+		load-path)))
   (progn
 	(when (require 'gruber-darker-theme nil 'noerror)
 	  (setq my-default-dark-theme 'gruber-darker))
