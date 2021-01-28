@@ -22,6 +22,8 @@
     ("incl" "include" nil 1)
     ("rtn" "return" nil 0)
     ("unsg" "unsigned" nil 0)
+    ("i" "ii" nil 0)
+    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'c-mode-abbrev-table
@@ -30,6 +32,8 @@
     ("incl" "include" nil 17)
     ("rtn" "return" nil 3)
     ("unsg" "unsigned" nil 7)
+    ("i" "ii" nil 0)
+    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'change-log-mode-abbrev-table '())
@@ -86,6 +90,8 @@
 (define-abbrev-table 'go-mode-abbrev-table
   '(
     ("rtn" "return" nil 1)
+    ("i" "ii" nil 0)
+    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'godoc-mode-abbrev-table '())
@@ -112,9 +118,7 @@
 
 (define-abbrev-table 'ivy-occur-mode-abbrev-table '())
 
-(define-abbrev-table 'java-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'java-mode-abbrev-table '())
 
 (define-abbrev-table 'jison-mode-abbrev-table '())
 
@@ -144,9 +148,7 @@
 
 (define-abbrev-table 'neotree-mode-abbrev-table '())
 
-(define-abbrev-table 'objc-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'objc-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
@@ -161,17 +163,11 @@
     ("incl" "include" nil 1)
    ))
 
-(define-abbrev-table 'pike-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'pike-mode-abbrev-table '())
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'prog-mode-abbrev-table
-  '(
-    ("i" "ii" nil 73)
-    ("j" "jj" nil 10)
-   ))
+(define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'python-mode-abbrev-table
   '(
@@ -219,9 +215,7 @@
 
 (define-abbrev-table 'speedbar-mode-abbrev-table '())
 
-(define-abbrev-table 'sql-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'sql-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 

@@ -1,3 +1,8 @@
+;;; package --- Summary:
+;;; A whole bunch of golang stuff
+;;; Commentary:
+;;; Code:
+
 ;; (defun go-run-goreturns ()
 ;;   "Run goreturns to update buffer, includes, etc and save result."
 ;;   (interactive)
@@ -38,7 +43,7 @@
 (with-eval-after-load 'go-mode
   (require 'go-autocomplete nil 'noerror))
 
-(setq gofmt-command "goreturns")
+(defvar gofmt-command "goreturns")
 
 (defun go-config ()
   "For use in 'go-mode-hook'."
@@ -54,3 +59,4 @@
   (local-set-key [(f5)] 'godef-jump))
 
 (provide 'go-config)
+;;; go-config.el ends here

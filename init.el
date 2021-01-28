@@ -23,7 +23,7 @@
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(gruber-darker-theme load-theme-buffer-local markdown-mode xah-fly-keys flycheck-ocaml gnu-elpa-keyring-update erlstack-mode clang-format exec-path-from-shell powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
+	(haskell-mode gruber-darker-theme load-theme-buffer-local markdown-mode xah-fly-keys flycheck-ocaml gnu-elpa-keyring-update erlstack-mode clang-format exec-path-from-shell powershell yaml-mode golint govet bison-mode slime counsel-spotify which-key projectile erlang nasm-mode htmlize tuareg caml tramp-term ssh lisp-extra-font-lock scheme-here scheme-complete chicken-scheme go-gopath go-imports cargo php-mode web-mode fish-mode evil-tutor evil-numbers ruby-end ruby-extra-highlight ahk-mode molokai-theme opencl-mode glsl-mode elisp-lint flycheck-golangci-lint python-pylint pylint flycheck rust-playground rust-mode x-path-walker helm go-mode neotree auto-complete evil magit elpy)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -32,6 +32,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(trailing-whitespace ((t (:background "purple4")))))
+
+;;; BEGIN MY CODE
 
 ;; NOTE: Must install gnu-elpa-keyring-update to use gnu elpa
 ;; Found here: https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
@@ -42,7 +44,7 @@
 
 ;; TODO: find better way to determine filesystem
 ;; oh no nfs
-(setq on-nfs-p (cl-search "/nfs/" (getenv "HOME")))
+(defvar on-nfs-p (cl-search "/nfs/" (getenv "HOME")))
 
 ;; append shell (SHELL) path to path and exec-path.  Set path
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
@@ -55,46 +57,53 @@
 	  (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
 	  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))))
 
-(setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
+(defvar my-default-dark-theme 'manoj-dark)
+;; (setq my-default-dark-theme 'manoj-dark)
+(defvar my-default-light-theme 'adwaita)
+;; (setq my-default-light-theme 'adwaita)
 
-(setq my-default-dark-theme 'manoj-dark)
-(setq my-default-light-theme 'adwaita)
+;; (setq load-path (append (list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config") load-path))
 
-(when (require 'gruber-darker-theme nil 'noerror)
-  (setq my-default-dark-theme 'gruber-darker))
+(let '(load-path
+	   (append
+		(list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config")
+		load-path))
+  (progn
+	(when (require 'gruber-darker-theme nil 'noerror)
+	  (setq my-default-dark-theme 'gruber-darker))
 
-;; Load general features files
-(require 'list)
-(require 'string)
-(require 'comments)
-(require 'header)
+	;; Load general features files from 42
+	(require 'list)
+	(require 'string)
+	(require 'comments)
+	(require 'header)
 
-;; Other packages
-;; (require 'column-marker)			; Commented out in favor of fci
-(require 'fill-column-indicator)
-(require 'nlinum)
-(require 'hl-todo)
-(require 'escreen)
-(escreen-install)
-(require 'sql-upcase)
+	;; Other packages
+	;; (require 'column-marker)			; Commented out in favor of fci
+	(require 'fill-column-indicator)
+	(require 'nlinum)
+	(require 'hl-todo)
+	(require 'escreen)
+	(escreen-install)
+	(require 'sql-upcase)
 
-;; default stuff
-(require 'cosmetic)
-(load "prune-backups")
-(require 'defaults)
-(require 'globals)
-(require 'mode-settings)
+	;; default stuff
+	(require 'cosmetic)
+	(load "prune-backups")
+	(require 'defaults)
+	(require 'globals)
+	(require 'mode-settings)
 
-;; configs
-(require 'prog-config)
-(require 'c-config)
-(require 'c++-config)
-(require 'ruby-config)
-(require 'term-config)
-(require 'web-config)
-(require 'php-config)
-(require 'sql-config)
-(require 'go-config)
+	;; configs
+	(require 'prog-config)
+	(require 'c-config)
+	(require 'c++-config)
+	(require 'ruby-config)
+	(require 'term-config)
+	(require 'web-config)
+	(require 'php-config)
+	(require 'sql-config)
+	(require 'go-config)))
 
 ;; Set mode hooks
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
