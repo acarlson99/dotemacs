@@ -154,8 +154,8 @@
 ;;                                              :    ,'
 ;;                                              ~~~~~
 ")))
-  ;; (setq initial-scratch-message (nth (random (length l)) l)))
-  (setq initial-scratch-message (nth 0 (reverse l))))
+  (setq initial-scratch-message (nth (random (length l)) l)))
+  ;; (setq initial-scratch-message (nth 0 (reverse l))))
 
 ;; Theme
 (load-theme my-default-dark-theme t)
