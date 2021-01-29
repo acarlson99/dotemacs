@@ -88,8 +88,8 @@
 ;;         _._ _.-    .-~ ~-.       /       }   \/~~~/
 ;;     _.-'q  }~     /       }     {        ;    \__/
 ;;    {'__,  /      (       /      {       /      `. ,~~|   .     .
-;;     `''''='~~-.__(      /_      |      /- _      `..-'   \\   //
-;;                 / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'
+;;     `''''='~~-.__(      /_      |      /- _      '..-'   \\   //
+;;                 / \   =/  ~~--~~{    ./|    ~-.     '-..__\\_//_.-'
 ;;                {   \  +\         \  =\ (        ~ - . _ _ _..---~
 ;;                |  | {   }         \   \_\
 ;;               '---.o___,'       .o___,'       -r.millward-
@@ -394,36 +394,36 @@
 ;;   .-..      ._.         ._.    ,;'       __   '--'
 ;;   '--'
 --------------------------------------------------------------------------------
-;;                           #MOEeajF]x1xJ{u2ekDN
-;;                       NDPoeXwmeauz7L\\/L7v]F}zv2hN
-;;                   Q&Ea6khEPwu\r;:::::_~,,,,,:;?LzvLuq
-;;                 N9wq996kEX7^;;;;:::::_~,,,,,’’’’’:^i7/]N
-;;               ReqKKq9$6ku=;;;r??^::::_~:;;:,’’’’.---,*i/ch
-;;             BmOOOKKq9$6S^^;rumeeZJ;:::7juuFv~’’’.---‘‘’^//7D
-;;            wkHdOOKKq9$m?^^;iwmeeZa|::;yjufF]^’’’.---‘‘‘‘’;\|S
-;;          QaDDHdOOKKq9$}^^^;^iaeeS\:::_*zuuJ|,’’’.---‘‘‘‘‘‘_|\\Q
-;;         QeRDDHdOOKKq9$z^^^;;;;;;:::::_~,~~,,’’’’.---‘‘‘‘‘‘ -||LQ
-;;         oRRDDHdOOKKq9$yr^^;;;;;;:|{S2]|:,,,,’’’’.---‘‘‘‘‘‘  ’*|\
-;;        eHRRDDHdOOKKq9$k7^^;;;;;;raaoS2j\,,,,’’’’.---‘‘‘‘‘‘   ’||e
-;;       Da&RRDDHdOOKKq9$6X*^;;;;;;;2aoS2ur,,,,’’’’.---‘‘‘‘‘‘    r|*Q
-;;       e&&RRDDHdOOKKq9$66m7;;;;;;:;*\\?:,,,,,’’’’.---‘‘‘‘‘‘    ,|?o
-;;       jM&RRDDHdOOKKq9$6kEPoi^;;;:::::_~,,,,,’’’’.---‘‘‘‘‘‘    ‘=|/
-;;       yM&RRDDHdOOKKq9$6kEEPXmf7?^;:::_~,,,,,’’’’.---‘‘‘‘‘‘     ;?r
-;;       oM&RRDDHdOOKKq9$6kEEPXXmeeZaojuFzc|^",’’’’.---‘‘‘‘‘‘     ;|;
-;;       eM&RRDDHdOOKKq9$6kEEPXwmeeZaaoS2jjuuFv;,’’.---‘‘‘‘‘‘    ‘>?*
-;;       hM&RRDDHdOOKKq9$6kEEPXwmeeZa]iL7ujufFF}z;’.---‘‘‘‘‘‘    ’|?{
-;;       RX&RRDDHdOOKKq9$6kEEPXwmeeo;:::_:iufF]}{x\,---‘‘‘‘‘‘    ^|rD
-;;        kHRRDDHdOOKKq9$6kEEPXwmee}::::_~rufF]}{xJ/.--‘‘‘‘‘‘   ’||S
-;;         mRRDDHdOOKKq9$6kEEPXwmeeZi^:::?]uuF]}{xJz:--‘‘‘‘‘‘  ’*||
-;;         QPRDDHdOOKKq9$6kEEPXwmeeZaouFjyjuuF]}{xJz;--‘‘‘‘‘‘ ‘*||8
-;;          QeDDHdOOKKq9$6kEEPX]=;;rvooS2i^:":={{xJz;--‘‘‘‘‘‘,?\|Q
-;;            mKHdOOKKq9$6kEEPJ;;;;::ioS{~,,,,,?{xJz,--‘‘‘‘‘:\\zQ
-;;             8PdOOKKq9$6kEEP2r;;;:;}oSu:,,,,,i{xJ>---‘‘-;\/\X
-;;               KXOKKq9$6kEEPXet7izoaoSSu7?*\1}tv;’---’;/i\S
-;;                 Dw6q9$6kEEPXwmeeZaaoS2jjuuF]t|,’.,;\7L7d
-;;                   BOew$kEEPXwmeeZaaoS2jjuFLr::^?cv7vmQ
-;;                      QD9aaPXwmeeZaaoSju{vivJ]{7xadQ
-;;                           #8OPeojF]x1xx}uSekR#
+;;                           `MOEeajFlx1xJ{u2ekD'
+;;                       `DPoeXwmeauz7'\\/`7vlF}zv2h'
+;;                   `&Ea6khEPwu\r':::::_~,,,,,:;`LzvLu'
+;;                 `9wq996kEX7^';;;:::::_~,,,,,’’’’’:`i7/l'
+;;               `eqKKq9$6ku=';`r??'::::_~:;;:,’’’’.---`*i/c'
+;;             `mOOOKKq9$6S'^`rumeeZJ':::`juuFv'’’’.---‘‘’`//7'
+;;            `kHdOOKKq9$m?'^`iwmeeZa|':`yjufFl'’’’.---‘‘‘‘’`l|'
+;;          `aDDHdOOKKq9$}'^^;`iaeeS/'::_`zuuJ|'’’’.---‘‘‘‘‘‘_`||'
+;;         `eRDDHdOOKKq9$z'^^;;;;;;:::::_~,~~,,’’’’.---‘‘‘‘‘‘ `||L'
+;;         `RRDDHdOOKKq9$yr'^;;;;;;`|{S2l|',,,,’’’’.---‘‘‘‘‘‘  `*|'
+;;        `HRRDDHdOOKKq9$k7'^;;;;;`raaoS2j|',,,’’’’.---‘‘‘‘‘‘   `||'
+;;       `a&RRDDHdOOKKq9$6X*';;;;;;`2aoS2ur',,,’’’’.---‘‘‘‘‘‘   `r|*'
+;;       `&&RRDDHdOOKKq9$66m7';;;;;:`*\\?:',,,,’’’’.---‘‘‘‘‘‘    `|?'
+;;       `M&RRDDHdOOKKq9$6kEPoi';;;:::::_~,,,,,’’’’.---‘‘‘‘‘‘    `=|'
+;;       `M&RRDDHdOOKKq9$6kEEPXmf7?';:::_~,,,,,’’’’.---‘‘‘‘‘‘    `ca'
+;;       `M&RRDDHdOOKKq9$6kEEPXXmeeZaojuFzc|'",’’’’.---‘‘‘‘‘‘    `c|'
+;;       `M&RRDDHdOOKKq9$6kEEPXwmeeZaaoS2jjuuFv',’’.---‘‘‘‘‘‘    ‘>?'
+;;       `M&RRDDHdOOKKq9$6kEEPXwmeeZaliL7ujufFF}z'’.---‘‘‘‘‘‘    `|?'
+;;       `X&RRDDHdOOKKq9$6kEEPXwmeeo':::_`iufFl}{x',---‘‘‘‘‘‘    `|r'
+;;        `HRRDDHdOOKKq9$6kEEPXwmee}':::_~`ufFl}{xJ'.--‘‘‘‘‘‘   `||'
+;;         `RRDDHdOOKKq9$6kEEPXwmeeZi':::`luuFl}{xJz'--‘‘‘‘‘‘  `*|'
+;;         `PRDDHdOOKKq9$6kEEPXwmeeZaouFjyjuuFl}{xJz'--‘‘‘‘‘‘ `*||'
+;;          `eDDHdOOKKq9$6kEEPXl';;`vooS2'^:"`={{xJz'--‘‘‘‘‘‘`?\|'
+;;            `KHdOOKKq9$6kEEPJ';;;:`ioS{',,,,`?{xJz'--‘‘‘‘`:\\z'
+;;             `PdOOKKq9$6kEEP2r';;:`}oSu',,,`ni{xJ'---‘‘-`\//'
+;;               `XOKKq9$6kEEPXet7izoaoSSu7?*\1}tv'’---’`/i/'
+;;                 `w6q9$6kEEPXwmeeZaaoS2jjuuFlt',’.,;`7L7'
+;;                   `Oew$kEEPXwmeeZaaoS2jjuFLr':^`cv7vm'
+;;                      `D9aaPXwmeeZaaoSju{vivJl{7xad'
+;;                           `8OPeojFlx1xx}uSekR'
 --------------------------------------------------------------------------------
 ;;                            -:*vJzvvvlv1zxc>:-
 ;;                       `^]O#qz?*|zyoZZoy}vvi\xakur-
@@ -458,8 +458,9 @@
 #+end_text
 
 #+begin_src emacs-lisp :var v=ascii-art
-(let ((l (split-string v "--------------------------------------------------------------------------------\n")))
-  (setq initial-scratch-message (nth (random (length l)) l)))
+(let* ((l (split-string v "--------------------------------------------------------------------------------\n"))
+       (msg (nth (random (length l)) l)))
+  (setq initial-scratch-message msg))
   ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
   ;; (replace-regexp-in-string "^" ";; " s)
   ;; (setq initial-scratch-message (car (reverse l))))
