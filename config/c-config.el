@@ -43,8 +43,12 @@
   "Run clang-format with STYLE on buffer or region."
   (interactive "P")
   (if (executable-find "clang-format")
-	  (if (not (shell-command-on-region (point-min) (point-max) "clang-format" t t))
-		  (error "Command clang-format failed"))
+	  (let ((cmd (if style (concat "clang-format --style=" style) "clang-format")))
+		(if (or (not style) (member style '("llvm" "google" "chromium" "mozilla" "webkit" "file")))
+			(if (not
+				 (shell-command-on-region (point-min) (point-max) cmd t t))
+				(error "Command clang-format failed"))
+		  (error "Unsupported style.  Use llvm,google,chromium,mozilla,webkit,file")))
 	(message "clang-format not found")))
 
 (defun c-config ()
