@@ -105,6 +105,7 @@
 	(require 'term-config)
 	(require 'web-config)
 	(require 'php-config)
+	(require 'js-config)
 	(require 'sql-config)
 	(require 'go-config)))
 
@@ -119,6 +120,7 @@
 (add-hook 'term-mode-hook 'term-config)
 (add-hook 'web-mode-hook 'web-config)
 (add-hook 'php-mode-hook 'php-config)
+(add-hook 'js-mode-hook 'js-config)
 (add-hook 'sql-mode-hook 'sql-config)
 (add-hook 'go-mode-hook 'go-config)
 
