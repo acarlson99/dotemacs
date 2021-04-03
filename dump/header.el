@@ -22,7 +22,7 @@
 ;    By: login____ <mail_______@student.42.fr>      +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: yyyy/mm/dd 15:27:11 by login____         #+#    #+#              ;
-;    Updated: yyyy/mm/dd 15:27:11 by login____        ###   ########.fr        ;
+;    Updated: 2021/04/03 15:04:30 by marvin           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -245,21 +245,28 @@
 	)
   )
 
+(defun header-first-line-comment ()
+  (interactive)
+   (save-excursion
+	 (progn
+	   (goto-char (point-min))
+	   (string= (buffer-substring-no-properties 1 (search-forward "\n"))
+				(comments-make-bar)))))
 
 (defun header-update ()
   "Updates the header for the current source file."
   (interactive)
   (save-excursion
-    (if (buffer-modified-p)
-        (progn
-          (goto-char (point-min))
-          (if (search-forward "Updated" nil t)
-              (progn
-                (delete-region
-                 (progn (beginning-of-line) (point))
-                 (progn (end-of-line) (point)))
+	(if (and (header-first-line-comment) (buffer-modified-p))
+		(progn
+		  (goto-char (point-min))
+		  (if (search-forward "Updated" nil t)
+			  (progn
+				(delete-region
+				 (progn (beginning-of-line) (point))
+				 (progn (end-of-line) (point)))
 				(header-insert-line-09)
-                (message "Header up to date."))))))
+				(message "Header up to date."))))))
   nil)
 
 
