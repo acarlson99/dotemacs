@@ -246,12 +246,14 @@
   )
 
 (defun header-first-line-comment ()
+  "Check first line of file for 42-style comment."
   (interactive)
-   (save-excursion
-	 (progn
-	   (goto-char (point-min))
-	   (string= (buffer-substring-no-properties 1 (search-forward "\n"))
-				(comments-make-bar)))))
+  (save-excursion
+	(if (> (point-min) (point-max))
+		(progn
+		  (goto-char (point-min))
+		  (string= (buffer-substring-no-properties 1 (search-forward "\n"))
+				   (comments-make-bar))))))
 
 (defun header-update ()
   "Updates the header for the current source file."
