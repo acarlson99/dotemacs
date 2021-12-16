@@ -66,7 +66,8 @@
 
 (let ((load-path
 	   (append
-		(list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config")
+		;; git clone https://github.com/emacs-evil/evil.git
+		(list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config" "~/.emacs.d/evil")
 		load-path)))
   (progn
 	(when (require 'gruber-darker-theme nil 'noerror)
