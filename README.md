@@ -1,7 +1,7 @@
 # .emacs.d/
 
 ```bash
-git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d
+git clone --recurse-submodules https://github.com/acarlson99/dotemacs.git ~/.emacs.d
 ```
 
 ## Neat packages
@@ -64,4 +64,4 @@ dump from 42siliconvalley
 
 Actually read config files and figure out what is going on
 
-Imports shell PATH from default shell
+Imports shell PATH from default shell (tries its best)
