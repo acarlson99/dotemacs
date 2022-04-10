@@ -27,7 +27,7 @@
 
 ;; TODO: find better way to determine filesystem
 ;; oh no nfs
-(defvar on-nfs-p (cl-search "/nfs/" (getenv "HOME")))
+(defvar on-nfs-p (string-match "/nfs/" (getenv "HOME")))
 
 ;; append shell (SHELL) path to path and exec-path.  Set path
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
