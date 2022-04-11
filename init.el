@@ -56,19 +56,13 @@
 (defvar my-default-dark-theme 'manoj-dark)
 (defvar my-default-light-theme 'adwaita)
 
-(let* ((subdirs '("lisp" "lisp/dump" "lisp/packages" "lisp/lang-conf"))
+(let* ((subdirs '("lisp" "lisp/packages" "lisp/lang-conf"))
 	   (confdir (file-name-directory (or load-file-name (buffer-file-name))))
 	   (load-path
 		(append
 		 (mapcar (lambda (x) (concat confdir x)) subdirs)
 		 load-path)))
   (progn
-
-	;; Load general features files from 42
-	(require 'list)
-	(require 'string)
-	(require 'comments)
-	(require 'header)
 
 	;; Other packages
 	;; (require 'column-marker)			; Commented out in favor of fci
@@ -87,6 +81,7 @@
 	(require 'defaults)
 	(require 'globals)
 	(load "lang-conf")
+	(require 'alist)
 	))
 
 (provide 'init)

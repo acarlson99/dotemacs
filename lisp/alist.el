@@ -17,3 +17,6 @@
 
 (autoload 'php-mode "php-mode" "Major mode for editing PHP code" t)
 (add-to-list 'auto-mode-alist '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
+
+(provide 'alist)
+;;; alist.el ends here
