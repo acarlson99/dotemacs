@@ -10,11 +10,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-	("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
- '(frame-brackground-mode (quote dark))
- '(org-babel-load-languages (quote ((python . t) (shell . t) (emacs-lisp . t))))
- '(send-mail-function (quote mailclient-send-it))
+   '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
+ '(frame-brackground-mode 'dark)
+ '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t)))
+ '(package-selected-packages '(flycheck evil-numbers evil auto-complete))
+ '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -22,6 +22,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(trailing-whitespace ((t (:background "purple4")))))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(let ((did-refresh-p nil))
+  (mapc (lambda (pkg)
+		  (if (not (package-installed-p pkg))
+			  (progn
+				(if (not did-refresh-p) (setq did-refresh-p t))
+				(if (yes-or-no-p (concat "Package not installed (" (symbol-name pkg) "). Install?"))
+					(package-install pkg)
+				  (message "Skipping...")))))
+		package-selected-packages))
 
 ;;; BEGIN MY CODE
 
@@ -43,12 +56,11 @@
 (defvar my-default-dark-theme 'manoj-dark)
 (defvar my-default-light-theme 'adwaita)
 
-(let* ((submodules '("flycheck" "evil" "tramp"))
-	  (load-path
-	   (append
-		(list nil "~/.emacs.d/dump/" "~/.emacs.d/lisp" "~/.emacs.d/packages" "~/.emacs.d/config")
-		(mapcar (lambda (x) (concat "~/.emacs.d/"x"/")) submodules)
-		load-path)))
+(let* ((subdirs '("lisp" "lisp/dump" "lisp/packages" "lisp/lang-conf"))
+	   (load-path
+		(append
+		 (mapcar (lambda (x) (concat "~/.emacs.d/" x "/")) subdirs)
+		 load-path)))
   (progn
 
 	;; Load general features files from 42
@@ -73,34 +85,8 @@
 	(load "prune-backups")
 	(require 'defaults)
 	(require 'globals)
-
-	;; configs
-	(require 'prog-config)
-	(require 'c-config)
-	(require 'c++-config)
-	(require 'ruby-config)
-	(require 'term-config)
-	(require 'web-config)
-	(require 'php-config)
-	(require 'js-config)
-	(require 'sql-config)
-	(require 'go-config)))
-
-;; Set mode hooks
-;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
-;; commented out in favor of fci-mode
-(add-hook 'prog-mode-hook 'prog-config)
-(add-hook 'c-mode-hook 'c-config)
-(add-hook 'c++-mode-hook 'c++-config)
-(add-hook 'ruby-mode-hook 'ruby-config)
-(add-hook 'org-mode-hook 'font-lock-mode)
-(add-hook 'term-mode-hook 'term-config)
-(add-hook 'web-mode-hook 'web-config)
-(add-hook 'php-mode-hook 'php-config)
-(add-hook 'js-mode-hook 'prettier-js-mode)
-(add-hook 'js-mode-hook 'js-config)
-(add-hook 'sql-mode-hook 'sql-config)
-(add-hook 'go-mode-hook 'go-config)
+	(load "lang-conf")
+	))
 
 (provide 'init)
 ;;; init.el ends here

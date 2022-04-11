@@ -1,6 +1,0 @@
-[submodule "evil"]
-	path = evil
-	url = git@github.com:emacs-evil/evil.git
-[submodule "flycheck"]
-	path = flycheck
-	url = git@github.com:flycheck/flycheck.git

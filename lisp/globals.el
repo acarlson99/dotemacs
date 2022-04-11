@@ -89,16 +89,16 @@
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-q") 'evil-numbers/dec-at-pt)
 
-;; ;; Set auto-complete-mode settings if installed
-;; ;; NOTE: commented out due to removing elpa
-;; (require 'auto-complete)
-;; (setq ac-use-menu-map t)
-;; ;; (add-hook 'go-mode-hook 'auto-complete-for-go)
-;; (add-to-list 'ac-modes 'prog-mode)
-;; (add-to-list 'ac-modes 'makefile-bsdmake-mode)
-;; (add-to-list 'ac-modes 'makefile-gmake-mode)
-;; (add-to-list 'ac-modes 'makefile-mode)
-;; (add-to-list 'ac-modes 'nasm-mode)
+;; Set auto-complete-mode settings if installed
+(require 'auto-complete)
+(ac-config-default)
+(setq ac-use-menu-map t)
+;; (add-hook 'go-mode-hook 'auto-complete-for-go)
+(add-to-list 'ac-modes 'prog-mode)
+(add-to-list 'ac-modes 'makefile-bsdmake-mode)
+(add-to-list 'ac-modes 'makefile-gmake-mode)
+(add-to-list 'ac-modes 'makefile-mode)
+(add-to-list 'ac-modes 'nasm-mode)
 
 ;; Set global flycheck
 (require 'flycheck)
