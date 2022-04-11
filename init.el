@@ -13,7 +13,7 @@
    '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
  '(frame-brackground-mode 'dark)
  '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t)))
- '(package-selected-packages '(flycheck evil-numbers evil auto-complete))
+ '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
  '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -23,20 +23,20 @@
  ;; If there is more than one, they won't work right.
  '(trailing-whitespace ((t (:background "purple4")))))
 
+;;; BEGIN MY CODE
+
+;; init pkg
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
-(let ((did-refresh-p nil))
-  (mapc (lambda (pkg)
-		  (if (not (package-installed-p pkg))
-			  (progn
-				(if (not did-refresh-p) (setq did-refresh-p t))
-				(if (yes-or-no-p (concat "Package not installed (" (symbol-name pkg) "). Install?"))
-					(package-install pkg)
-				  (message "Skipping...")))))
-		package-selected-packages))
-
-;;; BEGIN MY CODE
+;; install required uninstalled packages
+(let* ((req-packages '(flycheck evil-numbers evil auto-complete))
+	   (missing-packages (cl-remove-if 'package-installed-p req-packages)))
+  (if (/= (length missing-packages) 0)
+	  (if (yes-or-no-p (format "Packages not installed %s. Install? " missing-packages))
+		  (progn
+			(package-refresh-contents)
+			(mapc 'package-install missing-packages)))))
 
 ;; TODO: find better way to determine filesystem
 ;; oh no nfs
@@ -57,9 +57,10 @@
 (defvar my-default-light-theme 'adwaita)
 
 (let* ((subdirs '("lisp" "lisp/dump" "lisp/packages" "lisp/lang-conf"))
+	   (confdir (file-name-directory (or load-file-name (buffer-file-name))))
 	   (load-path
 		(append
-		 (mapcar (lambda (x) (concat "~/.emacs.d/" x "/")) subdirs)
+		 (mapcar (lambda (x) (concat confdir x)) subdirs)
 		 load-path)))
   (progn
 
