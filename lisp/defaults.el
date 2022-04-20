@@ -15,10 +15,11 @@
 ;; Font lock mode
 (setq-default font-lock-mode t)
 
-;; Make search case sensetive
-(setq-default case-fold-search nil)
-
-;;; 42 stuff
+;; Make search case insensetive
+;; NOTE: can be toggled with `M-c` in isearch mode
+;; see https://www.gnu.org/software/emacs/manual/html_node/efaq/Controlling-case-sensitivity.html
+(setq-default case-fold-search t)
+(setq-default case-replace t)
 
 ;; Set default Emacs configuration
 (set-language-environment "UTF-8")
