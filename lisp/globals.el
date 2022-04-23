@@ -82,6 +82,10 @@
 (evil-set-initial-state 'comint-mode 'emacs)
 (evil-set-initial-state 'slime-repl-mode 'emacs)
 (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+(evil-set-initial-state 'smudge-mode 'emacs)
+(evil-set-initial-state 'smudge-device-select-mode 'emacs)
+(evil-set-initial-state 'smudge-playlist-search-mode 'emacs)
+(evil-set-initial-state 'smudge-track-search-mode 'emacs)
 
 (define-key evil-insert-state-map (kbd "C-a") 'evil-beginning-of-visual-line)
 
