@@ -25,18 +25,25 @@
 
 ;;; BEGIN MY CODE
 
-;; init pkg
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-;; install required uninstalled packages
-(let* ((req-packages '(flycheck evil-numbers evil auto-complete))
-	   (missing-packages (cl-remove-if 'package-installed-p req-packages)))
-  (if (/= (length missing-packages) 0)
-	  (if (yes-or-no-p (format "Packages not installed %s. Install? " missing-packages))
-		  (progn
-			(package-refresh-contents)
-			(mapc 'package-install missing-packages)))))
+(let ((req-packages '(flycheck evil-numbers evil)))
+  (progn
+	;; google-emacs ships with patched auto-complete
+	;; so attempt to load google version first
+	(if (require 'google nil 'noerror)
+		(require 'auto-complete)
+	  (add-to-list 'req-packages 'auto-complete))
+
+	;; init pkg
+	(require 'package)
+	(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+	(package-initialize)
+	;; install required uninstalled packages
+	(let ((missing-packages (cl-remove-if 'package-installed-p req-packages)))
+	  (if (/= (length missing-packages) 0)
+		  (if (yes-or-no-p (format "Packages not installed %s. Install? " missing-packages))
+			  (progn
+				(package-refresh-contents)
+				(mapc 'package-install missing-packages)))))))
 
 ;; TODO: find better way to determine filesystem
 ;; oh no nfs
