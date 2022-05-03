@@ -63,13 +63,14 @@
 (defvar my-default-dark-theme 'manoj-dark)
 (defvar my-default-light-theme 'adwaita)
 
-(let* ((subdirs '("lisp" "lisp/packages" "lisp/lang-conf"))
-	   (confdir (file-name-directory (or load-file-name (buffer-file-name))))
-	   (load-path
-		(append
-		 (mapcar (lambda (x) (concat confdir x)) subdirs)
-		 load-path)))
+(let* ((my-lisp-directory
+		(concat
+		 (file-name-directory (or load-file-name (buffer-file-name)))
+		 "lisp/"))
+	   (load-path (append (list my-lisp-directory) load-path)))
   (progn
+	(let ((default-directory my-lisp-directory))
+	  (normal-top-level-add-subdirs-to-load-path))
 
 	;; Other packages
 	;; (require 'column-marker)			; Commented out in favor of fci

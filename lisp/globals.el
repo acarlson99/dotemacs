@@ -111,9 +111,12 @@
 ;; projectile project management
 (require 'projectile)
 (projectile-mode +1)
-(setq projectile-project-search-path '("~/projects/"))
+(setq projectile-project-search-path '("~/projects/" "~/p/"))
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+(when (require 'which-key nil 'noerror)
+  (which-key-mode))
 
 ;; load slime stuff properly
 (when (require 'slime nil 'noerror)
