@@ -10,6 +10,7 @@
 (require 'js-config)
 (require 'sql-config)
 (require 'go-config)
+(require 'org-config)
 
 ;; Set mode hooks
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -26,3 +27,4 @@
 (add-hook 'js-mode-hook 'js-config)
 (add-hook 'sql-mode-hook 'sql-config)
 (add-hook 'go-mode-hook 'go-config)
+(add-hook 'org-mode-hook 'org-config)
