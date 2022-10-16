@@ -68,9 +68,12 @@ network-security.data
 TAGS
 /url/
 /.tutor/
+/eln-cache
 /session.*
 /.org-id-locations
 /var
 /projectile*
 /transient
 /lisp/scratch-msg.el
+
+/.lastIwiped
