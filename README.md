@@ -1,7 +1,7 @@
 # .emacs.d/
 
 ```bash
-git clone --recurse-submodules https://github.com/acarlson99/dotemacs.git ~/.emacs.d
+git clone --recurse-submodules git@github.com:acarlson99/dotemacs.git ~/.emacs.d
 ```
 
 ## Neat packages
