@@ -1,3 +1,8 @@
+;;; my-smudge --- testing smudge spotify API
+;;; Commentary:
+;;; this is just a test
+;;; Code:
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)

@@ -10,11 +10,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
- '(frame-brackground-mode 'dark)
- '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t)))
- '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
- '(send-mail-function 'mailclient-send-it)
+   (quote
+	("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
+ '(frame-brackground-mode (quote dark))
+ '(org-babel-load-languages (quote ((python . t) (shell . t) (emacs-lisp . t))))
+ '(package-selected-packages (quote (request auto-complete evil evil-numbers flycheck)))
+ '(send-mail-function (quote mailclient-send-it))
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -90,6 +91,11 @@
 	(require 'globals)
 	(load "lang-conf")
 	(require 'alist)
+
+	;; rando
+	(require 'gptmacs)
+
+	;; TODO: add API key loader, why not
 	))
 
 (provide 'init)
