@@ -1,13 +1,13 @@
 ;;; gptmacs -- GPT emacs entanglement
 ;;; Commentary:
-;;; for use 
+;;; for use
 ;;; (kbd "C-M-|") -- send highlighted code along with a message
 ;;; (kbd "C-|")   -- send highlighted code to gpt-3 in the following format
-;;; 
+;;;
 ;;; Please analyze the following code
-;;; 
+;;;
 ;;; ### TEXT TO ANALYZE
-;;; 
+;;;
 ;;; int main() {
 ;;;    // printf() displays the string inside quotation
 ;;;    printf("Hello\n, World!");
