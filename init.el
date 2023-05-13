@@ -12,7 +12,7 @@
  '(custom-safe-themes
    '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
  '(frame-brackground-mode 'dark)
- '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t)))
+ '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t)))
  '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
  '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
@@ -88,7 +88,7 @@
 	(load "prune-backups")
 	(require 'defaults)
 	(require 'globals)
-	(load "lang-conf")
+	(load "mode-conf")
 	(require 'alist)
 	))
 
