@@ -90,6 +90,11 @@
 	(require 'globals)
 	(load "mode-conf")
 	(require 'alist)
+
+	;; rando
+	(require 'gptmacs)
+
+	;; TODO: add API key loader, why not
 	))
 
 (provide 'init)
