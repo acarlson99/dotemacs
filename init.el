@@ -94,6 +94,9 @@
 	;; rando
 	(require 'gptmacs)
 
+	;; (auto-insert-mode 1)
+	;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+
 	;; TODO: add API key loader, why not
 	))
 

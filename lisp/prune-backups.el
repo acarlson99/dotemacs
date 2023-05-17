@@ -1,3 +1,8 @@
+;;; prune-backups.el --- Prune emacs auto-backups.
+;;; Commentary:
+;;; Set backup directory to "~/.emacs.d/backups" and clear directory weekly
+;;; Code:
+
 (message "BEGIN PRUNE-BACKUPS")
 
 ;; Make sure backup directory exists

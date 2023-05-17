@@ -7,6 +7,9 @@
 	(org-redisplay-inline-images))
   )
 
+(defun my/org-unsafe-babel ()
+  (setq org-confirm-babel-evaluate nil))
+
 (defun org-config ()
   "For use in 'org-mode-hook'."
   (hl-todo-mode t)
