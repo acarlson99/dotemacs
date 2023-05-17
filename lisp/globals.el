@@ -106,6 +106,8 @@
 
 ;; Set global flycheck
 (require 'flycheck)
+(with-eval-after-load 'flycheck
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 (global-flycheck-mode)
 
 ;; projectile project management

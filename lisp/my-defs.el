@@ -1,4 +1,4 @@
-;;; my-defs.el --- little funcs
+;;; my-defs.el --- little funcs                      -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

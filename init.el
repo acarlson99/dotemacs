@@ -1,4 +1,4 @@
-;;; package -- summary:
+;;; package -- summary:                              -*- lexical-binding: t; -*-
 ;; init.el
 ;;; Commentary:
 ;; init file
@@ -25,14 +25,15 @@
 
 ;;; BEGIN MY CODE
 
-(let ((req-packages '(flycheck evil-numbers evil)))
+(let ((req-packages
+	   ;; google-emacs ships with patched auto-complete
+	   ;; so attempt to load google version first
+	   (if (require 'google nil 'noerror)
+		   (progn
+			 (require 'auto-complete)
+			 '(flycheck evil-numbers evil))
+		 '(flycheck evil-numbers evil auto-complete))))
   (progn
-	;; google-emacs ships with patched auto-complete
-	;; so attempt to load google version first
-	(if (require 'google nil 'noerror)
-		(require 'auto-complete)
-	  (add-to-list 'req-packages 'auto-complete))
-
 	;; init pkg
 	(require 'package)
 	(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -97,7 +98,7 @@
 	;; (auto-insert-mode 1)
 	;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
 
-	;; TODO: add API key loader, why not
+	(require 'el-keystore)
 	))
 
 (provide 'init)
