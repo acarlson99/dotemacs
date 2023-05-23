@@ -95,7 +95,7 @@
 	;; rando
 	(require 'gptmacs)
 
-	;; (auto-insert-mode 1)
+	(auto-insert-mode 1)
 	;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
 
 	(require 'el-keystore)
