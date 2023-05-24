@@ -16,7 +16,7 @@
 
 (require 'url)
 
-(defun my-switch-to-url-buffer (status)
+(defun gptmacs-switch-to-url-buffer (status)
   "Switch to the buffer returned by `url-retreive'.
 	The buffer contains the raw HTTP response sent by the server."
   (help-mode)
@@ -24,7 +24,7 @@
 
 (defvar openai-api-key "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
-(defun my-url-http-post (url args)
+(defun gptmacs-url-http-post (url args)
   "Send ARGS to URL as a POST request."
   (let ((url-request-method "POST")
 		(url-request-extra-headers
@@ -38,8 +38,8 @@
 					  (pop-to-buffer (current-buffer)))))))
 
 (defun gptmacs-query-gpt (msgContent)
-  ;; (my-url-http-post "http://localhost:8080"
-  (my-url-http-post "https://api.openai.com/v1/chat/completions"
+  ;; (gptmacs-url-http-post "http://localhost:8080"
+  (gptmacs-url-http-post "https://api.openai.com/v1/chat/completions"
 					(concat
 					 "{"
 					 "\"model\":\"gpt-3.5-turbo\","
