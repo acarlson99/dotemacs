@@ -11,6 +11,7 @@
 (require 'sql-config)
 (require 'go-config)
 (require 'org-config)
+(require 'package-conf)
 
 ;; Set mode hooks
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))

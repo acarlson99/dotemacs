@@ -67,39 +67,37 @@
 (let* ((my-lisp-directory
 		(concat
 		 (file-name-directory (or load-file-name (buffer-file-name)))
-		 "lisp/"))
-	   (load-path (append (list my-lisp-directory) load-path)))
+		 "lisp/")))
   (progn
+	(setq load-path (append (list my-lisp-directory) load-path))
 	(let ((default-directory my-lisp-directory))
 	  (normal-top-level-add-subdirs-to-load-path))
-
-	;; Other packages
-	;; (require 'column-marker)			; Commented out in favor of fci
-	(require 'fill-column-indicator)
-	(require 'nlinum)
-	(require 'hl-todo)
-	(require 'escreen)
-	(escreen-install)
-	(require 'sql-upcase)
-
-	(require 'prettier-js)
-
-	;; default stuff
-	(require 'cosmetic)
-	(load "prune-backups")
-	(require 'defaults)
-	(require 'globals)
-	(load "mode-conf")
-	(require 'alist)
-
-	;; rando
-	(require 'gptmacs)
-
-	(auto-insert-mode 1)
-	;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-
-	(require 'el-keystore)
 	))
+
+;; (require 'column-marker)			; Commented out in favor of fci
+(require 'fill-column-indicator)
+(require 'nlinum)
+(require 'hl-todo)
+(require 'escreen)
+(escreen-install)
+(require 'sql-upcase)
+
+(require 'prettier-js)
+
+;; default stuff
+(require 'cosmetic)
+(load "prune-backups")
+(require 'defaults)
+(load "mode-conf")
+(require 'alist)
+
+;; rando
+(require 'gptmacs)
+
+(auto-insert-mode 1)
+;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+
+(require 'el-keystore)
 
 (provide 'init)
 ;;; init.el ends here
