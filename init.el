@@ -86,7 +86,9 @@
 
 ;; default stuff
 (require 'cosmetic)
-(load "prune-backups")
+(require 'my-defs)
+(prune-backups)
+
 (require 'defaults)
 (load "mode-conf")
 (require 'alist)
