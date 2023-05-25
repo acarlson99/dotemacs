@@ -44,6 +44,8 @@
   `(lambda (&rest args2)
 	 (apply ,fun (append '(,@args) args2))))
 
+(require 'subr-x)
+
 (defun prune-backups ()
   "Set backup directory to `~/.emacs.d/backups' and clear directory weekly"
   (progn
