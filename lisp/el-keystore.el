@@ -1,6 +1,8 @@
 ;;; el-keystore.el --- store API keys                -*- lexical-binding: t; -*-
-;;; Commentary:
+;;; Commentary: written in a weed-induced stupor
 ;;; Code:
+
+(require 'pp)
 
 (defvar el-keystore-key-storage-file (mapconcat 'identity `(,user-emacs-directory ".el-keystored-keys.el") ""))
 
@@ -16,12 +18,14 @@
 (defun el-keystore-store-key (name val)
   (interactive "sName: \nsVal: ")
   (puthash name val el-keystore-keylist)
-  )
+  (el-keystore-save-keys))
 
 (defun el-keystore-read-key (name)
   "Read stored key NAME."
-  (interactive "sName: ")
-  (gethash name el-keystore-keylist))
+  (interactive (list (completing-read "Key:" (el-keystore-list-stored-keys))))
+  (if (called-interactively-p 'any)
+	  (message "%S" (gethash name el-keystore-keylist))
+	  (gethash name el-keystore-keylist)))
 
 (defun el-keystore-serialize (db)
   "No documentation, DB."
@@ -32,7 +36,6 @@
 (defun el-keystore-save-keys (&optional fname) ;; dump to file
   "Save keys in FNAME or default to el-keystore-key-storage-file."
   (interactive)
-  (require 'pp)
   (ignore-errors
 	(with-temp-buffer
 	  (insert ";; DO NOT ADD TO SOURCE CONTROL\n")
@@ -54,13 +57,19 @@
   "Read keys from FNAME or default to el-keystore-key-storage-file."
   (interactive)
   (let* ((file (or fname el-keystore-key-storage-file))
-		(db (if (file-exists-p file)
-				(ignore-errors
-				  (with-temp-buffer
-					(insert-file-contents file)
-					(goto-char (point-min))
-					(el-keystore-deserialize (read (current-buffer))))))))
+		 (db (if (file-exists-p file)
+				 (ignore-errors
+				   (with-temp-buffer
+					 (insert-file-contents file)
+					 (goto-char (point-min))
+					 (el-keystore-deserialize (read (current-buffer))))))))
 	(setq el-keystore-keylist (or db (make-hash-table :test 'equal)))))
+
+(defun el-keystore-list-stored-keys ()
+  (interactive)
+  (if (called-interactively-p 'any)
+	   (message "%S" (hash-table-keys el-keystore-keylist))
+	   (hash-table-keys el-keystore-keylist)))
 
 ;; (progn
 ;;   (el-keystore-reset-keylist)

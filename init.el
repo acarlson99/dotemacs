@@ -99,7 +99,8 @@
 (auto-insert-mode 1)
 ;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
 
-(require 'el-keystore)
+(when (require 'el-keystore nil 'noerror)
+  (el-keystore-load-keys))
 
 (provide 'init)
 ;;; init.el ends here
