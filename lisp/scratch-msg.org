@@ -556,15 +556,17 @@
 #+end_text
 
 #+begin_src emacs-lisp :var ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon aa-flag=aa-flag wales-flag=wales-flag pooh-bear=pooh-bear mandelbrot=mandelbrot tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead lambda-char=lambda-char squirtle=squirtle charmander=charmander
+(require 'subr-x)
 (let* ((l (list
-		   ankylosaur plesiosaur corythosaur stegosaurus
-		   coffee pale-blue-dot earth mandelbrot
-		   aa-flag wales-flag
-		   gaetan-juvin pooh-bear tux dragon
-		   bulbasaur squirtle charmander
-		   dudeism grateful-dead lambda-char))
-	   (msg (nth (random (length l)) l)))
-  (setq initial-scratch-message msg))
+           ankylosaur plesiosaur corythosaur stegosaurus
+           coffee pale-blue-dot earth mandelbrot
+           aa-flag wales-flag
+           gaetan-juvin pooh-bear tux dragon
+           bulbasaur squirtle charmander
+           dudeism grateful-dead lambda-char))
+       (msg (nth (random (length l)) l)))
+         (setq initial-scratch-message
+           (string-join (list ";; " (current-time-string) "\n" msg))))
   ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
   ;; (replace-regexp-in-string "^" ";; " s)
   ;; (setq initial-scratch-message (car (reverse l))))
