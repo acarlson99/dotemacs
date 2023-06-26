@@ -36,5 +36,12 @@
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
 								64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
+;; Change panes in GUI
+(global-set-key (kbd "C-{") 'back-window)
+(global-set-key (kbd "C-}") 'other-window)
+
+;; My god this is amazing! Man pages on command! Com-man-d pages, if you will
+(global-set-key [(f5)] (lambda () (interactive) (manual-entry (current-word))))
+
 (provide 'defaults)
 ;;; defaults.el ends here

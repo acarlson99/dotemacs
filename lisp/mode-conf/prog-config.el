@@ -1,3 +1,5 @@
+(require 'my-defs)
+
 (defun prog-config ()
   "For use in 'prog-mode-hook'."
   ;; moving text

@@ -1,4 +1,4 @@
-;; load lang configs
+;; load mode configs
 
 (require 'prog-config)
 (require 'c-config)
@@ -11,6 +11,7 @@
 (require 'sql-config)
 (require 'go-config)
 (require 'org-config)
+(require 'package-conf)
 
 ;; Set mode hooks
 ;; (add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-2 80)))
@@ -19,7 +20,6 @@
 (add-hook 'c-mode-hook 'c-config)
 (add-hook 'c++-mode-hook 'c++-config)
 (add-hook 'ruby-mode-hook 'ruby-config)
-(add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'term-mode-hook 'term-config)
 (add-hook 'web-mode-hook 'web-config)
 (add-hook 'php-mode-hook 'php-config)
@@ -27,4 +27,5 @@
 (add-hook 'js-mode-hook 'js-config)
 (add-hook 'sql-mode-hook 'sql-config)
 (add-hook 'go-mode-hook 'go-config)
+;; (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'org-mode-hook 'org-config)

@@ -1,4 +1,4 @@
-;;; package -- summary:
+;;; package -- summary:                              -*- lexical-binding: t; -*-
 ;; init.el
 ;;; Commentary:
 ;; init file
@@ -10,12 +10,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-	("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default)))
- '(frame-brackground-mode (quote dark))
- '(org-babel-load-languages (quote ((python . t) (shell . t) (emacs-lisp . t))))
- '(package-selected-packages (quote (request auto-complete evil evil-numbers flycheck)))
- '(send-mail-function (quote mailclient-send-it))
+   '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
+ '(frame-brackground-mode 'dark)
+ '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t)))
+ '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
+ '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -26,14 +25,15 @@
 
 ;;; BEGIN MY CODE
 
-(let ((req-packages '(flycheck evil-numbers evil)))
+(let ((req-packages
+	   ;; google-emacs ships with patched auto-complete
+	   ;; so attempt to load google version first
+	   (if (require 'google nil 'noerror)
+		   (progn
+			 (require 'auto-complete)
+			 '(flycheck evil-numbers evil))
+		 '(flycheck evil-numbers evil auto-complete))))
   (progn
-	;; google-emacs ships with patched auto-complete
-	;; so attempt to load google version first
-	(if (require 'google nil 'noerror)
-		(require 'auto-complete)
-	  (add-to-list 'req-packages 'auto-complete))
-
 	;; init pkg
 	(require 'package)
 	(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -67,36 +67,40 @@
 (let* ((my-lisp-directory
 		(concat
 		 (file-name-directory (or load-file-name (buffer-file-name)))
-		 "lisp/"))
-	   (load-path (append (list my-lisp-directory) load-path)))
+		 "lisp/")))
   (progn
+	(setq load-path (append (list my-lisp-directory) load-path))
 	(let ((default-directory my-lisp-directory))
 	  (normal-top-level-add-subdirs-to-load-path))
-
-	;; Other packages
-	;; (require 'column-marker)			; Commented out in favor of fci
-	(require 'fill-column-indicator)
-	(require 'nlinum)
-	(require 'hl-todo)
-	(require 'escreen)
-	(escreen-install)
-	(require 'sql-upcase)
-
-	(require 'prettier-js)
-
-	;; default stuff
-	(require 'cosmetic)
-	(load "prune-backups")
-	(require 'defaults)
-	(require 'globals)
-	(load "lang-conf")
-	(require 'alist)
-
-	;; rando
-	(require 'gptmacs)
-
-	;; TODO: add API key loader, why not
 	))
+
+;; (require 'column-marker)			; Commented out in favor of fci
+(require 'fill-column-indicator)
+(require 'nlinum)
+(require 'hl-todo)
+(require 'escreen)
+(escreen-install)
+(require 'sql-upcase)
+
+(require 'prettier-js)
+
+;; default stuff
+(require 'cosmetic)
+(require 'my-defs)
+(prune-backups)
+
+(require 'defaults)
+(load "mode-conf")
+(require 'alist)
+
+;; rando
+(require 'gptmacs)
+
+(auto-insert-mode 1)
+;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+
+(when (require 'el-keystore nil 'noerror)
+  (el-keystore-load-keys))
 
 (provide 'init)
 ;;; init.el ends here
