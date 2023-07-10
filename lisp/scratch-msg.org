@@ -550,19 +550,55 @@
 ;;                             `,;?ctFy2yfz/r:'
 #+end_text
 
+#+NAME: dancing-bear
+#+begin_text
+;;                    Ko:;::cldON     NNN      Kxl:::,'c0
+;;                   No..lxxddl:;:ccccccccccloc;:odxO0o..c0
+;;                   K, oKl.'cON0OOO0KKKKK0OdloOOc..,ONc.;kN
+;;                   0:.:Oc  ,O                 Kc..:00,'O
+;;                    0, ckooK   XOolX    0lk    N0OOo,.lN
+;;                    Nd,..l0    NKOO0xodKKxO     Xo'.l0N
+;;                      Xx;.'dX      x;,,oX      O:,dK
+;;            KO0KXKooOKKo'..,;lOXKkoolloxk0NXOd:,l0
+;;           Ko...,:,..',..:0Xk,'kNd.     ,xx,.:dK
+;;        Ko;.,cdk0KKKk;. 'dN  k';xxc.   ,kx'.';xX
+;;       K:  ;0       NKd. ;OKXNk;.,lollodc'cOl..dN
+;;       K: .O          0l:,..dN X0xc::c::lkNXl..x
+;;       x. '0     NOolodOk;.:0      NXXX   Nk'.cO
+;;       kl''O    O:,cdd:..';:,:0         Xl,,..;clodxO0XN
+;;     NXKO:.k   x':K  Xl'lX O'.:lcxNNX 0xd'.;.'dkxolcccc::coON
+;;  Koc:ccccdX  k':X  K:'x   x,,c;..:;,xc... :;'O Kdccccccllc,:O
+;; 0;,xKNN     O,;0  0;,k    XX  X0c ....'kOdx;.k Xx;.     'xk';K
+;; 0,,ON     Xo,:0  0;'k           Kdk0c ;X  X;.,cldxdollccoxo'lN
+;;  Oc::clllc;:xN  Xc.lN               XodN  x.:kkdlcc:ccccc;;dX
+;;    NKOkkkOKN    x..o               N  N  0,.x      NK0kkO0N
+;;                 0c.,0              kxN  O;..;K
+;;                  x. :X             d;OKo'c0k':K
+;;                  k:,.lN           Nc.,,;kN  k':K
+;;                   NX:'O           0,  cX     k,;0
+;;                   Nk',0          0;.,'.lK     O;,xN
+;;                  0c.'k        XOo. 'Ok. ,xN    Xo,:dkkdoccco0
+;;                 Kl.'O      NOl'.. .d Xxl..lX     KxlllldkOx,,0
+;;                O; .k    NOl,. 'c;,oN   Xc..:K            Xk,,0
+;;               Nk;.lN   Kc':::dKNKK      XKd.lN     Kxllcc::l0
+;;                Nc'O    k,':clkX           Xc'k   Xo,:dkO0XN
+;;                X;'0     X0kxo,,ck          K:,okd;;xN
+;;                 d';lllllllloo;';x           XxlccxX
+#+end_text
+
 #+NAME: lambda-char
 #+begin_text
 ;; λ
 #+end_text
 
-#+begin_src emacs-lisp :var ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon aa-flag=aa-flag wales-flag=wales-flag pooh-bear=pooh-bear mandelbrot=mandelbrot tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead lambda-char=lambda-char squirtle=squirtle charmander=charmander
+#+begin_src emacs-lisp :var ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon aa-flag=aa-flag wales-flag=wales-flag pooh-bear=pooh-bear mandelbrot=mandelbrot tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char squirtle=squirtle charmander=charmander
 (let* ((l (list
 		   ankylosaur plesiosaur corythosaur stegosaurus
 		   coffee pale-blue-dot earth mandelbrot
 		   aa-flag wales-flag
 		   gaetan-juvin pooh-bear tux dragon
 		   bulbasaur squirtle charmander
-		   dudeism grateful-dead lambda-char))
+		   dudeism grateful-dead dancing-bear lambda-char))
 	   (msg (nth (random (length l)) l)))
   (setq initial-scratch-message msg))
   ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
