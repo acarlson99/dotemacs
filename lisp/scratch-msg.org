@@ -1,3 +1,22 @@
+#+NAME: shrek
+#+begin_text
+;; ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+;; ⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
+;; ⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
+;; ⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+;; ⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+#+end_text
+
 #+NAME: ankylosaur
 #+begin_text
 ;;                              /~~~~~~~~~~~~\_
@@ -173,6 +192,26 @@
 ;; ...#(######%%&&@&@@&&&&&&&%&&&&@&&&&&&&&&&&%%%&%%%&&&@@@@&%
 #+end_text
 
+#+NAME: keanu-breathtaking
+#+begin_text
+;; ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⣰⣿⣿⣿⣿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣧⢀⠀⠀⠀⠀
+;; ⠀⠀⠀⣿⣿⣿⠋⠀⠀⠀⠀⠀⠙⠀⠙⣿⣿⣿⣷⢳⢀⠀⠀⠀
+;; ⠀⠀⣠⣿⣿⣿⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⢀
+;; ⠀⠀⣸⣿⣿⣿⠸⠀⠀⠀⠒⠒⠒⠐⠀⠀⢿⣿⣿⣿⣿⣿⠀⠀
+;; ⠀⣴⣿⣿⣿⡿⠀⠒⣋⣙⡒⢰⠀⠤⣖⠒⢾⣿⣿⣿⣿⣧⠀⠀
+;; ⢺⣿⣿⣿⣿⢀⠀⠀⠉⠉⠉⠸⠀⡇⠉⠉⠀⢿⣿⣿⣿⣄⠀⠀
+;; ⠀⠙⣿⣿⣧⢻⠀⠀⠀⠀⠀⠠⠀⠰⠀⠀⠀⣸⠸⣿⣿⠿⠰⠀
+;; ⠀⠀⠀⠹⣿⣿⣿⣷⠀⡠⠙⣲⣔⣅⢡⣰⣷⣿⣿⣿⣧⠀⠀⠀
+;; ⠀⠀⠀⣼⣿⣿⣿⣿⠀⡿⠭⠭⠭⠭⢿⠀⣿⢻⣿⣿⠃⠀⠀⠀
+;; ⠀⠀⠀⠙⠛⣿⢻⠹⣿⠐⠙⠛⠟⠉⢀⣴⡟⢿⣿⡏⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⡟⠀⠀⠻⣦⣤⣶⠾⠋⠀⠀⠁⡦⢄⢀⠀⠀⠀
+;; ⠀⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+;; ⠀⠔⠊⠁⠀⠀⣇⠀⠀⠀⠑⡤⠤⢎⠁⠀⠀⡘⠀⠀⠀⠀⠀⠀
+;; ⠀⠀⠀⠀⠀⠀⢢⠠⠀⡠⢆⠀⠀⡠⠙⢄⠀⡸⠀⠀⠀⠀⠀⠀ You're breathtaking
+#+end_text
+
 #+NAME: pale-blue-dot
 #+begin_text
 ;;                                                        ..       :
@@ -231,53 +270,6 @@
 ;;                                              ~~~~~
 #+end_text
 
-#+NAME: aa-flag
-#+begin_text
-;; B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@@@@@@@QQQ#gQNQQQQ@@@@@@@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@@@Q#BzNHBjKQr&QlQoXBQ@@@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@N#ejJ@mOc/\>\\\vq6QoQjW@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@NNuXQoi'           '?DmKwyN@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@H@@Q$8x,        ,|2U6F;;9Q@@d@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@K@@@&Q@@@QgOU9d#@@@@@@@@Qvq@@@O@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@&Q@@NQ@@@@@@@@@@@@@@@@@@@@#`q@@Qg@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@O@@@6@@@@@@@@@@@@@@@@@@@@@, _@@@O@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@O@@@|OQ@@@@@@@@@@@@@@@@@@7  `@@@O@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@O@@@^umSX9OHHdKkmaazoQ@@$   :@@@O@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@WQ@@D`;Fk666666666j`  PQ`   O@@Qg@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@K@@@e` `,;^^;;rSE'  :@:  `w@@@O@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@D@@@Q^       `e^  `Qx  ;Q@@@H@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@#N@@@#7,    cv   FO,v#@@@##@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@N#@@QxDu^zj\*i=$oPX@@#N@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@@@QBOyQeB@z@]9Xv#eU#Q@@@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@@@@@@@QQQQBQ#QQQQ@@@@@@@@@@@@@@@@@@@@@@@@@@B
-;; B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B
-#+end_text
-
-#+NAME: wales-flag
-#+begin_text
-;; WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-;; WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-;; WWWWWWWWWWWWWWWWWWWP'dP'dWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-;; WWWWWW"VWWWb &""'.o.. .dWWWWWWWWWWWWP~~""_{WWWWWWWWWWWWWWWWWWWWWW
-;; WWWWWWb  """""""w.     jWWWWWWWP"  ,.--"'    .wWWWWWWWWWWWWWWWWWW
-;; WWWWWWWbWWWWF"""""`    WWWWWWP" .-"          {WWWWWWWWWWWWWWWWWWW
-;; WWWWWWWWWWWWLLWP      jWWWWP"               .wwWWWWWWWWW WWWWWWWW
-;; WWWWW'W'W'WWWW'      jWWW'                 {WWWWWWWWWWP  `VWWWWWW
-;; WWWWWW, dWWWW'      jWWWW                 .wwWWP".w."WWP.WWWWWWWW
-;; WWWWWW' VWWWW        VWW'               _{WWWW( WWWW. P.WWWWWWWWW
-;; ::::::':  :::         "                {  `:::::. '' ,.::::::::::
-;; :::::,:::  ::                                `''''  .::::::::::::
-;; ::::::::::                                       ..,:::::::::::::
-;; :::::::::::   .                  ..:.      `:::::::::::::::::::::
-;; :::::::::::: ::   .: ::::::::   :::::::.          `::::::::::::::
-;; ::::::::::::::' .::::::::::::.    .::::::::::::::  ::::::::::::::
-;; :::::::::::::'.:::::::::::::::::  ::::::::::::::'  ::::::::::::::
-;; :::::::'.....:.. ::::::::'......:. :::::::::'....::.`::::::::::::
-;; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-;; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-#+end_text
-
 #+NAME: pooh-bear
 #+begin_text
 ;;                  .--,
@@ -286,9 +278,9 @@
 ;; |    |               `)
 ;;   \   `             `\ ;
 ;;  /       ,        ,    |
-;; |      /         : O /_
-;; |          O  .--;__   '.
-;; |                (  )`.  |
+;; |      /         : O /_       Oh bother...
+;; |          O  .--;__   '.   Time to write more bugs than
+;; |                (  )`.  |  the Hundred Acre Wood on a hot summer day
 ;;  \                 `-` /  |
 ;;   \          ,_  _.-./`  /
 ;;    \          \``-.(    /
@@ -296,33 +288,6 @@
 ;;  ,--\___..__        _.'   /--.
 ;;  \          `-._  _`/    '    '.
 ;;  .' ` ' .       ``    '        .
-#+end_text
-
-#+NAME: mandelbrot
-#+begin_text
-;;                                   \
-;;                                   `\,/
-;;                                   .-'-.
-;;                                  '     `
-;;                                  `.   .'
-;;                           `._  .-~     ~-.   _,'
-;;                            ( )'           '.( )
-;;              `._    _       /               .'
-;;               ( )--' `-.  .'                 ;
-;;          .    .'        '.;                  ()
-;;           `.-.`           '                 .'
-;; ----*-----;                                .'
-;;           .`-'.           ,                `.
-;;          '    '.        .';                  ()
-;;               (_)-   .-'  `.                 ;
-;;              ,'   `-'       \               `.
-;;                            (_).           .'(_)
-;;                           .'   '-._   _.-'    `.
-;;                                  .'   `.
-;;                                  '     ;
-;;                                   `-,-'
-;;                                    /`\
-;;                                  /`
 #+end_text
 
 #+NAME: tux
@@ -362,8 +327,8 @@
 ;;         ,‘-.    ,".   ’--’                      >.      ,’     |
 ;;        . .’\’   ‘-’       __    ,  ,-.         /  ‘.__.-      ,’
 ;;        ||:, .           ,’  ;  /  / \ ‘        ‘.    .      .’/
-;;        j|:D  \          ’--’  ’ ,’_  . .         ‘.__, \   , /
-;;       / L:_  |                 .  "’ :_;                ‘.’.’
+;;        ||:   \          ’--’  ’ ,’_  . .         ‘.__, \   , /
+;;       / \:_  |                 .  "’ :_;                ‘.’.’
 ;;       .    ""’                  """""’                    V
 ;;        ‘.                                 .    ‘.   _,..  ‘
 ;;          ‘,_   .    .                _,-’/    .. ‘,’   __  ‘
@@ -410,12 +375,10 @@
 ;;               ‘.           / ‘----|          |-............'---’
 ;;                 \          \      |          |
 ;;                ,’           )     ‘.         |
-;;                 7____,,..--’      /          |
 #+end_text
 
 #+NAME: charmander
 #+begin_text
-;;             ,’          ‘.
 ;;           ,’          __  ‘.
 ;;          /|          " __   \
 ;;         , |           / |.   .
@@ -519,35 +482,35 @@
 #+NAME: grateful-dead
 #+begin_text
 ;;                            -:*vJzvvvlv1zxc>:-
-;;                       `^]O#qz?*|zyoZZoy}vvi\xakur-
-;;                    ,zDQNJriLumf?'-,?qNRRRW#QD2>^uQMu:
-;;                 -/MQB9>\6RqHKkXUq:   \#RRRRRR8NQkr>PBNt.
-;;               'aQ#MD>cR$wwwwwwwwwD^   7NRRRRRRRR8#&r^ddBa,
-;;             'FQNRNZ:RqwwwmmmmmmmwXM'   ORRRRRRRRRRRB9,wKKBe-
-;;            ,NQRRNo;#Pwwmmmmmmmmmwwku   :BRRRRRRRRRRRgN'mqUHB;
-;;           ^QNRRgj:QPwmmmmmmmmmmmmmwg    {gRRRRRRRRRRRg#-O969Q7
-;;          ?QWRRR#'#kwwmmmmmmmmmmmmmXR     U&RRRRRRRRRRR#a~N6UUQF
-;;         ;@WRRRNvcBwwmmmmmmmmmmmmmwK/';   `8RRRRRRRRRRR8Q`m6UUUQL
-;;        `QNRRRRB:UDwmmmmmmmmmmmmmwkP;D9e   ~#RRRRRRRRRRRQ:\O6UU9Q,
-;;        zQRRRRRQ,qDwmmmmmmmmmmmmwE9:Rww9u   iNRRRRRRRRRRQ;|O666U89
-;;       `QNRRRRRQ"FgwmmmmmmmmmmwwUm'DXwmwH*   ogRRRRRRRR8Q.j9666U6@.
-;;       ;@RRRRRRBc;QwwmmmmmmmmwXKF`6Pwmmww&,   XWRRRRRRRgd-g6U66UUQ?
-;;       \@RRRRRRN#rFMXwmmmmmmwwdL j$wmmmwwXH`   ENRRRRR8Q~oO6U66U6#x
-;;       \@RRRRRR&@x/UDwwmmmwXwH? 7Kwwmmmmmwkm    yN8&RRQ?|R6U666U6#J
-;;       ;@8RRRRRRQ@ivkRXwwwwwH= ^DwwmmmmmmwwO|    egR&Q?:&666666U6Q*
-;;       `QNRRRRRRN@O;maN9wwXH; :RXwwmmmmmmmmwM,    wBO,-g6UU666U6U@-
-;;        /QRRRRRRRQHZhJ^/dH9' 'RwwwmmmmmmmmmwXH`  _;;,,eK6U6666UUWk
-;;         ##RRRRRRQR6$R   ;zRBDXXwmmmmmmmmwwwXdRv/'  PrQ666666U6qQ'
-;;         ,QNRRRRRQxeK6R;    '>1Z$DRHdddDRdh27;`    `PvQ66666UUUQ=
+;;                       ‘^]O#qz?*|zyoZZoy}vvi\xakur-
+;;                    ,zDQNJriLumf?’-,?qNRRRW#QD2>^uQMu:
+;;                 -/MQB9`\6RqHKkXUq'   `RRRRRRR8NQkr'PBNt.
+;;               ’aQ#MD>`R$wwwwwwwwwD'  `7NRRRRRRRR88&r'ddBa,
+;;             ’FQNRNZ`RqwwwmmmmmmmwXM'  `ORRRRRRRRRRRB9'wKKBe-
+;;            ,NQRRNo;`Pwwmmmmmmmmmwwku'  `BRRRRRRRRRRRgN'mqUHB;
+;;           ^QNRRgj`QPwmmmmmmmmmmmmmwg'   `gRRRRRRRRRRRgg'O969Q7
+;;          ?QWRRR#’`kwwmmmmmmmmmmmmmXR'   `U&RRRRRRRRRRRRa'N6UUQF
+;;         ;@WRRRNv`BwwmmmmmmmmmmmmmwK'’;   `8RRRRRRRRRRR8Q'm6UUUQL
+;;        ‘QNRRRRB`UDwmmmmmmmmmmmmmwkP'`9e'  `RRRRRRRRRRRRQ'\O6UU9Q,
+;;        zQRRRRRQ`qDwmmmmmmmmmmmmwE9'`ww9u' `iNRRRRRRRRRRQ'|O666U89
+;;       ‘QNRRRRRQ`FgwmmmmmmmmmmwwUm'`XwmwH'  `ogRRRRRRRR8Q'j9666U6@.
+;;       ;@RRRRRRBc`QwwmmmmmmmmwXKF'`Pwmmww&'  `XWRRRRRRRgd'g6U66UUQ?
+;;       \@RRRRRRN`rFMXwmmmmmmwwdL'`$wmmmwwXH'  `ENRRRRR8Q'oO6U66U6#x
+;;       \@RRRRRR&`x/UDwwmmmwXwH?'`Kwwmmmmmwkm'  `yN8&RRQ?'R6U666U6#J
+;;       ;@8RRRRRRQ`ivkRXwwwwwH' `DwwmmmmmmwwO'   `egR&Q?'&666666U6Q*
+;;       ‘QNRRRRRRN@O`maN9wwXH' `RXwwmmmmmmmmwM'   `wBO'-g6UU666U6U@-
+;;        /QRRRRRRRQHZhJ`/dH9' `RwwwmmmmmmmmmwXH'  _;;,,eK6U6666UUWk
+;;         ##RRRRRRQR6$R   `zRBDXXwmmmmmmmmwwwXdRv/'  PrQ666666U6qQ’
+;;         ,QNRRRRRQxeK6R;    `>1Z$DRHdddDRdh27j'    ‘PvQ66666UUUQ=
 ;;          ;QgRRRRgBezg@@QBBBBgqu^--:M|,_7eDBBQgwv=zRjkg666UUU6QJ
-;;           :QNRRRRR##Q@##QQ@Q####96``  9NddKUejUDN@QWK6U66UU9Q/
-;;            -KQ8RRRR&@PQMq&^      |' `         `9m]OUU6UUU6DN:
-;;              rBBRRRRNQHg#B;'     'Q:q         rjdD666666HB{`
+;;           :QNRRRRR##Q@##QQ@Q####96‘‘  9NddKUejUDN@QWK6U66UU9Q/
+;;            -KQ8RRRR&@PQMq&^      |’ ‘         ‘9m]OUU6UUU6DN:
+;;              rBBRRRRNQHg#B;’     ’Q:q         rjdD666666HB{‘
 ;;                \NQMRRRRWgNQBP\i  "Q*Q:  ./BDgBQBRUUU66D#J-
-;;                  ;6Q#8RRRR&Bqr#-  `     ~*Bg6U6U666KNDL`
-;;                    `?XBQN8RNgjav|k\?;>>X\vN9UU69R#Kv,
-;;                        ,|oO#QQWq~D`N`F,DeQ&g#Hez;`
-;;                             `,;?ctFy2yfz/r:'
+;;                  ;6Q#8RRRR&Bqr#-  ‘     ~*Bg6U6U666KNDL‘
+;;                    ‘?XBQN8RNgjav|k\?;>>X\vN9UU69R#Kv,
+;;                        ,|oO#QQWq~D‘N‘F,DeQ&g#Hez;‘
+;;                             ‘,;?ctFy2yfz/r:’
 #+end_text
 
 #+NAME: dancing-bear
@@ -591,17 +554,54 @@
 ;; λ
 #+end_text
 
-#+begin_src emacs-lisp :var ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon aa-flag=aa-flag wales-flag=wales-flag pooh-bear=pooh-bear mandelbrot=mandelbrot tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char squirtle=squirtle charmander=charmander
+#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking
+(require 'subr-x)
 (let* ((l (list
+           shrek keanu-breathtaking
 		   ankylosaur plesiosaur corythosaur stegosaurus
-		   coffee pale-blue-dot earth mandelbrot
-		   aa-flag wales-flag
+		   coffee pale-blue-dot earth
 		   gaetan-juvin pooh-bear tux dragon
 		   bulbasaur squirtle charmander
 		   dudeism grateful-dead dancing-bear lambda-char))
 	   (msg (nth (random (length l)) l)))
-  (setq initial-scratch-message msg))
+  (setq initial-scratch-message
+        (string-join (list ";; " (user-full-name) " -- " (current-time-string) "\n" msg))))
   ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
   ;; (replace-regexp-in-string "^" ";; " s)
   ;; (setq initial-scratch-message (car (reverse l))))
 #+end_src
+
+#+RESULTS:
+#+begin_example
+;; chumshack -- Mon Jul 10 15:59:44 2023
+;;                            -:*vJzvvvlv1zxc>:-
+;;                       ‘^]O#qz?*|zyoZZoy}vvi\xakur-
+;;                    ,zDQNJriLumf?’-,?qNRRRW#QD2>^uQMu:
+;;                 -/MQB9`\6RqHKkXUq'   `RRRRRRR8NQkr'PBNt.
+;;               ’aQ#MD>`R$wwwwwwwwwD'  `7NRRRRRRRR88&r'ddBa,
+;;             ’FQNRNZ`RqwwwmmmmmmmwXM'  `ORRRRRRRRRRRB9'wKKBe-
+;;            ,NQRRNo;`Pwwmmmmmmmmmwwku'  `BRRRRRRRRRRRgN'mqUHB;
+;;           ^QNRRgj`QPwmmmmmmmmmmmmmwg'   `gRRRRRRRRRRRgg'O969Q7
+;;          ?QWRRR#’`kwwmmmmmmmmmmmmmXR'   `U&RRRRRRRRRRRRa'N6UUQF
+;;         ;@WRRRNv`BwwmmmmmmmmmmmmmwK'’;   `8RRRRRRRRRRR8Q'm6UUUQL
+;;        ‘QNRRRRB`UDwmmmmmmmmmmmmmwkP'`9e'  `RRRRRRRRRRRRQ'\O6UU9Q,
+;;        zQRRRRRQ`qDwmmmmmmmmmmmmwE9'`ww9u' `iNRRRRRRRRRRQ'|O666U89
+;;       ‘QNRRRRRQ`FgwmmmmmmmmmmwwUm'`XwmwH'  `ogRRRRRRRR8Q'j9666U6@.
+;;       ;@RRRRRRBc`QwwmmmmmmmmwXKF'`Pwmmww&'  `XWRRRRRRRgd'g6U66UUQ?
+;;       \@RRRRRRN`rFMXwmmmmmmwwdL'`$wmmmwwXH'  `ENRRRRR8Q'oO6U66U6#x
+;;       \@RRRRRR&`x/UDwwmmmwXwH?'`Kwwmmmmmwkm'  `yN8&RRQ?'R6U666U6#J
+;;       ;@8RRRRRRQ`ivkRXwwwwwH' `DwwmmmmmmwwO'   `egR&Q?'&666666U6Q*
+;;       ‘QNRRRRRRN@O`maN9wwXH' `RXwwmmmmmmmmwM'   `wBO'-g6UU666U6U@-
+;;        /QRRRRRRRQHZhJ`/dH9' `RwwwmmmmmmmmmwXH'  _;;,,eK6U6666UUWk
+;;         ##RRRRRRQR6$R   `zRBDXXwmmmmmmmmwwwXdRv/'  PrQ666666U6qQ’
+;;         ,QNRRRRRQxeK6R;    `>1Z$DRHdddDRdh27j'    ‘PvQ66666UUUQ=
+;;          ;QgRRRRgBezg@@QBBBBgqu^--:M|,_7eDBBQgwv=zRjkg666UUU6QJ
+;;           :QNRRRRR##Q@##QQ@Q####96‘‘  9NddKUejUDN@QWK6U66UU9Q/
+;;            -KQ8RRRR&@PQMq&^      |’ ‘         ‘9m]OUU6UUU6DN:
+;;              rBBRRRRNQHg#B;’     ’Q:q         rjdD666666HB{‘
+;;                \NQMRRRRWgNQBP\i  "Q*Q:  ./BDgBQBRUUU66D#J-
+;;                  ;6Q#8RRRR&Bqr#-  ‘     ~*Bg6U6U666KNDL‘
+;;                    ‘?XBQN8RNgjav|k\?;>>X\vN9UU69R#Kv,
+;;                        ,|oO#QQWq~D‘N‘F,DeQ&g#Hez;‘
+;;                             ‘,;?ctFy2yfz/r:’
+#+end_example

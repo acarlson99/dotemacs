@@ -15,6 +15,9 @@
 ;;; }
 
 (require 'url)
+(require 'el-keystore)
+
+(el-keystore-load-keys)
 
 (defun gptmacs-switch-to-url-buffer (status)
   "Switch to the buffer returned by `url-retreive'.
@@ -22,7 +25,7 @@
   (help-mode)
   (pop-to-buffer (current-buffer)))
 
-(defvar openai-api-key "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+(defvar openai-api-key (el-keystore-read-key "openai-key"))
 
 (defun gptmacs-url-http-post (url args)
   "Send ARGS to URL as a POST request."
