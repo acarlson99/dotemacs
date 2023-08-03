@@ -27,6 +27,26 @@
 
 (defvar openai-api-key (el-keystore-read-key "openai-key"))
 
+(defun gptmacs-query-str2 (msgContent)
+  "deprecated."
+  (concat
+   "{"
+   "\"model\":\"gpt-3.5-turbo\","
+   "\"messages\":[{\"role\":\"user\", \"content\":\""
+   (gptmacs-escape-json-string msgContent)
+   "\"}],"
+   "\"temperature\":\"0.7\""
+   "}"))
+
+;; (type-of (gethash "a" (json-parse-string "{\"a\": [{\"b\": 3}]}")))
+(defun gptmacs-query-str (msgContent)
+  (let ((msgMap #s(hash-table size 5 test equal data ("role" "user")))
+		(postMap #s(hash-table size 30 test equal data ("model" "gpt-3.5-turbo"
+														"temperature" "0.7"))))
+	(puthash "content" msgContent msgMap)
+	(puthash "messages" (vector msgMap) postMap)
+	(json-serialize postMap)))
+
 (defun gptmacs-url-http-post (url args)
   "Send ARGS to URL as a POST request."
   (let ((url-request-method "POST")
@@ -43,14 +63,7 @@
 (defun gptmacs-query-gpt (msgContent)
   ;; (gptmacs-url-http-post "http://localhost:8080"
   (gptmacs-url-http-post "https://api.openai.com/v1/chat/completions"
-					(concat
-					 "{"
-					 "\"model\":\"gpt-3.5-turbo\","
-					 "\"messages\":[{\"role\":\"user\", \"content\":\""
-					 (gptmacs-escape-json-string msgContent)
-					 "\"}],"
-					 "\"temperature\":\"0.7\""
-					 "}")))
+						 (gptmacs-query-str msgContent)))
 
 ;; (gptmacs-query-gpt (concat "cum all over my code" "#include <stdio.h>
 ;; int main() {
