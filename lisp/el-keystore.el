@@ -51,19 +51,24 @@
 				  sexp)
 			tab)
 		  (el-keystore-make-keylist))
-	(error (message "Invalid comphist db.") nil)))
+	(error (message "Invalid keystore db.") nil)))
 
 (defun el-keystore-load-keys (&optional fname) ;; dump from file
   "Read keys from FNAME or default to el-keystore-key-storage-file."
   (interactive)
-  (let* ((file (or fname el-keystore-key-storage-file))
-		 (db (if (file-exists-p file)
-				 (ignore-errors
-				   (with-temp-buffer
-					 (insert-file-contents file)
-					 (goto-char (point-min))
-					 (el-keystore-deserialize (read (current-buffer))))))))
-	(setq el-keystore-keylist (or db (make-hash-table :test 'equal)))))
+  (if (el-keystore-should-load-keys)
+	  (let* ((file (or fname el-keystore-key-storage-file))
+			 (db (if (file-exists-p file)
+					 (ignore-errors
+					   (with-temp-buffer
+						 (insert-file-contents file)
+						 (goto-char (point-min))
+						 (el-keystore-deserialize (read (current-buffer))))))))
+		(setq el-keystore-keylist (or db (make-hash-table :test 'equal))))
+	el-keystore-keylist))
+
+(defun el-keystore-should-load-keys ()
+  (eq el-keystore-keylist nil))
 
 (defun el-keystore-list-stored-keys ()
   (interactive)
