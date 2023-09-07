@@ -102,5 +102,8 @@
 (when (require 'el-keystore nil 'noerror)
   (el-keystore-load-keys))
 
+(if (< emacs-major-version 30)
+	(message "Low emacs version; please update"))
+
 (provide 'init)
 ;;; init.el ends here
