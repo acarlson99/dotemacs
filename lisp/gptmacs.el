@@ -45,7 +45,7 @@
 														"temperature" "0.7"))))
 	(puthash "content" msgContent msgMap)
 	(puthash "messages" (vector msgMap) postMap)
-	(json-serialize postMap)))
+	(json-encode postMap)))
 
 (defun gptmacs-url-http-post (url args)
   "Send ARGS to URL as a POST request."
@@ -60,10 +60,13 @@
 					  (help-mode)
 					  (pop-to-buffer (current-buffer)))))))
 
-(defun gptmacs-query-gpt (msgContent)
-  ;; (gptmacs-url-http-post "http://localhost:8080"
-  (gptmacs-url-http-post "https://api.openai.com/v1/chat/completions"
-						 (gptmacs-query-str msgContent)))
+(defun gptmacs-query-gpt (msgContent &optional url)
+  (let ((target
+		 (if (eq nil url)
+			 "https://api.openai.com/v1/chat/completions"
+		   url)))
+	(gptmacs-url-http-post target
+						   (gptmacs-query-str msgContent))))
 
 ;; (gptmacs-query-gpt (concat "cum all over my code" "#include <stdio.h>
 ;; int main() {
