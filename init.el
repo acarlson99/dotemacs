@@ -101,6 +101,7 @@
 
 ;; rando
 (require 'gptmacs)
+(require 'google nil :noerror)
 
 (auto-insert-mode 1)
 ;; (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
