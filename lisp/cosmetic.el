@@ -2,6 +2,9 @@
 (org-babel-load-file (format "%sscratch-msg.org" (file-name-directory load-file-name)))
 
 ;; Theme
+(defvar my-default-dark-theme 'manoj-dark)
+(defvar my-default-light-theme 'adwaita)
+
 (load-theme my-default-dark-theme t)
 
 ;; Disable startup screen

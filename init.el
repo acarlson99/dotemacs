@@ -36,6 +36,7 @@
 	))
 
 (require 'el-log)
+(require 'cosmetic)
 
 (let ((req-packages
 	   ;; google-emacs ships with patched auto-complete
@@ -71,9 +72,6 @@
 	  (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
 	  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))))
 
-(defvar my-default-dark-theme 'manoj-dark)
-(defvar my-default-light-theme 'adwaita)
-
 ;; (require 'column-marker)			; Commented out in favor of fci
 (require 'fill-column-indicator)
 (require 'nlinum)
@@ -94,7 +92,6 @@
    (t (el-log-lvl 'WARN "agda-mode unexpected error with command '%s' code %d; please check installation" agda-locate-command exitCode))))
 
 ;; default stuff
-(require 'cosmetic)
 (require 'my-defs)
 (prune-backups)
 
