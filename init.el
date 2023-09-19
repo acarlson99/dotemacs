@@ -28,11 +28,9 @@
 (let ((req-packages
 	   ;; google-emacs ships with patched auto-complete
 	   ;; so attempt to load google version first
-	   (if (require 'google nil 'noerror)
-		   (progn
-			 (require 'auto-complete)
-			 '(flycheck evil-numbers evil))
-		 '(flycheck evil-numbers evil auto-complete))))
+	   (if (require 'auto-complete nil 'noerror)
+	       '(flycheck evil-numbers evil)
+	     '(flycheck evil-numbers evil auto-complete))))
   (progn
 	;; init pkg
 	(require 'package)
@@ -110,6 +108,9 @@
 
 (when (require 'el-keystore nil 'noerror)
   (el-keystore-load-keys))
+
+(if (< emacs-major-version 30)
+	(message "Low emacs version; please update"))
 
 (provide 'init)
 ;;; init.el ends here

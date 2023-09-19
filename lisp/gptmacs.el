@@ -27,6 +27,21 @@
 
 (defvar openai-api-key (el-keystore-read-key "openai-key"))
 
+(defvar gptmacs-role "user")
+(defvar gptmacs-model "gpt-3.5-turbo")
+(defvar gptmacs-temperature "0.7")
+
+;; (type-of (gethash "a" (json-parse-string "{\"a\": [{\"b\": 3}]}")))
+(defun gptmacs-query-str (msgContent)
+  (let ((msgMap #s(hash-table test equal data))
+		(postMap #s(hash-table test equal data)))
+	(puthash "model" gptmacs-model postMap)
+	(puthash "temperature" gptmacs-temperature postMap)
+	(puthash "role" gptmacs-role msgMap)
+	(puthash "content" msgContent msgMap)
+	(puthash "messages" (vector msgMap) postMap)
+	(json-encode postMap)))
+
 (defun gptmacs-url-http-post (url args)
   "Send ARGS to URL as a POST request."
   (let ((url-request-method "POST")
@@ -40,17 +55,15 @@
 					  (help-mode)
 					  (pop-to-buffer (current-buffer)))))))
 
-(defun gptmacs-query-gpt (msgContent)
-  ;; (gptmacs-url-http-post "http://localhost:8080"
-  (gptmacs-url-http-post "https://api.openai.com/v1/chat/completions"
-					(concat
-					 "{"
-					 "\"model\":\"gpt-3.5-turbo\","
-					 "\"messages\":[{\"role\":\"user\", \"content\":\""
-					 (gptmacs-escape-json-string msgContent)
-					 "\"}],"
-					 "\"temperature\":\"0.7\""
-					 "}")))
+(defvar gptmacs-openai-url "https://api.openai.com/v1/chat/completions")
+
+(defun gptmacs-query-gpt (msgContent &optional url)
+  (let ((target
+		 (if (eq nil url)
+			 gptmacs-openai-url
+		   url)))
+	(gptmacs-url-http-post target
+						   (gptmacs-query-str msgContent))))
 
 ;; (gptmacs-query-gpt (concat "cum all over my code" "#include <stdio.h>
 ;; int main() {
@@ -58,11 +71,6 @@
 ;;    printf(\"Hello\\n, World!\");
 ;;    return 0;
 ;; }"))
-
-(defun gptmacs-escape-json-string (s)
-  "Escapes JSON string `S` containing code/text to be sent to GPT-3."
-  ;; NOTE: this is broken; does not always produce proper JSON
-  (replace-regexp-in-string "\n" "\\\\n" (replace-regexp-in-string "\\([\"\\]\\)" "\\\\\\1" s)))
 
 (defun gptmacs-execute-on-region (start end msg)
   "Sends marked code to gpt with a message from the user.  `START` and `END` represent the region, `MSG` is the message."
