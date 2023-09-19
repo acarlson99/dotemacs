@@ -26,11 +26,11 @@
 ;; C-x u is amazing
 (require 'undo-tree nil 'noerror)
 (global-undo-tree-mode)
-(setq evil-undo-system 'undo-tree)
 
 ;; Turn on evil mode if it is installed
 (require 'evil nil 'noerror)
 (evil-mode 1)
+(setq evil-undo-system 'undo-tree)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'eshell-mode 'emacs)
 (evil-set-initial-state 'neotree-mode 'emacs)
