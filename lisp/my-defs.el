@@ -45,6 +45,7 @@
 	 (apply ,fun (append '(,@args) args2))))
 
 (require 'subr-x)
+(require 'el-log)
 
 (defun prune-backups ()
   "Set backup directory to `~/.emacs.d/backups' and clear directory weekly"
@@ -73,7 +74,7 @@
 		  (if (> current (+ last-wipe-time week))
 			  (progn
 				;; Purges files not accessed in a week
-				(message "Deleting old backup files...")
+				(el-log "Deleting old backup files...")
 				(dolist (file
 						 (mapcar
 						  (lambda (f) (string-join (list backupdir f) "/"))
@@ -81,11 +82,11 @@
 				  (when (and (backup-file-name-p file)
 							 (> (- current (float-time (nth 5 (file-attributes file))))
 								week))
-					(message "Delete %s" file)
+					(el-log "Delete %s" file)
 					(delete-file file)))
 				(write-region (number-to-string (float-time (current-time))) nil last-run-time-file)
 				t)
-			(message "No wipe; waiting %d seconds" (- (+ last-wipe-time week) current))))))))
+			(el-log "No wipe; waiting %d seconds" (- (+ last-wipe-time week) current))))))))
 
 (provide 'my-defs)
 ;;; my-defs.el ends here

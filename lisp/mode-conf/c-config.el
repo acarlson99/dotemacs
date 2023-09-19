@@ -1,3 +1,5 @@
+(require 'el-log)
+
 ;; TODO: fix.  Breaks with long or massively indented line
 (defun comment-norminette ()
   "Redefinition of block commenting to appease Norminette."
@@ -49,7 +51,7 @@
 				 (shell-command-on-region (point-min) (point-max) cmd t t))
 				(error "Command clang-format failed"))
 		  (error "Unsupported style.  Use llvm,google,chromium,mozilla,webkit,file")))
-	(message "clang-format not found")))
+	(el-log-lvl 'WARN "clang-format not found")))
 
 (defun c-config ()
   "For use in 'c-mode-hook'."

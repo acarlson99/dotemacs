@@ -1,3 +1,5 @@
+(require 'el-log)
+
 ;; Escreen settings
 (add-hook 'escreen-goto-screen-hook
 		  'escreen-enable-number-mode-if-more-than-one-screen)
@@ -97,9 +99,9 @@
 ;; If this fails run "autoconf && ./configure && make" up in that directory
 (if (and (file-exists-p "~/.emacs.d/tramp/lisp/tramp.el") (file-exists-p "~/.emacs.d/tramp/lisp/Makefile") (require 'tramp nil 'noerror) (require 'tramp-compat nil 'noerror))
 	(progn
-	  (message "tramp loaded")
+	  (el-log "tramp loaded")
 	  (setq load-path (append (list nil "~/.emacs.d/tramp/lisp") load-path))
 	  (setq tramp-default-method "ssh"))
-  (message "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist and that tramp and tramp-compat are available.  Perhaps run 'autoconf && ./configure && make'"))
+  (el-log-lvl 'WARN "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist and that tramp and tramp-compat are available.  Perhaps run 'autoconf && ./configure && make'"))
 
 (provide 'package-conf)

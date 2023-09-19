@@ -83,8 +83,12 @@
 	)
   )
 
+(defun gptmacs-execute-on-region-hello (start end)
+  (interactive "r")
+  (gptmacs-execute-on-region start end "Hello! Can you tell me what the following code does?"))
+
 ;; TODO: don't set this globally, use a keymap like a normal person
-(global-set-key (kbd "C-|") (lambda (start end) (interactive "r") (gptmacs-execute-on-region start end "Hello! Can you tell me what the following code does?")))
+(global-set-key (kbd "C-|") 'gptmacs-execute-on-region-hello)
 (global-set-key (kbd "C-M-|") 'gptmacs-execute-on-region)
 
 (provide 'gptmacs)

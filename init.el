@@ -25,6 +25,18 @@
 
 ;;; BEGIN MY CODE
 
+(let* ((my-lisp-directory
+		(concat
+		 (file-name-directory (or load-file-name (buffer-file-name)))
+		 "lisp/")))
+  (progn
+	(setq load-path (append (list my-lisp-directory) load-path))
+	(let ((default-directory my-lisp-directory))
+	  (normal-top-level-add-subdirs-to-load-path))
+	))
+
+(require 'el-log)
+
 (let ((req-packages
 	   ;; google-emacs ships with patched auto-complete
 	   ;; so attempt to load google version first
@@ -54,23 +66,13 @@
 	(let ((exec-path-from-shell-check-startup-files))
 	  (exec-path-from-shell-initialize))
   (progn
-	(message "exec-path-from-shell not found.  Loading weird janky version")
+	(el-log-lvl 'WARN "exec-path-from-shell not found.  Loading weird janky version")
 	(let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -c 'echo $PATH'"))))
 	  (setenv "PATH" (concat (getenv "PATH") ":" path-from-shell))
 	  (setq exec-path (append exec-path (split-string path-from-shell path-separator))))))
 
 (defvar my-default-dark-theme 'manoj-dark)
 (defvar my-default-light-theme 'adwaita)
-
-(let* ((my-lisp-directory
-		(concat
-		 (file-name-directory (or load-file-name (buffer-file-name)))
-		 "lisp/")))
-  (progn
-	(setq load-path (append (list my-lisp-directory) load-path))
-	(let ((default-directory my-lisp-directory))
-	  (normal-top-level-add-subdirs-to-load-path))
-	))
 
 ;; (require 'column-marker)			; Commented out in favor of fci
 (require 'fill-column-indicator)
@@ -85,11 +87,11 @@
 (defvar agda-locate-command "agda-mode locate")
 (let ((exitCode (shell-command agda-locate-command)))
   (cond
-   ((equal exitCode 127) (format "agda-mode not found with command '%s'; exit code %d" agda-locate-command exitCode))
+   ((equal exitCode 127) (el-log-lvl 'WARN "agda-mode not found with command '%s'; exit code %d" agda-locate-command exitCode))
    ((equal exitCode 0)
 	(load-file (let ((coding-system-for-read 'utf-8))
 				 (shell-command-to-string agda-locate-command))))
-   (t (format "agda-mode unexpected error with command '%s' code %d; please check installation" agda-locate-command exitCode))))
+   (t (el-log-lvl 'WARN "agda-mode unexpected error with command '%s' code %d; please check installation" agda-locate-command exitCode))))
 
 ;; default stuff
 (require 'cosmetic)
@@ -110,7 +112,7 @@
   (el-keystore-load-keys))
 
 (if (< emacs-major-version 30)
-	(message "Low emacs version; please update"))
+	(el-log-lvl 'WARN "Low emacs version; please update"))
 
 (provide 'init)
 ;;; init.el ends here
