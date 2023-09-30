@@ -79,3 +79,4 @@ TAGS
 /.lastIwiped
 /request
 /.el-keystored-keys.el
+/org-persist
