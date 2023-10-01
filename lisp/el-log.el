@@ -32,7 +32,8 @@ Logging to a loglvl not in this list produces no output")
 
 (defmacro el-log-msg-prefix (loglvl)
   "Prefix for log messages.  This can be customized"
-  `(format "[%s] %s:%d -- "
+  `(format "%s [%s] %s:%d -- "
+		   (current-time-string)
 		   (symbol-name ,loglvl)
 		   ;; TODO: FIX when run on init this produces "[INFO] *scratch*:1 -- "
 		   (or (buffer-file-name) (buffer-name))
