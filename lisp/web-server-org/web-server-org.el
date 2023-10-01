@@ -173,6 +173,7 @@ b.onclick = () => { oldF(); refreshF(); };
 	  ))))
 
 (unless (package-installed-p 's)
+  (package-refresh-contents)
   (package-install 's))
 (require 's)
 
