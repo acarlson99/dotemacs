@@ -224,6 +224,7 @@ b.onclick = () => { oldF(); refreshF(); };
 ;; * FILE.org -- serve org file in editable interface and allow updates
 ;; * path/dir/folder/ -- serve ORG/HTML files
 (defun org-server (request)
+  (el-log "reveiced request")
   (condition-case err
 	  (with-slots (process headers) request
 		(let* ((path (ws-in-directory-p ; check if path is in docroot
