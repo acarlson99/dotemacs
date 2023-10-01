@@ -45,11 +45,17 @@
 ;; (add-to-list 'load-path "./")
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
 
-(package-initialize)
-
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+(package-initialize)
+(unless (require 'web-server nil :noerror)
+  (package-install 'web-server)
+  (require 'web-server))
+
 (require 'el-log)
+(require 'url)
+(require 'org)
+
 
 ;; TODO: disable 'would you like to reread file? (yes/no)' message
 ;; dangerous :)
@@ -172,10 +178,14 @@ b.onclick = () => { oldF(); refreshF(); };
 	  (iframe :id view-b :src ,path-b :frameBorder 0)
 	  ))))
 
-(unless (package-installed-p 's)
-  (package-refresh-contents)
-  (package-install 's))
-(require 's)
+;; from github.com/magnars/s.el
+(defvar ucs-normalize-combining-chars)  ; Defined in `ucs-normalize'
+(autoload 'slot-value "eieio")
+(defun s-replace (old new s)
+  "Replaces OLD with NEW in S."
+  (declare (pure t) (side-effect-free t))
+  (replace-regexp-in-string (regexp-quote old) new s t t))
+;; end s.el
 
 (defun escape-js-special-characters (str)
   (s-replace "\\" "\\\\" str))
@@ -203,11 +213,6 @@ b.onclick = () => { oldF(); refreshF(); };
 	  ))))
 
 ;; BEGIN SERVER
-
-(require 'url)
-(require 'org)
-(unless (require 'web-server nil :noerror)
-  (package-install 'web-server))
 
 (setq org-confirm-babel-evaluate nil)
 
