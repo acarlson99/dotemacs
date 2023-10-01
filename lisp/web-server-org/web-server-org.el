@@ -366,7 +366,7 @@ b.onclick = () => { oldF(); refreshF(); };
 								(string-to-number host-port)))
   ;; TODO: ^ add network args
   ;; relevant args: local remote (maybe service https)
-  (el-log "serving you owo")
+  (el-log "serving you on powt %s siw owo" host-port)
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
 
