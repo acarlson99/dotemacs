@@ -31,6 +31,11 @@
 ;;    -" /‘.         _,’     | _  _  _.|
 ;;     ""--’---"""""’        ‘’ ’! |! /
 
+;; dangerous :)
+(defun ask-user-about-supersession-threat (fn)
+  "blatantly ignore files that changed on disk"
+  )
+
 (require 'subr-x)
 
 ;; from https://hungyi.net/posts/dead-simple-emacs-lisp-templating/
@@ -78,11 +83,13 @@
        (when (and tag (not tag-is-void))
          (format "</%s>" tag))))))
 
-;; TODO: add UTF-8 charset enforcement
+;; JS stuff
+
 (defvar js-embed-string "
 function sendContent() {
   // Get the content from the textarea
-  const content = document.getElementById('editable-content').innerText;
+  // const content = document.getElementById('editable-content').innerText;
+  const content = document.getElementById('editable-content').value;
 
   // Create a FormData object
   const formData = new FormData();
@@ -112,23 +119,88 @@ function sendContent() {
 }
 ")
 
+(defvar js-onload-func "
+window.onload = function(){
+// document.getElementById('editable-content').innerText = content;
+document.getElementById('editable-content').value = content;
+};
+// document.onload = function(){
+// document.getElementById('editable-content').editableContent = 'true';
+// if (navigator.userAgent.search('Firefox') === -1)
+//   document.getElementById('editable-content').editableContent = 'plaintext-only';
+// };
+")
+
+(defun make-html-dual-view (path-a path-b)
+  (charge-html
+   `(html
+	 (head
+	  ;; (source "document.getElementByID() ; document.getElementById("view-a").contentDocument.activeElement.getElementsByTagName('button')[0].onclick
+	  (script "
+window.onload = function(){
+var viewA = document.getElementById('view-a');
+var viewB = document.getElementById('view-b');
+var b = viewA.contentDocument.getElementsByTagName('button')[0];
+var oldF = b.onclick;
+var refreshF = () => { viewB.contentWindow.location.reload(); };
+b.onclick = () => { oldF(); refreshF(); };
+}")
+	  (style "iframe { width: 50vw; height: 100vh; }")
+	  (style "body { margin: 0; }"))
+   (body
+	(iframe :id view-a :src ,path-a :frameBorder 0)
+	(iframe :id view-b :src ,path-b :frameBorder 0)
+	))))
+
+(defun escape-js-special-characters (str)
+  "Escape common special characters in a JavaScript string."
+  (setq str (replace-regexp-in-string "\\\\" "\\\\\\\\" str)) ; Escape backslashes
+  (setq str (replace-regexp-in-string "\n"
+									  "\\\\n" str)) ; Escape newlines
+  (setq str (replace-regexp-in-string "\r"
+									  "\\\\r" str)) ; Escape carriage returns
+  (setq str (replace-regexp-in-string "\t"
+									  "\\\\t" str)) ; Escape tabs
+  (setq str (replace-regexp-in-string "\b"
+									  "\\\\b" str)) ; Escape backspace
+  (setq str (replace-regexp-in-string "\f"
+									  "\\\\f" str)) ; Escape form feed
+  (setq str (replace-regexp-in-string "\v"
+									  "\\\\v" str)) ; Escape vertical tab
+  (setq str (replace-regexp-in-string "\0"
+									  "\\\\0" str)) ; Escape null character
+  (setq str (replace-regexp-in-string "\\u" ;; TODO: fix this; adds an extra '\'
+									  "\\\\\\\\u" str)) ; Escape Unicode escapes like \uXXXX
+  str)
+
+;; Example usage:
+(escape-js-special-characters  "This is a string with special characters: \n\r\t\"'")
+
 (defun make-html (filepath content)
   (charge-html
    `(html
 	 (head
 	  (title ,(format "Edit %S" filepath))
-	  (meta :charset "ISO-8859-1") ;; TODO: verify that this enforces UTF-8-only
-	  (script ,(format "var filepath = %S;" filepath))
-	  (script ,(format "var content = `%s`;" content))
-	  (script "window.onload = function(){ document.getElementById('editable-content').innerText = content; };")
+	  (meta :charset "UTF-8")
+	  (style "body { height: 100%; background-color: darkblue; color: red; }")
+	  (style "textarea { width: 100%; height: 90vh; background-color: darkblue; color: red; }")
+	  (style "button { margin: auto; display: block; }")
+	  (style "h1 { text-align: center; margin: auto; }")
+	  (script ,(format "var filepath = %S;" (escape-js-special-characters filepath)))
+	  (script ,(format "var content = `%s`; console.log(content);" (escape-js-special-characters content)))
+	  (script ,js-onload-func)
 	  (script ,js-embed-string))
 	 (body
 	  (h1 ,(format "Edit %S" filepath))
-	  (p :contenteditable nil :id editable-content)
+	  (br)
+	  ;; (p :contenteditable "true" :id editable-content)
+	  (textarea :type text :id editable-content)
 	  ;; (p :contenteditable nil :id editable-content ,content)
+	  (br)
 	  (button :onclick "sendContent()" "Upload")
 	  ))))
 
+;; BEGIN SERVER
 
 (require 'url)
 (require 'web-server)
@@ -138,24 +210,10 @@ function sendContent() {
 ;; (setq docroot "/home/john/p/dota-draml")
 (setq docroot "/tmp/test")
 
-;; (ws-start
-;;  '(((:POST . ".*") .
-;;     (lambda (request)
-;;       (with-slots (process headers) request
-;;         (let ((message (cdr (assoc "message" headers))))
-;;           (ws-response-header process 200 '("Content-type" . "text/plain"))
-;;           (process-send-string process
-;;             (if message
-;;                 (format "you said %S\n" (cdr (assoc 'content message)))
-;;               "This is a POST request, but it has no \"message\".\n"))))))
-;;    ((:GET . ".*") .
-;;     (lambda (request)
-;;       (with-slots (process) request
-;;         (ws-response-header process 200 '("Content-type" . "text/plain"))
-;;         (process-send-string process
-;;           "This is a GET request not a POST request.\n")))))
-;;  9005)
-
+;; serve GET requests for:
+;; * FILE.html -- compile FILE.org to HTML and serve
+;; * FILE.org -- serve org file in editable interface and allow updates
+;; * path/dir/folder/ -- serve ORG/HTML files
 (defun org-server (request)
   (with-slots (process headers) request
 	(let* ((path (ws-in-directory-p ; check if path is in docroot
@@ -164,6 +222,13 @@ function sendContent() {
 		   (orig (concat base ".org")))
 	  (unless path (ws-send-404 process)) ; send 404 if not in docroot
 	  (cond
+	   ;; serve dual-view to edit
+	   ((string-equal "edit" (file-name-extension path))
+		(progn
+		  (print "WE IN!!!")
+		  (ws-response-header process 200 (cons "Content-type" "text/html"))
+		  (process-send-string process (make-html-dual-view "abc.org" "abc.html"))
+		  ))
 	   ((file-directory-p path)
 		(progn ;; send directory listing, convert org files to html/tex/txt
 		  (print (concat "PATH IS" path))
@@ -184,8 +249,9 @@ function sendContent() {
 																(list
 																 ;; (concat f ".txt")
 																 ;; (concat f ".tex")
-																 (concat f ".org")
-																 (concat f ".html")))
+																 (concat f ".edit")
+																 (concat f ".html")
+																 (concat f ".org")))
 															  (mapcar #'file-name-sans-extension
 																	  (directory-files path nil ;; "^[^\.]"))))
 																					   "^[^\.].*org$"))))
@@ -195,17 +261,17 @@ function sendContent() {
 														  (file-directory-p (expand-file-name dirname path))
 														  (not (and (string= path docroot) (string= dirname "..")))
 														  ))
-													   (directory-files path nil)) ;; TODO: list directories
+													   (directory-files path nil))
 													  ) 'string<)
 										"\n") "</ul>"))))
-	   ;; TODO: serve as editable file
+	   ;; serve as editable file
 	   ((string-equal "org" (file-name-extension path))
 		(progn
 		  (ws-response-header process 200 (cons "Content-type" "text/html"))
-		  ;; (print (format "THIS IS PATH %S" path))
 		  (let ((filename (filename-in-docroot path))
 				(content (with-temp-buffer
-						   (insert-file-contents orig)
+						   (if (file-exists-p orig)
+							   (insert-file-contents orig))
 						   (buffer-string))))
 			(process-send-string process
 								 (make-html filename content))
@@ -252,11 +318,13 @@ function sendContent() {
 	  (print (format "root %S base %S" (concat docroot (filename-in-docroot orig)) orig))
 	  (if (not (equal nil message))
 		  (progn
+			(print (format "WRITING TEXT TO %S" orig))
+			(print (format "TEXT: %S" message))
 			(if (not (file-directory-p (file-name-directory orig)))
 				(make-directory (file-name-directory orig) t))
 			(with-temp-buffer
 			  (insert message)
-			  (write-region nil nil orig))
+			  (write-region nil nil orig nil t))
 			(process-send-string process (format "Wrote %S.\n" orig)))
 		(process-send-string process
 							 (format "This is a POST request with no content.\n"))
@@ -264,8 +332,8 @@ function sendContent() {
 
 ;; (ws-start 'org-server 9014)
 
-(setq my-server (ws-start   '(((:POST . ".*") . org-poster)
-							  ((:GET . ".*") . org-server))
-							9002))
+(defvar my-server (ws-start   '(((:POST . ".*") . org-poster)
+								((:GET . ".*") . org-server))
+							  9002))
 
 ;; (ws-stop-all)
