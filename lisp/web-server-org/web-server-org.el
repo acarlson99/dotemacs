@@ -172,8 +172,9 @@ b.onclick = () => { oldF(); refreshF(); };
 	  (iframe :id view-b :src ,path-b :frameBorder 0)
 	  ))))
 
-(unless (require 's nil :noeror)
+(unless (package-installed-p 's)
   (package-install 's))
+(require 's)
 
 (defun escape-js-special-characters (str)
   (s-replace "\\" "\\\\" str))
