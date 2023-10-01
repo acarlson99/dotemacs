@@ -31,6 +31,16 @@
 ;;    -" /‘.         _,’     | _  _  _.|
 ;;     ""--’---"""""’        ‘’ ’! |! /
 
+;; (add-to-list 'load-path "~/p/emacs-org-server/")
+;; (add-to-list 'load-path "./")
+;; (add-to-list 'load-path "~/.emacs.d/elpa/")
+
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(require 'el-log)
+
 ;; dangerous :)
 (defun ask-user-about-supersession-threat (fn)
   "blatantly ignore files that changed on disk"
@@ -219,19 +229,14 @@ b.onclick = () => { oldF(); refreshF(); };
 	(let* ((path (ws-in-directory-p ; check if path is in docroot
 				  docroot (substring (cdr (assoc :GET headers)) 1)))
 		   (base (file-name-sans-extension path))
-		   (orig (concat base ".org")))
+		   (orig (concat base ".org"))
+		   (extension (downcase (or (file-name-extension path) ""))))
 	  (unless path (ws-send-404 process)) ; send 404 if not in docroot
 	  (cond
-	   ;; serve dual-view to edit
-	   ((string-equal "edit" (file-name-extension path))
-		(progn
-		  (print "WE IN!!!")
-		  (ws-response-header process 200 (cons "Content-type" "text/html"))
-		  (process-send-string process (make-html-dual-view "abc.org" "abc.html"))
-		  ))
-	   ((file-directory-p path)
+	   ;; /path/to/dir/ -- require trailing slash
+	   ((and (string= (substring (cdr (assoc :GET headers)) -1) "/") (file-directory-p path))
 		(progn ;; send directory listing, convert org files to html/tex/txt
-		  (print (concat "PATH IS" path))
+		  (el-log (format "Serving directory %S." path))
 		  (ws-response-header process 200 (cons "Content-type" "text/html"))
 		  (process-send-string process
 							   (concat "<ul>"
@@ -264,9 +269,20 @@ b.onclick = () => { oldF(); refreshF(); };
 													   (directory-files path nil))
 													  ) 'string<)
 										"\n") "</ul>"))))
-	   ;; serve as editable file
-	   ((string-equal "org" (file-name-extension path))
+	   ;; serve dual-view to edit
+	   ((string= extension "")
+	   ;; ((string-equal "edit" (file-name-extension path))
 		(progn
+		  (el-log (format "dual editing file %S." orig))
+		  (ws-response-header process 200 (cons "Content-type" "text/html"))
+		  ;; (process-send-string process (make-html-dual-view (print (format "orig %S" orig)) (print (format "html %S" (concat base ".html")))))
+		  (process-send-string process (make-html-dual-view (filename-in-docroot orig) (filename-in-docroot (concat base ".html"))))
+		  ))
+	   ;; serve as editable file
+	   ((string= extension "org")
+		;; ((string-equal "org" (or (file-name-extension path) ""))
+		(progn
+		  (el-log (format "editing file %S." orig))
 		  (ws-response-header process 200 (cons "Content-type" "text/html"))
 		  (let ((filename (filename-in-docroot path))
 				(content (with-temp-buffer
@@ -277,16 +293,21 @@ b.onclick = () => { oldF(); refreshF(); };
 								 (make-html filename content))
 			)))
 	   ;; Export the file as requested and return the result
-	   (t (let* ((type (case (intern (downcase (file-name-extension path)))
+	   ((file-exists-p orig)
+		(el-log (format "exporting with extension %S." extension)
+		(let* ((type (cl-case (intern extension)
 						 (html 'html)
 						 (tex  'latex)
+						 (latex  'latex)
 						 (txt  'ascii)
 						 (t (ws-error process "%S export not supported"
 									  (file-name-extension path))))))
 			(unless (file-exists-p orig) (ws-send-404 process))
 			(save-window-excursion (find-file orig)
 								   (org-export-to-file type path))
-			(ws-send-file process path)))))))
+			(ws-send-file process path))))
+	   (t (ws-send-404 process))
+		))))
 
 (defmacro assert (test-form)
   `(when (not ,test-form)
@@ -315,11 +336,11 @@ b.onclick = () => { oldF(); refreshF(); };
 			(if (not (equal nil message-assoc))
 				(cdr (assoc 'content message-assoc))
 			  nil)))
-	  (print (format "root %S base %S" (concat docroot (filename-in-docroot orig)) orig))
+	  (el-log (format "root %S base %S" (concat docroot (filename-in-docroot orig)) orig))
 	  (if (not (equal nil message))
 		  (progn
-			(print (format "WRITING TEXT TO %S" orig))
-			(print (format "TEXT: %S" message))
+			(el-log (format "WRITING TEXT TO %S" orig))
+			(el-log (format "TEXT: %S" message))
 			(if (not (file-directory-p (file-name-directory orig)))
 				(make-directory (file-name-directory orig) t))
 			(with-temp-buffer
@@ -337,3 +358,5 @@ b.onclick = () => { oldF(); refreshF(); };
 							  9002))
 
 ;; (ws-stop-all)
+
+(defvar block (while t (sleep-for 99999999)))
