@@ -36,7 +36,7 @@ Logging to a loglvl not in this list produces no output")
 		   (current-time-string)
 		   (symbol-name ,loglvl)
 		   ;; TODO: FIX when run on init this produces "[INFO] *scratch*:1 -- "
-		   (or (buffer-file-name) (buffer-name))
+		   (or load-file-name (buffer-file-name) (buffer-name))
 		   (line-number-at-pos)))
 
 (defmacro el-log-lvl (loglvl format-string &rest args)
