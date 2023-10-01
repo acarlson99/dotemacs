@@ -1,4 +1,7 @@
-:; ~/emacs/src/emacs --batch -l "$0" -f main -- "$@"
+#!/home/john/emacs/src/emacs --script
+
+
+;; :; ~/emacs/src/emacs -Q -q --batch -l "$0" -f main -- "$@"
 
 ;; TODO: why does this crash????
 
@@ -35,6 +38,8 @@
 ;;    _,-_    ’       ‘.     .’      ,\
 ;;    -" /‘.         _,’     | _  _  _.|
 ;;     ""--’---"""""’        ‘’ ’! |! /
+
+(message "Called with argv %S" argv)
 
 ;; (add-to-list 'load-path "~/p/emacs-org-server/")
 ;; (add-to-list 'load-path "./")
@@ -101,7 +106,10 @@
 
 ;; JS HTML stuff
 
-(defvar js-embed-string "
+(defvar host-address "http://localhost")
+(defvar host-port "9002") ;; TODO: add number support
+
+(defvar js-embed-string (concat "
 function sendContent() {
   const content = document.getElementById('editable-content').value;
 
@@ -115,7 +123,12 @@ function sendContent() {
   const xhr = new XMLHttpRequest();
 
   // Define the POST request to 'localhost:9002'
-  xhr.open('POST', 'http://localhost:9002'+filepath, true);
+  xhr.open('POST', '"
+								host-address
+								(if (not (or (equal nil host-port) (string-empty-p host-port)))
+									(concat ":" host-port)
+								  "")
+  "'+filepath, true);
 
   // Send the FormData object
   xhr.send(formData);
@@ -130,7 +143,7 @@ function sendContent() {
     }
   };
 }
-")
+"))
 
 (defvar js-onload-func "
 window.onload = function(){
@@ -343,7 +356,11 @@ b.onclick = () => { oldF(); refreshF(); };
   (el-log "preparing")
   (defvar my-server (ws-start   '(((:POST . ".*") . org-poster)
 								  ((:GET . ".*") . org-server))
-								9002))
+								(string-to-number host-port)))
+  ;; TODO: ^ add network args
+  ;; relevant args: local remote (maybe service https)
   (el-log "serving you owo")
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
+
+(main)
