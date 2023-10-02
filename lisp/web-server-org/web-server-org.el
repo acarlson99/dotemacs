@@ -279,6 +279,8 @@ b.onclick = () => { oldF(); refreshF(); };
 																   (directory-files path nil)))
 														  ) 'string<)
 											"\n") "</ul>"))))
+		   ((string= (substring (cdr (assoc :GET headers)) -1) "/")
+			(ws-send-404 process ))
 		   ;; serve dual-view to edit
 		   ((string= extension "")
 			(progn
