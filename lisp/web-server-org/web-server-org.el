@@ -1,4 +1,4 @@
-:; /home/john/emacs/src/emacs --batch -l "$0" -f main -- "$@"
+:; emacs --batch -l "$0" -f main -- "$@"
 
 ;; TODO: create argparse library
 
