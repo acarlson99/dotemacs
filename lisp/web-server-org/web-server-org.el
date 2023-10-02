@@ -199,8 +199,13 @@ b.onclick = () => { oldF(); refreshF(); };
 	 (head
 	  (title ,(format "Edit %S" filepath))
 	  (meta :charset "UTF-8")
-	  (style "body { height: 100%; background-color: darkblue; color: red; }")
-	  (style "textarea { width: 100%; height: 90vh; background-color: darkblue; color: red; }")
+	  (style "body { height: 100%; background-color: darkblue; color: red; margin: 0; }")
+	  (style ,(concat
+	  		   "textarea { "
+			   "font-family: \"Lucida Console\", \"Courier New\", monospace; "
+			   "width: 100%; height: 90vh; "
+			   "background-color: darkblue; color: red; "
+			   "}")) ;; "Lucida Console", "Courier New", monospace;
 	  (style "button { margin: auto; display: block; }")
 	  (style "h1 { text-align: center; margin: auto; }")
 	  (script ,(format "var filepath = %S;" (escape-js-special-characters filepath)))
