@@ -1,7 +1,9 @@
-#!/home/john/emacs/src/emacs --script
+:; /home/john/emacs/src/emacs --batch -l "$0" -f main -- "$@"
+
+;; TODO: create argparse library
 
 
-;; :; ~/emacs/src/emacs -Q -q --batch -l "$0" -f main -- "$@"
+:; ~/emacs/src/emacs -Q -q --batch -l "$0" -f main -- "$@"
 
 ;; TODO: why does this crash????
 
@@ -112,8 +114,9 @@
 
 ;; JS HTML stuff
 
-(defvar host-address "http://localhost")
-(defvar host-port "9002") ;; TODO: add number support
+(defvar host-address "http://localhost"
+  "HOST-ADDRESS is the location to which frontend JS should send POST requests")
+(defvar host-port "8080")
 
 (defvar js-embed-string (concat "
 function sendContent() {
@@ -128,13 +131,13 @@ function sendContent() {
   // Create a new XMLHttpRequest object
   const xhr = new XMLHttpRequest();
 
-  // Define the POST request to 'localhost:9002'
+  // Define the POST request to 'localhost:8080'
   xhr.open('POST', '"
 								host-address
 								(if (not (or (equal nil host-port) (string-empty-p host-port)))
 									(concat ":" host-port)
 								  "")
-  "'+filepath, true);
+								"'+filepath, true);
 
   // Send the FormData object
   xhr.send(formData);
@@ -323,7 +326,7 @@ b.onclick = () => { oldF(); refreshF(); };
 	filename))
 
 ;; read posted file and save to disk
-;; POST localhost:9002/abc/def/test -F 'content=* Header'
+;; POST localhost:8080/abc/def/test -F 'content=* Header'
 (defun org-poster (request)
   ;; TODO: add authentication for poasting
   ;; TODO: add exception catch/error handling
@@ -362,13 +365,14 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (defun main ()
   (el-log "preparing")
-  (defvar my-server (ws-start   '(((:POST . ".*") . org-poster)
-								  ((:GET . ".*") . org-server))
-								(string-to-number host-port)))
+  (defvar my-server (ws-start '(((:POST . ".*") . org-poster)
+								((:GET . ".*") . org-server))
+							  (string-to-number host-port)
+							  nil
+							  :host "0.0.0.0"
+							  ))
   ;; TODO: ^ add network args
   ;; relevant args: local remote (maybe service https)
   (el-log "serving you on powt %s siw owo" host-port)
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
-
-(main)

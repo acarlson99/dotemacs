@@ -1,3 +1,9 @@
+## This project does NOT work within docker.  For some reason unknown to me the
+## server drops its connection on a forwarded port.  This is a known bug with
+## the emacs-web-server library.
+
+
+
 # Use an Ubuntu-based image as the base image
 FROM ubuntu:20.04
 
@@ -61,10 +67,11 @@ RUN apt autoremove -y
 # Clean up
 RUN apt clean && rm -rf /var/lib/apt/lists/* /src
 
-RUN rm -rf /src/emacs-29.1
+# RUN rm -rf /src/emacs-29.1
 
-EXPOSE 9002
+EXPOSE 8080
 RUN mkdir -p /tmp/test/
 WORKDIR /tmp/test/
 
-CMD ["emacs", "--script", "~/.emacs.d/lisp/web-server-org/web-server-org.el"]
+# CMD ["emacs", "--script", "~/.emacs.d/lisp/web-server-org/web-server-org.el"]
+CMD ["~/.emacs.d/lisp/web-server-org/web-server-org.el"]
