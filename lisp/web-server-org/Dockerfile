@@ -1,9 +1,3 @@
-## This project does NOT work within docker.  For some reason unknown to me the
-## server drops its connection on a forwarded port.  This is a known bug with
-## the emacs-web-server library.
-
-
-
 # Use an Ubuntu-based image as the base image
 FROM ubuntu:20.04
 
@@ -47,19 +41,6 @@ RUN cd ~/.emacs.d/lisp/ &&  \
     wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/el-log.el
 
 # cleanup
-# Install build dependencies
-# RUN apt remove -y \
-#     build-essential \
-#     wget \
-#     xz-utils \
-# 	libxpm-dev \
-#     libgif-dev \
-#     libjpeg-dev \
-#     libtiff5-dev \
-#     libgtk-3-dev \
-#     libncurses5-dev \
-#     libgnutls28-dev \
-# 	libwebkit2gtk-4.0-dev
 
 # RUN apt install -y git
 RUN apt autoremove -y
@@ -73,5 +54,4 @@ EXPOSE 8080
 RUN mkdir -p /tmp/test/
 WORKDIR /tmp/test/
 
-# CMD ["emacs", "--script", "~/.emacs.d/lisp/web-server-org/web-server-org.el"]
-CMD ["~/.emacs.d/lisp/web-server-org/web-server-org.el"]
+CMD ["emacs", "--batch", "-l", "~/.emacs.d/lisp/web-server-org/web-server-org.el", "-f", "web-server-org-main"]

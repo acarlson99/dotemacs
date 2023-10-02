@@ -1,9 +1,9 @@
-:; emacs --batch -l "$0" -f main -- "$@"
+:; emacs --batch -l "$0" -f web-server-org-main -- "$@"
 
 ;; TODO: create argparse library
 
 
-:; ~/emacs/src/emacs -Q -q --batch -l "$0" -f main -- "$@"
+:; ~/emacs/src/emacs -Q -q --batch -l "$0" -f web-server-org-main -- "$@"
 
 ;; TODO: why does this crash????
 
@@ -114,7 +114,7 @@
 
 ;; JS HTML stuff
 
-(defvar host-address "http://localhost"
+(defvar host-address "http://localhost" ;; TODO: parameterize; read from argv
   "HOST-ADDRESS is the location to which frontend JS should send POST requests")
 (defvar host-port "8080")
 
@@ -219,8 +219,7 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (setq org-confirm-babel-evaluate nil)
 
-;; (setq docroot "/home/john/p/dota-draml")
-(setq docroot "/tmp/test")
+(setq docroot "/tmp/test") ;; TODO: read this value from env or argv
 
 ;; serve GET requests for:
 ;; * FILE.html -- compile FILE.org to HTML and serve
@@ -363,16 +362,17 @@ b.onclick = () => { oldF(); refreshF(); };
 
 ;; (ws-start 'org-server 9014)
 
-(defun main ()
+(defun web-server-org-main ()
   (el-log "preparing")
   (defvar my-server (ws-start '(((:POST . ".*") . org-poster)
 								((:GET . ".*") . org-server))
 							  (string-to-number host-port)
 							  nil
-							  :host "0.0.0.0"
+							  :host "0.0.0.0" ;; critical fix for Docker
 							  ))
   ;; TODO: ^ add network args
-  ;; relevant args: local remote (maybe service https)
+  ;; TODO: https support
+  ;; TODO: (require 'ox) org mode export theme customization
   (el-log "serving you on powt %s siw owo" host-port)
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
