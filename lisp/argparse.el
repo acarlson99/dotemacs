@@ -37,37 +37,41 @@ HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
 ARG-TYPE: 'int 'str 'float"
   name longopt shortopt has-arg arg-type)
 
-;; (require 'cl-extra)
-
-;; (defmacro num-lambda-args (l)
-;;   `(let ((clj ,l))
-;; 	 (print (car l))
-;; 	 (cl-assert (equal (car clj) 'lambda))
-;; 	 (cl-assert (listp (cadr clj)))
-;; 	 (length (cadr clj))))
-
-(defun argparse-num-lambda-args (lmb)
+(defun argparse--num-lambda-args (lmb)
   (cl-assert (equal (car lmb) 'lambda))
   (length (cadr lmb)))
 
-;; parser creation macro
-;; create a parser which accepts a continuation
-;; tail-call optimized even though it doesn't matter (not supported by elisp)
 (defmacro argparse-parser-with-continuation (f)
+  "\
+Create a tail-call optimized (unsupported in elisp) parser which accepts a
+continuation.
+Returns a function of form (lambda (opts args &optional continuation rargs) ...)
+
+F: lambda which acts as the body of the created parser.  This cannot be a
+function, it MUST be a lambda.
+
+Parser consumes as many tokens as the function takes arguments.
+Specifically this uses the `argparse--num-lambda-args` function which does not
+properly handle `&optional' or `&rest' arguments.  In cases where a function
+with optional arguments is required please use the following form:
+  (let ((parse-func (lambda (a b &optional c d)
+					  ...)))
+	(argparse-parser-with-continuation (lambda (a b) (parse-func a b))))
+"
   `(lambda (opts args &optional continuation rargs)
-	 (let ((n-consumed ,(- (argparse-num-lambda-args f) 1)))
+	 (let ((n-consumed ,(- (argparse--num-lambda-args f) 1)))
 	   (if (< (length args) n-consumed)
 		   (append (list rargs) (list args))
 		 (let* ((result (cl-some
 						 (lambda (opt)
 						   (let ((res (apply ,f opt
 											 (take n-consumed args))))
-								 (cl-case (and res (argparse-opt-has-arg opt) (argparse-opt-arg-type opt))
-								   (str res)
-								   (int (list (append (list (caar res)) (round (string-to-number (cdar res))))))
-								   (float (list (append (list (caar res)) (string-to-number (cdar res)))))
-								   (t res)
-								   )))
+							 (cl-case (and res (argparse-opt-has-arg opt) (argparse-opt-arg-type opt))
+							   (str res)
+							   (int (list (append (list (caar res)) (round (string-to-number (cdar res))))))
+							   (float (list (append (list (caar res)) (string-to-number (cdar res)))))
+							   (t res)
+							   )))
 						 opts)))
 		   (if result
 			   (let ((next-args (nthcdr n-consumed args)))
@@ -76,10 +80,14 @@ ARG-TYPE: 'int 'str 'float"
 				   (append (list (append rargs result)) (list next-args))))
 			 (append (list rargs) (list args))))))))
 
-(defun argparse-largest-list (lss)
+(defun argparse--largest-list (lss)
   (car (seq-sort (lambda (a b) (> (length (car a)) (length (car b)))) lss)))
 
 (defun argparse-getopt (opts args)
+  "\
+OPTS: list of `argparse-opt'
+ARGS: list of strings, usually `argv'
+"
   (let* (
 										; '--flag' 'val'
 		 (with-sep-arg (argparse-parser-with-continuation
@@ -147,19 +155,19 @@ ARG-TYPE: 'int 'str 'float"
 							   (string= (concat "-" (argparse-opt-shortopt opt)) arg1))
 							  (list (list (argparse-opt-name opt)))))))
 		 (f (lambda (opts args &optional continuation rargs)
-			  (argparse-largest-list (mapcar (lambda (fn) (funcall fn opts args continuation rargs))
-									(list with-sep-arg with-eq with-no-arg
-										  short-sep-arg short-eq-arg
-										  short-arg-no-sep short-no-arg))))))
+			  (argparse--largest-list (mapcar (lambda (fn) (funcall fn opts args continuation rargs))
+											  (list with-sep-arg with-eq with-no-arg
+													short-sep-arg short-eq-arg
+													short-arg-no-sep short-no-arg))))))
 	(funcall f opts args f nil)))
 
 (let ((g-opts
-	    (list (make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
-			  (make-argparse-opt :name "argless-flag" :longopt "no-arg" :shortopt "a" :has-arg nil)
-			  (make-argparse-opt :name "arg-flag" :longopt "arg" :has-arg t)
-			  (make-argparse-opt :name "nolong" :shortopt "s" :has-arg t)
-			  (make-argparse-opt :name "mini" :shortopt "m")
-			  )))
+	   (list (make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
+			 (make-argparse-opt :name "argless-flag" :longopt "no-arg" :shortopt "a" :has-arg nil)
+			 (make-argparse-opt :name "arg-flag" :longopt "arg" :has-arg t)
+			 (make-argparse-opt :name "nolong" :shortopt "s" :has-arg t)
+			 (make-argparse-opt :name "mini" :shortopt "m")
+			 )))
 
   (cl-assert (equal
 			  (argparse-getopt g-opts '("--arg" "fdsa" "--arg=fadssdaf" "--file" "file-val" "--no-arg" "other-arg"))
@@ -189,10 +197,44 @@ ARG-TYPE: 'int 'str 'float"
   (cl-assert (equal
 			  (argparse-getopt my-opts '("--flt" "22.22" "-p22.22" "--fls" "12.3"))
 			  '((("float" . 22.22) ("port" . 22) ("floatless")) ("12.3"))))
-			  )
+  )
 
+(defun argparse--index-of (e l &optional cmp_)
+  (letrec ((cmp (or cmp_ #'eq))
+		   (rf (lambda (l n)
+				 (if l
+					 (if (funcall (or cmp #'eq) e (car l))
+						 n
+					   (funcall
+						rf
+						(cdr l)
+						(+ (or n 0) 1)))
+				   nil))))
+	(funcall rf l 0)))
+
+(defun argparse-scan-argv (element args)
+  "\
+ELEMENT: token to search for
+ARGS: args to search through
+RETURNS: list after `ELEMENT' or `nil'
+
+e.g.
+(argparse-scan-argv '--
+					'(-f main -- serve -p 8080 -d /tmp/files))
+=> (-- serve -p 8080 -d /tmp/files)
+"
+  (let* ((n (argparse--index-of element args #'string=)))
+	(if n
+		(nthcdr n args))))
 
 (defun argparse-get-arg (k arglist)
+  "\
+K: key to search for
+ARGLIST: list of key/value pairs of form ((A . B) (C . D))
+
+(argparse-get-arg 'A '((C . D) (A . B)))
+=> (A . B)
+"
   (assoc k arglist #'string=))
 
 (let ((parsed-args (car (argparse-getopt
