@@ -45,19 +45,19 @@
 
 (require 'argparse)
 
+;; scan for '--' to skip emacs args
+(let* ((argv-2 (cdr (argparse-scan-argv "--" argv)))
+	  (argp-v
+	   (argparse-getopt
+		(list
+		 (make-argparse-opt :name "host-address" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
+		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
+		 (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
+		argv-2)))
+  (defvar argv (cadr argp-v))
+  (defvar args (car argp-v)))
 
-
-(message "Called with args %S" (let ((argp (argparse-getopt (list (make-argparse-opt :name "func" :shortopt "f" :has-arg t)) argv)))
-								 (message "Called with args %S" argp)
-								 (message "%S" (cdadr argp))
-								 (argparse-getopt
-								  (list
-								   (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-								   (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
-								   (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
-								  (cdadr argp))))
-
-(message "Called with argv %S" argv)
+(message "Called with argv %S" args)
 
 ;; (add-to-list 'load-path "~/p/emacs-org-server/")
 ;; (add-to-list 'load-path "./")
@@ -129,9 +129,9 @@
 
 ;; JS HTML stuff
 
-(defvar host-address "http://localhost" ;; TODO: parameterize; read from argv
+(defvar host-address (or (cdr (argparse-get-arg "host-address" args)) "http://localhost")
   "HOST-ADDRESS is the location to which frontend JS should send POST requests")
-(defvar host-port "8080")
+(defvar host-port (int-to-string (or (cdr (argparse-get-arg "port" args)) 8080)))
 
 (defvar js-embed-string (concat "
 function sendContent() {
@@ -239,7 +239,7 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (setq org-confirm-babel-evaluate nil)
 
-(setq docroot "/tmp/test") ;; TODO: read this value from env or argv
+(defvar docroot (or (cdr (argparse-get-arg "docroot" args)) "/tmp/test/"))
 
 ;; serve GET requests for:
 ;; * FILE.html -- compile FILE.org to HTML and serve
@@ -249,92 +249,93 @@ b.onclick = () => { oldF(); refreshF(); };
   (el-log "reveiced request")
   (condition-case err
 	  (with-slots (process headers) request
-		(let* ((path (ws-in-directory-p ; check if path is in docroot
-					  docroot (substring (cdr (assoc :GET headers)) 1)))
-			   (base (file-name-sans-extension path))
-			   (orig (concat base ".org"))
-			   (extension (downcase (or (file-name-extension path) ""))))
-		  (unless path (ws-send-404 process)) ; send 404 if not in docroot
-		  (cond
-		   ;; /path/to/dir/ -- require trailing slash
-		   ((and (string= (substring (cdr (assoc :GET headers)) -1) "/") (file-directory-p path))
-			(progn ;; send directory listing, convert org files to html/tex/txt
-			  (el-log (format "Serving directory %S." path))
-			  (ws-response-header process 200 (cons "Content-type" "text/html"))
-			  (process-send-string process
-								   (concat "<ul>"
-										   (mapconcat
-											(lambda (f)
-											  (let* ((full (expand-file-name (concat path "/" f))) ;; concat to fix `~` errors
-													 ;; (end (if (file-directory-p full) "/" ""))
-													 (url (url-encode-url (filename-in-docroot full))))
-												;; (print (format "f %S path %S full %S end %S url %S" f path full end url))
-												;; (print (format "docroot %S" (filename-in-docroot full)))
-												(format "<li><a href=%s>%s</li>" url f)))
-											(sort (append (apply #'append
-																 (mapcar
-																  (lambda (f)
-																	(list
-																	 (concat f)
-																	 ;; (concat f ".tex")
-																	 ;; (concat f ".txt")
-																	 ;; (concat f ".html")
-																	 ;; (concat f ".org")))
-																	 ))
-																  (mapcar #'file-name-sans-extension
-																		  (directory-files path nil ;; "^[^\.]"))))
-																						   "^[^\.].*org$"))))
-														  (mapcar (lambda (s) (concat s "/"))
-																  (cl-remove-if-not
-																   (lambda (dirname)
-																	 (and
-																	  (file-directory-p (expand-file-name dirname path))
-																	  (not (and (string= path docroot) (string= dirname "..")))
-																	  ))
-																   (directory-files path nil)))
-														  ) 'string<)
-											"\n") "</ul>"))))
-		   ((string= (substring (cdr (assoc :GET headers)) -1) "/")
-			(ws-send-404 process ))
-		   ;; serve dual-view to edit
-		   ((string= extension "")
-			(progn
-			  (el-log (format "dual editing file %S." orig))
-			  (ws-response-header process 200 (cons "Content-type" "text/html"))
-			  ;; (process-send-string process (make-html-dual-view (print (format "orig %S" orig)) (print (format "html %S" (concat base ".html")))))
-			  (process-send-string process (make-html-dual-view (filename-in-docroot orig) (filename-in-docroot (concat base ".html"))))
-			  ))
-		   ;; serve as editable file
-		   ((string= extension "org")
-			;; ((string-equal "org" (or (file-name-extension path) ""))
-			(progn
-			  (el-log (format "editing file %S." orig))
-			  (ws-response-header process 200 (cons "Content-type" "text/html"))
-			  (let ((filename (filename-in-docroot path))
-					(content (with-temp-buffer
-							   (if (file-exists-p orig)
-								   (insert-file-contents orig))
-							   (buffer-string))))
+		(let ((path (ws-in-directory-p	; check if path is in docroot
+					 docroot (substring (cdr (assoc :GET headers)) 1))))
+		  (unless path (ws-send-404 process "invalid path")) ; send 404 if not in docroot
+		  (let* ((base (file-name-sans-extension path))
+				 (orig (concat base ".org"))
+				 (extension (downcase (or (file-name-extension path) ""))))
+			(unless path (ws-send-404 process))
+			(cond
+			 ;; /path/to/dir/ -- require trailing slash
+			 ((and (string= (substring (cdr (assoc :GET headers)) -1) "/") (file-directory-p path))
+			  (progn ;; send directory listing, convert org files to html/tex/txt
+				(el-log (format "Serving directory %S." path))
+				(ws-response-header process 200 (cons "Content-type" "text/html"))
 				(process-send-string process
-									 (make-html filename content))
-				)))
-		   ;; Export the file as requested and return the result
-		   ((file-exists-p orig)
-			(el-log (format "exporting with extension %S." extension)
-					(let* ((type (cl-case (intern extension)
-								   (html 'html)
-								   (tex  'latex)
-								   (latex  'latex)
-								   (txt  'ascii)
-								   (t (ws-error process "%S export not supported"
-												(file-name-extension path))))))
-					  (unless (file-exists-p orig) (ws-send-404 process))
-					  (save-window-excursion (find-file orig)
-											 (org-export-to-file type path))
-					  (ws-send-file process path))))
-		   (t (ws-send-404 process))
-		   )))
-	(error (el-log "caught error %s" (error-message-string err)))))
+									 (concat "<ul>"
+											 (mapconcat
+											  (lambda (f)
+												(let* ((full (expand-file-name (concat path "/" f))) ;; concat to fix `~` errors
+													   ;; (end (if (file-directory-p full) "/" ""))
+													   (url (url-encode-url (filename-in-docroot full))))
+												  ;; (print (format "f %S path %S full %S end %S url %S" f path full end url))
+												  ;; (print (format "docroot %S" (filename-in-docroot full)))
+												  (format "<li><a href=%s>%s</li>" url f)))
+											  (sort (append (apply #'append
+																   (mapcar
+																	(lambda (f)
+																	  (list
+																	   (concat f)
+																	   ;; (concat f ".tex")
+																	   ;; (concat f ".txt")
+																	   ;; (concat f ".html")
+																	   ;; (concat f ".org")))
+																	   ))
+																	(mapcar #'file-name-sans-extension
+																			(directory-files path nil ;; "^[^\.]"))))
+																							 "^[^\.].*org$"))))
+															(mapcar (lambda (s) (concat s "/"))
+																	(cl-remove-if-not
+																	 (lambda (dirname)
+																	   (and
+																		(file-directory-p (expand-file-name dirname path))
+																		(not (and (string= path docroot) (string= dirname "..")))
+																		))
+																	 (directory-files path nil)))
+															) 'string<)
+											  "\n") "</ul>"))))
+			 ((string= (substring (cdr (assoc :GET headers)) -1) "/")
+			  (ws-send-404 process ))
+			 ;; serve dual-view to edit
+			 ((string= extension "")
+			  (progn
+				(el-log (format "dual editing file %S." orig))
+				(ws-response-header process 200 (cons "Content-type" "text/html"))
+				;; (process-send-string process (make-html-dual-view (print (format "orig %S" orig)) (print (format "html %S" (concat base ".html")))))
+				(process-send-string process (make-html-dual-view (filename-in-docroot orig) (filename-in-docroot (concat base ".html"))))
+				))
+			 ;; serve as editable file
+			 ((string= extension "org")
+			  ;; ((string-equal "org" (or (file-name-extension path) ""))
+			  (progn
+				(el-log (format "editing file %S." orig))
+				(ws-response-header process 200 (cons "Content-type" "text/html"))
+				(let ((filename (filename-in-docroot path))
+					  (content (with-temp-buffer
+								 (if (file-exists-p orig)
+									 (insert-file-contents orig))
+								 (buffer-string))))
+				  (process-send-string process
+									   (make-html filename content))
+				  )))
+			 ;; Export the file as requested and return the result
+			 ((file-exists-p orig)
+			  (el-log (format "exporting with extension %S." extension)
+					  (let* ((type (cl-case (intern extension)
+									 (html 'html)
+									 (tex  'latex)
+									 (latex  'latex)
+									 (txt  'ascii)
+									 (t (ws-error process "%S export not supported"
+												  (file-name-extension path))))))
+						(unless (file-exists-p orig) (ws-send-404 process))
+						(save-window-excursion (find-file orig)
+											   (org-export-to-file type path))
+						(ws-send-file process path))))
+			 (t (ws-send-404 process))
+			 ))))
+		  (error (el-log "caught error %s" (error-message-string err)))))
 
 (defmacro assert (test-form)
   `(when (not ,test-form)
@@ -343,8 +344,10 @@ b.onclick = () => { oldF(); refreshF(); };
 (defun filename-in-docroot (full)
   (let ((filename (substring full (length docroot))))
 	;; (print (format "root %S base %S" (concat docroot filename) full))
-	(assert (string-equal (concat docroot filename) full)) ;; no escapes
-	filename))
+	(cl-assert (string-equal (concat docroot filename) full)) ;; no escapes
+	(if (and (> (length filename) 0) (string= (substring filename 0 1) "/"))
+		filename
+	  (concat "/" filename))))
 
 ;; read posted file and save to disk
 ;; POST localhost:8080/abc/def/test -F 'content=* Header'
@@ -395,6 +398,8 @@ b.onclick = () => { oldF(); refreshF(); };
   ;; TODO: ^ add network args
   ;; TODO: https support
   ;; TODO: (require 'ox) org mode export theme customization
-  (el-log "serving you on powt %s siw owo" host-port)
+  ;; TODO: css
+  (el-log "sewving you on powt %s:%s siw owo" host-address host-port)
+  (el-log "wif diwectowy %S ~*mpfh*~" docroot)
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
