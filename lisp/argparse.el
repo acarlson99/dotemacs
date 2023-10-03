@@ -32,7 +32,7 @@ NAME: how your code will reference this option
 LONGOPT: long `--flag' syntax; `nil' to unset
 SHORTOPT: short `-f' syntax; `nil' to unset
 HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
-ARG-TYPE: 'int 'str 'float; currently unsupported" ;; TODO: add ARG-TYPE
+ARG-TYPE: 'int 'str 'float
   name longopt shortopt has-arg arg-type)
 
 ;; (require 'cl-extra)
@@ -56,11 +56,17 @@ ARG-TYPE: 'int 'str 'float; currently unsupported" ;; TODO: add ARG-TYPE
 	 (let ((n-consumed ,(- (argparse-num-lambda-args f) 1)))
 	   (if (< (length args) n-consumed)
 		   (append (list rargs) (list args))
-		 (let ((result (cl-some
-						(lambda (opt)
-						  (apply ,f opt
-								 (take n-consumed args)))
-						opts)))
+		 (let* ((result (cl-some
+						 (lambda (opt)
+						   (let ((res (apply ,f opt
+											 (take n-consumed args))))
+								 (cl-case (and res (argparse-opt-has-arg opt) (argparse-opt-arg-type opt))
+								   (str res)
+								   (int (list (append (list (caar res)) (round (string-to-number (cdar res))))))
+								   (float (list (append (list (caar res)) (string-to-number (cdar res)))))
+								   (t res)
+								   )))
+						 opts)))
 		   (if result
 			   (let ((next-args (nthcdr n-consumed args)))
 				 (if continuation
@@ -172,20 +178,36 @@ ARG-TYPE: 'int 'str 'float; currently unsupported" ;; TODO: add ARG-TYPE
 (let ((my-opts (list
 				(make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
 				(make-argparse-opt :name "use-static-naming" :longopt "static" :shortopt "s" :has-arg nil :arg-type 'str)
+				(make-argparse-opt :name "float" :longopt "flt" :shortopt "n" :has-arg t :arg-type 'float)
+				(make-argparse-opt :name "floatless" :longopt "fls" :shortopt "i" :has-arg nil :arg-type 'float)
 				(make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int))))
   (cl-assert (equal
 			  (argparse-getopt my-opts '("--static" "-p" "8080" "-p=8080" "-s" "-p8080" "--" "--static" "rest-args"))
-			  '((("use-static-naming") ("port" . "8080") ("port" . "8080") ("use-static-naming") ("port" . "8080")) ("--" "--static" "rest-args")))))
+			  '((("use-static-naming") ("port" . 8080) ("port" . 8080) ("use-static-naming") ("port" . 8080)) ("--" "--static" "rest-args"))))
+  (cl-assert (equal
+			  (argparse-getopt my-opts '("--flt" "22.22" "-p22.22" "--fls" "12.3"))
+			  '((("float" . 22.22) ("port" . 22) ("floatless")) ("12.3"))))
+			  )
 
 
 (defun argparse-get-arg (k arglist)
   (assoc k arglist #'string=))
 
-(let ((parsed-args (argparse-getopt
-					(list
-					 (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-					 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'str)
-					 (make-argparse-opt :name "dir-to-serve" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str)
+(let ((parsed-args (car (argparse-getopt
+						 (list
+						  (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
+						  (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
+						  (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
+						 '("--port=8080" "-d" "/tmp")))))
+  (cl-assert (equal
+			  (argparse-get-arg "port" parsed-args)
+			  '("port" . 8080)))
+  (cl-assert (equal
+			  (argparse-get-arg "other" parsed-args)
+			  nil))
+  (cl-assert (equal
+			  (argparse-get-arg "dir" parsed-args)
+			  '("dir" . "/tmp"))))
 
 (provide 'argparse)
 ;;; argparse.el ends here
