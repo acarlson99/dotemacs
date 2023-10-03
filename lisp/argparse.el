@@ -68,19 +68,44 @@
 
 (require 'cl-extra)
 
+;; (defmacro num-lambda-args (l)
+;;   `(let ((clj ,l))
+;; 	 (print (car l))
+;; 	 (cl-assert (equal (car clj) 'lambda))
+;; 	 (cl-assert (listp (cadr clj)))
+;; 	 (length (cadr clj))))
+
+(defun num-lambda-args (lmb)
+  (cl-assert (equal (car lmb) 'lambda))
+  ; (cl-assert (equal (car lmb) 'closure))
+  (length (cadr lmb)))
+
+(defun drop (N LIST)
+  (if (eq N 0)
+	  LIST
+	(drop (- N 1) (cdr LIST))))
+
+(cl-assert (not (drop 3 '(1 2 3))))
+(cl-assert (equal (drop 3 '(1 2 3 4)) '(4)))
+
 ;; parser creation macro
 ;; create parser with continuation with which to continue parse
 (defmacro arg-parser-with-continuation (args-f f next-args-f)
   `(lambda (opts args &optional continuation rargs)
-	 (if (< (length args) ,(- (length args-f) 1))
-		 (append (list rargs) (list args))
-	   (let ((result (cl-some (lambda (opt) (apply ,f opt (mapcar (lambda (fn) (funcall fn args)) ,args-f))) opts)))
-		 (if result
-			 (let ((next-args (funcall ,next-args-f args)))
-			   (if continuation
-				   (funcall continuation opts next-args continuation (append rargs result))
-				 (append (list (append rargs result)) (list next-args))))
-		   (append (list rargs) (list args)))))))
+	 (let ((n-consumed ,(- (num-lambda-args f) 1)))
+	   (if (< (length args) n-consumed)
+		   (append (list rargs) (list args))
+		 (let ((result (cl-some
+						(lambda (opt)
+						  (apply ,f opt
+								 (take n-consumed args)))
+						opts)))
+		   (if result
+			   (let ((next-args (drop n-consumed args)))
+				 (if continuation
+					 (funcall continuation opts next-args continuation (append rargs result))
+				   (append (list (append rargs result)) (list next-args))))
+			 (append (list rargs) (list args))))))))
 
 ;; (mapcar (lambda (op) (funcall op '(1 2 3))) '(car cadr))
 
@@ -92,142 +117,96 @@
           (funcall (car funcs) (funcall (compose (cdr funcs)) arg))
         arg))))
 
-(let* (
-										; '--flag' 'val'
-	   (with-sep-arg (arg-parser-with-continuation
-								   (list #'car #'cadr)
-								   (lambda (opt arg1 arg2)
-									 (if (and
-										  (argparse-opt-has-arg opt)
-										  (string= "--" (substring arg1 0 2))
-										  (string= (concat "--" (argparse-opt-longopt opt)) arg1))
-										 (list (append (list (argparse-opt-name opt)) arg2))))
-								   #'cddr))
-										; '--flag=val'
-	   (with-eq (arg-parser-with-continuation
-				 (list #'car)
-				 (lambda (opt arg1)
-				   (let ((arg-eq-str (concat "--" (argparse-opt-longopt opt) "=")))
-					 (if (and
-						  (<= (length arg-eq-str) (length arg1))
-						  (string= arg-eq-str (substring arg1 0 (length arg-eq-str))))
-						 (progn
-						   (list (append (list (argparse-opt-name opt)) (substring arg1 (length arg-eq-str))))
-						   ))))
-				 #'cdr))
-										; '--flag-with-no-arg'
-	   (with-no-arg (arg-parser-with-continuation
-					 (list #'car)
-					 (lambda (opt arg1)
-					   (if (and
-							(not (argparse-opt-has-arg opt))
-							(string= "--" (substring arg1 0 2))
-							(string= (concat "--" (argparse-opt-longopt opt)) arg1))
-						   (list (list (argparse-opt-name opt)))))
-					 #'cdr))
-	   (short-sep-arg (arg-parser-with-continuation
-				   (list (car args) ;; TODO: remove `args' and just pass `(list car cadr)'
-						 (cadr args))
-				   (lambda (opt arg1 arg2)
-					 nil
-					 )
-				   (cddr args))) ;; TODO: remove `args', pass only `cddr'.
-	   (f (lambda (opts args &optional continuation rargs)
-			(largest-list (mapcar (lambda (fn) (funcall fn opts args continuation rargs)) (list with-sep-arg with-eq with-no-arg))))))
-  (funcall f g-opts '("--arg" "fdsa" "--arg=fadssdaf" "--file" "file-val" "--no-arg" "other-arg") f))
-
-(defun argp-parse---foo=bar (opt args &optional continuation rargs)
-  (if (< (length args) 1)
-	  rargs
-	(let ((arg1 (car args))
-		  (rest (cdr args)))
-	  (if (and
-		   (argparse-opt-has-arg opt)
-		   (string= "--" (substring arg1 0 2)))
-		  (let ((arg-eq-str (concat "--" (argparse-opt-longopt opt) "=")))
-			(if (and
-				 (<= (length arg-eq-str) (length arg1))
-				 (string= arg-eq-str (substring arg1 0 (length arg-eq-str))))
-				(let ((next-rargs (append rargs (list (append (list (argparse-opt-name opt)) (substring arg1 (length arg-eq-str)))))))
-				  (if continuation
-					  (funcall continuation opt rest continuation next-rargs)
-					next-rargs))
-			  rargs))
-		rargs))))
-
-(argp-parse---foo=bar opt-1 '("--file=this is my file" "--file=another") #'argp-parse---foo=bar '(("a" . "b")))
-
-(defun argp-parse---foo (opt args &optional continuation rargs)
-  (if (< (length args) 1)
-	  rargs
-	(let ((arg1 (car args))
-		  (rest (cdr args)))
-	  (if (and
-		   (not (argparse-opt-has-arg opt))
-		   (string= "--" (substring arg1 0 2))
-		   (string= (concat "--" (argparse-opt-longopt opt)) arg1))
-		  (let ((next-rargs (append rargs (list (list (argparse-opt-name opt))))))
-			(if continuation
-				(funcall continuation opt rest continuation next-rargs)
-			  next-rargs))
-		rargs))))
-
-(funcall #'argp-parse---foo opt-2 '("--no-arg"))
-
 (defun largest-list (lss)
   (car (seq-sort (lambda (a b) (> (length (car a)) (length (car b)))) lss)))
 
-(defun argp-parse-longopt (opts args &optional continuation rargs)
-  (if (< (length args) 1)
-	  rargs
-	(let* ((longfs '(
-					 argp-parse---foo\ bar
-					 argp-parse---foo=bar
-					 argp-parse---foo
-					 ))
-		   (parses (mapcar (lambda (fn)
-							 (largest-list (mapcar (lambda (opt)
-													 (funcall fn opt args
-															  (lambda (_ args &optional continuation rargs)
-																(funcall #'argp-parse-longopt opts args continuation rargs))
-															  rargs))
-												   opts)))
-						   longfs)))
-	  (largest-list parses))))
+(defun argp-parse-longopt (opts args)
+  (let* (
+										; '--flag' 'val'
+		 (with-sep-arg (arg-parser-with-continuation
+						(list #'car #'cadr)
+						(lambda (opt arg1 arg2)
+						  (if (and
+							   (argparse-opt-has-arg opt)
+							   (string= "--" (substring arg1 0 2))
+							   (string= (concat "--" (argparse-opt-longopt opt)) arg1))
+							  (list (append (list (argparse-opt-name opt)) arg2))))
+						#'cddr))
+										; '--flag=val'
+		 (with-eq (arg-parser-with-continuation
+				   (list #'car)
+				   (lambda (opt arg1)
+					 (let ((arg-eq-str (concat "--" (argparse-opt-longopt opt) "=")))
+					   (if (and
+							(argparse-opt-has-arg opt)
+							(<= (length arg-eq-str) (length arg1))
+							(string= arg-eq-str (substring arg1 0 (length arg-eq-str))))
+						   (list (append (list (argparse-opt-name opt)) (substring arg1 (length arg-eq-str)))))))
+				   #'cdr))
+										; '--flag-with-no-arg'
+		 (with-no-arg (arg-parser-with-continuation
+					   (list #'car)
+					   (lambda (opt arg1)
+						 (if (and
+							  (not (argparse-opt-has-arg opt))
+							  (string= "--" (substring arg1 0 2))
+							  (string= (concat "--" (argparse-opt-longopt opt)) arg1))
+							 (list (list (argparse-opt-name opt)))))
+					   #'cdr))
+		 (short-sep-arg (arg-parser-with-continuation
+						 (list #'car #'cadr)
+						 (lambda (opt arg1 arg2)
+						   (if (and
+								(argparse-opt-has-arg opt)
+								(string= arg1 (concat "-" (argparse-opt-shortopt opt))))
+							   (list (append (list (argparse-opt-name opt)) arg2))))
+						 #'cddr))
+		 (short-eq-arg (arg-parser-with-continuation
+						nil
+						(lambda (opt arg1)
+						  (let ((arg-eq-str (concat "-" (argparse-opt-shortopt opt) "=")))
+							(if (and
+								 (argparse-opt-has-arg opt)
+								 (<= (length arg-eq-str) (length arg1))
+								 (string= arg-eq-str (substring arg1 0 (length arg-eq-str))))
+								(list (append (list (argparse-opt-name opt)) (substring arg1 (length arg-eq-str)))))))
+						nil))
+		 (short-arg-no-sep (arg-parser-with-continuation
+						nil
+						(lambda (opt arg1)
+						  (let ((arg-str (concat "-" (argparse-opt-shortopt opt))))
+							(if (and
+								 (argparse-opt-has-arg opt)
+								 (<= (length arg-str) (length arg1))
+								 (string= arg-str (substring arg1 0 (length arg-str))))
+								(list (append (list (argparse-opt-name opt)) (substring arg1 (length arg-str)))))))
+						nil))
+		 (short-no-arg (arg-parser-with-continuation
+						nil
+						(lambda (opt arg1)
+						  (if (and
+							   (not (argparse-opt-has-arg opt))
+							   (string= "-" (substring arg1 0 1))
+							   (string= (concat "-" (argparse-opt-shortopt opt)) arg1))
+							  (list (list (argparse-opt-name opt)))))
+						nil))
+		 (f (lambda (opts args &optional continuation rargs)
+			  (largest-list (mapcar (lambda (fn) (funcall fn opts args continuation rargs)) (list with-sep-arg with-eq with-no-arg
+																								  short-sep-arg short-eq-arg short-arg-no-sep short-no-arg
+																								  ))))))
+	(funcall f opts args f nil)))
 
-(argp-parse-longopt opts '("--file" "bar"))
-(argp-parse-longopt opts '("--file=foobar" "--file=bar-foo" "--file" "bar" "--no-arg"))
+(argp-parse-longopt g-opts '("--arg" "fdsa" "--arg=fadssdaf" "--file" "file-val" "--no-arg" "other-arg"))
 
-(defun _argparse_rec (opt ls)
-  (if (equal ls nil) nil)
-  (let ((s (car ls))
-		(rest (cdr ls)))
-	(cond
-	 ((string= "--" (substring s 0 2))
-	  (progn
-		(message "yesSSSS")
-		(if (string= (concat "--" (argparse-opt-longopt opt)) s)
-			(if (argparse-opt-has-arg opt)
-				;; --abc def
-				(append (list (append (list s) (car rest))) (_argparse_rec (cdr rest)))
-			  ;; --abc
-			  (append (list s) (_argparse_rec rest)))
-		  (let ((sstr (concat (argparse-opt-longopt opt) "=")))
-			(if (string= sstr (substring s 0 (length sstr)))
-				;; --abc=def
-				(append (list (append (list s) (substring s (length sstr)))) (_argparse_rec rest))
-			  (append (list s) (_argparse_rec rest)))))))
-	 ((string= "-" (substring s 0 1))
-										; -s       ;; single
-										; -it      ;; two single flas combined
-										; -s=value
-										; -s value
-										; -svalue
-	  )
-	 (t (append nil s)))))
+(argp-parse-longopt g-opts '("--file" "bar"))
+(argp-parse-longopt g-opts '("--file" "bar" "baz"))
+(argp-parse-longopt g-opts '("--file=foobar" "--file=bar-foo" "--file" "bar" "--no-arg"))
 
-(defun argparse (ls)
-  (_argparse_rec ls))
+(let ((my-opts (list
+				(make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type :string)
+				(make-argparse-opt :name "use-static-naming" :longopt "static" :shortopt "s" :has-arg nil :arg-type :string)
+				(make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type :string))))
+  (argp-parse-longopt my-opts '("--static" "-p" "8080" "-p=8080" "-s" "-p8080" "--" "--static" "rest-args")))
 
 (provide 'argparse)
 ;;; argparse.el ends here
