@@ -32,7 +32,7 @@ NAME: how your code will reference this option
 LONGOPT: long `--flag' syntax; `nil' to unset
 SHORTOPT: short `-f' syntax; `nil' to unset
 HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
-ARG-TYPE: 'int 'str 'float
+ARG-TYPE: 'int 'str 'float"
   name longopt shortopt has-arg arg-type)
 
 ;; (require 'cl-extra)
