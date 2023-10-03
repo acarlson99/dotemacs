@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Text
+
 (defun move-text-internal (arg)
   (cond
    ((and mark-active transient-mark-mode)
@@ -39,10 +41,74 @@
   (interactive)
   (other-window -1))
 
+;; Functional
+
 (defmacro curry (fun &rest args)
   "Curry curries FUN with ARGS."
   `(lambda (&rest args2)
 	 (apply ,fun (append '(,@args) args2))))
+
+(defun compose (funcs)
+  "composes several funcitons into one"
+  (let ((funcs_ funcs))
+    (lambda (arg)
+      (if funcs_
+          (funcall (car funcs_) (funcall (compose (cdr funcs_)) arg))
+        arg))))
+
+(mapc
+ (lambda (funcs)
+   (let ((compose-funcs (car funcs))
+		 (test-func (cdr funcs)))
+	 (cl-assert (equal
+				 (funcall (compose compose-funcs) '(1 2 3 4 5))
+				 (funcall test-func '(1 2 3 4 5))))))
+ '(((car cdr cdr) . caddr)
+   ((identity identity cdr identity identity) . cdr)))
+
+;; (defun drop (N LIST)
+;;   (if (eq N 0)
+;; 	  LIST
+;; 	(drop (- N 1) (cdr LIST))))
+
+(defun drop (N LIST)
+  (nthcdr N LIST))
+
+(cl-assert (not (drop 3 '(1 2 3))))
+(cl-assert (equal (drop 3 '(1 2 3 4)) '(4)))
+(let ((ls '(0 1 2 3 4 5)))
+  (mapc (lambda (n)
+		  (cl-assert (equal (append (take n ls) (drop n ls)) ls)))
+		ls))
+
+;; NOTE: lambdas expand to closures which have different syntax
+;; Generally use `num-closure-args' unless you are using macros
+;; (macroexpand (lambda (x) x))
+;; => (closure (t) (x) x)
+(defun num-lambda-args (lmb)
+  "You may want `num-closure-args'."
+  (cl-assert (equal (car lmb) 'lambda))
+  (length (cadr lmb)))
+
+(defun num-closure-args (clj)
+  "You may want `num-lambda-args'."
+  (cl-assert (equal (car clj) 'closure))
+  (length (caddr clj)))
+
+;; (num-lambda-args '(lambda (x)))
+;; => 1
+;; (defmacro test-macro-1 (l)
+;;   `(+ 0 ,(num-lambda-args l)))
+;; (test-macro-1 (lambda (x)))
+;; => 1
+;; (defmacro test-macro-2 (l)
+;;   `(+ 0 (num-closure-args ,l)))
+;; (test-macro (lambda (x)))
+;; => 1
+;; (num-closure-args (lambda (x)))
+;; => 1
+
+;; Misc.
 
 (require 'subr-x)
 (require 'el-log)
