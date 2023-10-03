@@ -1,5 +1,7 @@
 :; emacs --batch -l "$0" -f web-server-org-main -- "$@"
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
 ;; TODO: create argparse library
 
 
@@ -41,13 +43,26 @@
 ;;    -" /‘.         _,’     | _  _  _.|
 ;;     ""--’---"""""’        ‘’ ’! |! /
 
+(require 'argparse)
+
+
+
+(message "Called with args %S" (let ((argp (argparse-getopt (list (make-argparse-opt :name "func" :shortopt "f" :has-arg t)) argv)))
+								 (message "Called with args %S" argp)
+								 (message "%S" (cdadr argp))
+								 (argparse-getopt
+								  (list
+								   (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
+								   (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
+								   (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
+								  (cdadr argp))))
+
 (message "Called with argv %S" argv)
 
 ;; (add-to-list 'load-path "~/p/emacs-org-server/")
 ;; (add-to-list 'load-path "./")
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (package-initialize)
 (unless (require 'web-server nil :noerror)

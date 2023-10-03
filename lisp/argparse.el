@@ -26,6 +26,8 @@
 
 ;;; Code:
 
+(require 'cl-macs)
+
 (cl-defstruct argparse-opt
   "\
 NAME: how your code will reference this option
