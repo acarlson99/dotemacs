@@ -34,8 +34,10 @@ NAME: how your code will reference this option
 LONGOPT: long `--flag' syntax; `nil' to unset
 SHORTOPT: short `-f' syntax; `nil' to unset
 HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
-ARG-TYPE: 'int 'str 'float"
-  name longopt shortopt has-arg arg-type)
+ARG-TYPE: 'int 'str 'float
+DESCRIPTION: flag description string
+"
+  name longopt shortopt has-arg arg-type description)
 
 (defun argparse--num-lambda-args (lmb)
   (cl-assert (equal (car lmb) 'lambda))
@@ -267,6 +269,35 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
   (cl-assert (equal
 			  (argparse-get-arg "dir" parsed-args)
 			  '("dir" . "/tmp"))))
+
+(defun argparse-help-msg (opts_)
+  (let* ((opts (seq-sort (lambda (a b) (string> (argparse-opt-name a) (argparse-opt-name b))) opts_))
+		 (opt-lists
+		  (mapcar
+		   (lambda (opt)
+			 (mapcar
+			  (lambda (fn)
+				(funcall fn opt))
+			  '(argparse-opt-name argparse-opt-description argparse-opt-shortopt argparse-opt-longopt argparse-opt-has-arg argparse-opt-arg-type)))
+		   opts_))
+		 (opt-lens (mapcar
+					(lambda (n)
+					  (mapcar
+					   (lambda (l)
+						 (length (nth n l)))
+					   opt-lists))
+					'(0 1 2 3))))
+	opt-lens))
+
+;; format stolen from cobra-command
+(let ((argp-opts (list
+				  (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str
+									 :description "hostname of server-- used for frontend to connect to server")
+				  (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
+									 :description "server port")
+				  (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
+									 :description "directory containing files to serve"))))
+  (argparse-help-msg argp-opts))
 
 (provide 'argparse)
 ;;; argparse.el ends here
