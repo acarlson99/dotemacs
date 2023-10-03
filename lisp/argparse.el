@@ -41,7 +41,7 @@ ARG-TYPE: 'int 'str 'float"
   (cl-assert (equal (car lmb) 'lambda))
   (length (cadr lmb)))
 
-(defmacro argparse-parser-with-continuation (f)
+(defmacro argparse-parser-with-continuation (f &optional next-args-f)
   "\
 Create a tail-call optimized (unsupported in elisp) parser which accepts a
 continuation.
@@ -74,7 +74,9 @@ with optional arguments is required please use the following form:
 							   )))
 						 opts)))
 		   (if result
-			   (let ((next-args (nthcdr n-consumed args)))
+			   (let ((next-args ,(if next-args-f
+									 `(funcall ,next-args-f args)
+								   `(nthcdr n-consumed args))))
 				 (if continuation
 					 (funcall continuation opts next-args continuation (append rargs result))
 				   (append (list (append rargs result)) (list next-args))))
@@ -152,8 +154,18 @@ ARGS: list of strings, usually `argv'
 							   (argparse-opt-shortopt opt)
 							   (not (argparse-opt-has-arg opt))
 							   (string= "-" (substring arg1 0 1))
-							   (string= (concat "-" (argparse-opt-shortopt opt)) arg1))
-							  (list (list (argparse-opt-name opt)))))))
+							   (not (string= "--" (substring arg1 0 2)))
+							   ;; (string= (concat "-" (argparse-opt-shortopt opt)) arg1)
+							   (string= (concat "-" (argparse-opt-shortopt opt)) (substring arg1 0 2)))
+							  (list (list (argparse-opt-name opt)))))
+						(lambda (ls)
+						  (append
+						   (let ((ns (substring (car ls) 2)))
+							 (if (> (length ns) 0)
+								 (list (concat "-" ns))
+							   nil))
+						   (cdr ls)))
+						))
 		 (f (lambda (opts args &optional continuation rargs)
 			  (argparse--largest-list (mapcar (lambda (fn) (funcall fn opts args continuation rargs))
 											  (list with-sep-arg with-eq with-no-arg
@@ -183,7 +195,10 @@ ARGS: list of strings, usually `argv'
 			  '((("filename" . "foobar") ("filename" . "bar-foo") ("filename" . "bar") ("argless-flag")) nil)))
   (cl-assert (equal
 			  (argparse-getopt g-opts '("-m" "-s" "arg" "-s--arg-2" "--=3"))
-			  '((("mini") ("nolong" . "arg") ("nolong" . "--arg-2")) ("--=3")))))
+			  '((("mini") ("nolong" . "arg") ("nolong" . "--arg-2")) ("--=3"))))
+  (cl-assert (equal
+			  (argparse-getopt g-opts '("-ma"))
+			  '((("mini") ("argless-flag")) nil))))
 
 (let ((my-opts (list
 				(make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
