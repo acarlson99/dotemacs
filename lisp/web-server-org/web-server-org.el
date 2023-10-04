@@ -45,26 +45,36 @@
 
 (require 'argparse)
 
+;; TODO: move argparse and vars to main
 ;; scan for '--' to skip emacs args
 (let* ((argv-2 (cdr (argparse-scan-argv "--" argv)))
-	  (argp-v
-	   (argparse-getopt
+	   (argp-opts
 		(list
-		 (make-argparse-opt :name "host-address" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
-		 (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
-		argv-2)))
+		 (make-argparse-opt :name "help" :longopt "help" :shortopt "h" :description "Help msg")
+		 (make-argparse-opt :name "host-address" :longopt "host" :has-arg t :arg-type 'str
+							:description "Address for frontend to contact host")
+		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
+							:description "Port to bind and listen to")
+		 (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
+							:description "Fileserver root directory")))
+	   (argp-v
+		(argparse-getopt
+		 argp-opts
+		 argv-2)))
   (defvar argv (cadr argp-v))
-  (defvar args (car argp-v)))
-
-(message "Called with argv %S" args)
+  (defvar args (car argp-v))
+  (print args)
+  (if (argparse-get-arg argp-opts "help" args)
+	  (progn
+	  (message "Usage:")
+	  (message (argparse-help-msg argp-opts))))
+  )
 
 ;; (add-to-list 'load-path "~/p/emacs-org-server/")
 ;; (add-to-list 'load-path "./")
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
 
-
-(package-initialize)
+(unless package--initialized (package-initialize))
 (unless (require 'web-server nil :noerror)
   (package-install 'web-server)
   (require 'web-server))

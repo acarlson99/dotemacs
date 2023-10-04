@@ -37,7 +37,7 @@ HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
 ARG-TYPE: 'int 'str 'float
 DESCRIPTION: flag description string
 "
-  name longopt shortopt has-arg arg-type description)
+  name longopt shortopt has-arg arg-type description default-arg)
 
 (defun argparse--num-lambda-args (lmb)
   (cl-assert (equal (car lmb) 'lambda))
@@ -244,7 +244,7 @@ e.g.
 	(if n
 		(nthcdr n args))))
 
-(defun argparse-get-arg (k arglist)
+(defun argparse-get-arg (opts k arglist)
   "\
 K: key to search for
 ARGLIST: list of key/value pairs of form ((A . B) (C . D))
@@ -252,23 +252,51 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 (argparse-get-arg 'A '((C . D) (A . B)))
 => (A . B)
 "
-  (assoc k arglist #'string=))
+  (or
+   (assoc k arglist #'string=)
+   (let ((matching-opt
+		  (cl-some
+		   (lambda (opt)
+			 (and (string= k (argparse-opt-name opt)) opt))
+		   opts)))
+	 (if matching-opt
+		 (cons
+		  (argparse-opt-name matching-opt)
+		  (argparse-opt-default-arg matching-opt))))))
 
-(let ((parsed-args (car (argparse-getopt
-						 (list
-						  (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-						  (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int)
-						  (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str))
-						 '("--port=8080" "-d" "/tmp")))))
+(let* ((arglist
+		(list
+		 (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
+		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int :default-arg 8080)
+		 (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str)))
+	   (parsed-args (car (argparse-getopt arglist '("-d" "/tmp")))))
   (cl-assert (equal
-			  (argparse-get-arg "port" parsed-args)
+			  (argparse-get-arg arglist "port" parsed-args)
 			  '("port" . 8080)))
   (cl-assert (equal
-			  (argparse-get-arg "other" parsed-args)
+			  (argparse-get-arg arglist "other" parsed-args)
 			  nil))
   (cl-assert (equal
-			  (argparse-get-arg "dir" parsed-args)
+			  (argparse-get-arg arglist "dir" parsed-args)
 			  '("dir" . "/tmp"))))
+
+
+(defun zip (a b)
+  (if (and a b)
+	  (append
+	   (list (cons (car a) (car b)))
+	   (zip (cdr a) (cdr b)))))
+
+(defun intersperse (element list)
+  "Intersperse ELEMENT into LIST."
+  (if (null list)
+      nil
+    (cons (car list)
+          (if (cdr list)
+              (cons element (intersperse element (cdr list)))
+            nil))))
+
+(require 'subr-x)
 
 (defun argparse-help-msg (opts_)
   (let* ((opts (seq-sort (lambda (a b) (string> (argparse-opt-name a) (argparse-opt-name b))) opts_))
@@ -278,25 +306,77 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 			 (mapcar
 			  (lambda (fn)
 				(funcall fn opt))
-			  '(argparse-opt-name argparse-opt-description argparse-opt-shortopt argparse-opt-longopt argparse-opt-has-arg argparse-opt-arg-type)))
+			  '(argparse-opt-name
+				(lambda (o)
+				  (let ((os (argparse-opt-shortopt o)))
+					(if os
+						(concat
+						 "-"
+						 os)
+					  "")))
+				
+				(lambda (o)
+				  (let ((os (argparse-opt-longopt o)))
+					(if os
+						(concat
+						 "--"
+						 os)
+					  "")))
+				(lambda (o)
+				  (if (argparse-opt-has-arg o)
+					  (symbol-name (or (argparse-opt-arg-type o) 'str))))
+				(lambda (o)
+				  (and
+				   (argparse-opt-default-arg o)
+				   (format "Default: %S" (argparse-opt-default-arg o))))
+				argparse-opt-description
+				)))
+		   ;; argparse-opt-has-arg
+		   ;; argparse-opt-arg-type)))
 		   opts_))
 		 (opt-lens (mapcar
 					(lambda (n)
-					  (mapcar
-					   (lambda (l)
-						 (length (nth n l)))
-					   opt-lists))
-					'(0 1 2 3))))
-	opt-lens))
+					  (apply #'max (mapcar
+									(lambda (l)
+									  (length (nth n l)))
+									opt-lists)))
+					'(0 1 2 3 4 5)))
+		 (opt-str-with-len (mapcar (lambda (ls)
+									 (zip ls opt-lens))
+								   opt-lists))
+		 (padded-strs (mapcar
+					   (lambda (opt-ss)
+						 (mapcar
+						  (lambda (pair)
+							(let ((s (car pair))
+								  (len (cdr pair)))
+							  (string-pad s len)))
+						  opt-ss))
+					   opt-str-with-len)))
+	(apply #'concat
+		   (intersperse "\n"
+						(mapcar (lambda (ls)
+								  (apply #'concat (intersperse "\t" ls)))
+								padded-strs)))
+	))
+
+;; (0 1 2 3)
+;; ((a b c d)
+;;  (e f g h))
+;; (((a . 0) (b . 1) (c . 2) (d . 3))
+;;  ((e . 0) (b . 1) (c . 2) (d . 3)))
 
 ;; format stolen from cobra-command
-(let ((argp-opts (list
-				  (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str
-									 :description "hostname of server-- used for frontend to connect to server")
-				  (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
-									 :description "server port")
-				  (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
-									 :description "directory containing files to serve"))))
+(let ((argp-opts
+	   (list
+		(make-argparse-opt :name "hostname" :longopt "hostname" :has-arg t :arg-type 'str
+						   :description "hostname of server-- used for frontend to connect to server")
+		(make-argparse-opt :name "port" :shortopt "p" :has-arg t :arg-type 'int
+						   :description "server port" :default-arg 8080)
+		(make-argparse-opt :name "fltopt" :shortopt "f" :has-arg t :arg-type 'float)
+		(make-argparse-opt :name "is-static" :shortopt "s" :description "turn on static hosting")
+		(make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
+						   :description "directory containing files to serve"))))
   (argparse-help-msg argp-opts))
 
 (provide 'argparse)

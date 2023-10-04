@@ -34,6 +34,7 @@
 (evil-mode 1)
 (setq evil-undo-system 'undo-tree)
 (evil-set-initial-state 'term-mode 'emacs)
+(evil-set-initial-state 'emacs-lisp-mode 'emacs)
 (evil-set-initial-state 'eshell-mode 'emacs)
 (evil-set-initial-state 'neotree-mode 'emacs)
 (evil-set-initial-state 'help-mode 'emacs)
