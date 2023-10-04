@@ -1,3 +1,4 @@
+;; ported (badly) from https://github.com/aqua-lzma/OwOify/blob/master/owoify.js
 (defun owoify (text)
   "OwOify the given text."
   (let ((replaceWords t)
