@@ -57,6 +57,7 @@
 						  ("*gwomps*" . 1)
 						  ))
 
+;; TODO: rewrite this using `cl-reduce' and macros generating a lambda or `identity'
 (defun owoify (text)
   "OwOify the given text."
   (let ((text text))
