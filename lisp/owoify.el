@@ -22,39 +22,39 @@
 (defvar owoify-doStutter t)
 (defvar owoify-stutterChance 0.5)
 (defvar owoify-doPrefixes t)
-(defvar owoify-prefixChance 0.2)
-(defvar owoify-prefixes '(("OwO" . 9) ;; TODO: literally what are these numbers
-						  ("OwO whats this?" . 1)
-						  ("*unbuttons shirt*" . 2)
-						  ("*nuzzles*" . 3)
-						  ("*waises paw*" . 4)
-						  ("*notices bulge*" . 5)
-						  ("*blushes*" . 6)
-						  ("*giggles*" . 7)
-						  ("hehe" . 8)))
+(defvar owoify-prefixChance 0.5)
+(defvar owoify-prefixes '("OwO" ;; TODO: literally what are these numbers
+						  "OwO whats this?"
+						  "*unbuttons shirt*"
+						  "*nuzzles*"
+						  "*waises paw*"
+						  "*notices bulge*"
+						  "*blushes*"
+						  "*giggles*"
+						  "hehe"))
 (defvar owoify-doSuffixes t)
-(defvar owoify-suffixChance 0.1)
-(defvar owoify-suffixes '(("(ﾉ´ з `)ノ" . 1)
-						  ("( ´ ▽ ` ).｡ｏ♡" . 1)
-						  ("(´,,•ω•,,)♡" . 1)
-						  ("(*≧▽≦)" . 1)
-						  ("ɾ⚈▿⚈ɹ" . 1)
-						  ("( ﾟ∀ ﾟ)" . 1)
-						  ("( ・ ̫・)" . 1)
-						  ("( •́ .̫ •̀ )" . 1)
-						  ("(▰˘v˘▰)" . 1)
-						  ("(・ω・)" . 1)
-						  ("✾(〜 ☌ω☌)〜✾" . 1)
-						  ("(ᗒᗨᗕ)" . 1)
-						  ("(・`ω´・)" . 1)
-						  (":3" . 1)
-						  (">:3" . 1)
-						  ("hehe" . 1)
-						  ("xox" . 1)
-						  (">3<" . 1)
-						  ("murr~" . 1)
-						  ("UwU" . 1)
-						  ("*gwomps*" . 1)
+(defvar owoify-suffixChance 0.8)
+(defvar owoify-suffixes '("(ﾉ´ з `)ノ"
+						  "( ´ ▽ ` ).｡ｏ♡"
+						  "(´,,•ω•,,)♡"
+						  "(*≧▽≦)"
+						  "ɾ⚈▿⚈ɹ"
+						  "( ﾟ∀ ﾟ)"
+						  "( ・ ̫・)"
+						  "( •́ .̫ •̀ )"
+						  "(▰˘v˘▰)"
+						  "(・ω・)"
+						  "✾(〜 ☌ω☌)〜✾"
+						  "(ᗒᗨᗕ)"
+						  "(・`ω´・)"
+						  ":3"
+						  ">:3"
+						  "hehe"
+						  "xox"
+						  ">3<"
+						  "murr~"
+						  "UwU"
+						  "*gwomps*"
 						  ))
 
 ;; TODO: rewrite this using `cl-reduce' and macros generating a lambda or `identity'
@@ -102,16 +102,16 @@
 			   (lambda (word)
 				 (if (or (= (length word) 0) (not (string-match "[a-z]" (substring word 0 1))))
 					 word
-				   (while (< (random 1.0) owoify-stutterChance)
+				   (while (< (/ (random 100) 100.0) owoify-stutterChance)
 					 (setq word (concat (substring word 0 1) "-" word)))
 				   word))
 			   (split-string text " ")
 			   " ")))
 	(if owoify-doPrefixes
-		(if (< (random 1.0) owoify-prefixChance)
+		(if (< (/ (random 100) 100.0) owoify-prefixChance)
 			(setq text (concat (owo-weighted-random owoify-prefixes) " " text))))
 	(if owoify-doSuffixes
-		(if (< (random 1.0) owoify-suffixChance)
+		(if (< (/ (random 100) 100.0) owoify-suffixChance)
 			(setq text (concat text " " (owo-weighted-random owoify-suffixes)))))
 	text))
 
@@ -122,17 +122,16 @@
   text)
 
 (defun owo-weighted-random (list)
-  "Return a randomly selected element from LIST with weighted probability."
-  (let ((total-weight (apply '+ (mapcar 'cdr list))))
-    (let ((rand-weight (random total-weight))
-		  (current-weight 0))
-	  ;; eval to first expr such that `(>= current-weight rand-weight)`
-	  (cl-some
-	   (lambda (item)
-		 (setq current-weight (+ current-weight (cdr item)))
-		 (if (>= current-weight rand-weight)
-			 (car item)))
-	   list))))
+  (let* ((maxN (apply #'max (mapcar #'length list)))
+		 (acc 0)
+		 (dotted-str-weights (mapcar
+							  (lambda (s)
+								(cons s (setq acc (+ acc maxN (length s)))))
+							  list))
+		 (random (* acc (/ (random 100) 100.0))))
+	(cl-some (lambda (dsw)
+			   (and (< random (cdr dsw)) (car dsw)))
+			 dotted-str-weights)))
 
 ;; (owo-weighted-random '((1 . 1) (2 . 2) (3 . 3) (4 . 4) (5 . 5)))
 
