@@ -387,6 +387,8 @@ b.onclick = () => { oldF(); refreshF(); };
 
 ;; (ws-start 'org-server 9014)
 
+(require 'owoify)
+
 (defun web-server-org-main ()
   (el-log "preparing")
   (defvar my-server (ws-start '(((:POST . ".*") . org-poster)
@@ -399,7 +401,9 @@ b.onclick = () => { oldF(); refreshF(); };
   ;; TODO: https support
   ;; TODO: (require 'ox) org mode export theme customization
   ;; TODO: css
-  (el-log "sewving you on powt %s:%s siw owo" host-address host-port)
-  (el-log "wif diwectowy %S ~*mpfh*~" docroot)
+  (message "%s" (owoify "Hello, server is running"))
+  (message "%s" (owoify (format "Serving HTML and ORG files in directory %S" docroot)))
+  (message "%s" (owoify (format "Servicing you, sir, at %s:%s" host-address host-port)))
+  (message (owoify "... ~nyaa"))
   (defvar block (while t (sleep-for 99999999)))
   (ws-stop-all))
