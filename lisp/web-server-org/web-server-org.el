@@ -1,64 +1,15 @@
 :; emacs --batch -l "$0" -f web-server-org-main -- "$@" && exit
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-
-;; TODO: create argparse library
-
-
-:; ~/emacs/src/emacs -Q -q --batch -l "$0" -f web-server-org-main -- "$@"
-
-;; TODO: why does this crash????
-
-
-;; chumshack -- Fri Sep 29 18:53:41 2023
-;;           ,’          __  ‘.
-;;          /|          " __   \
-;;         , |           / |.   .
-;;        |,’          !_.’|   |
-;;       ,’             ’   |   |
-;;      /              |’--’|   |
-;;    |                ’---’   |
-;;      .   ,                   |                       ,".
-;;       ._     ’           _’  |                    , ’ \ ‘
-;;   ‘.. ‘.‘-...___,...---""    |       __,.        ,‘"   L,|
-;;  |, ‘- .‘._        _,-,.’   .  __.-’-. /        .   ,    \
-;; -:..     ‘. ‘-..--_.,.<       ‘"      / ‘.        ‘-/ |   .
-;;   ‘,         """"’     ‘.              ,’         |   |  ’,,
-;;     ‘.      ’            ’            /          ’    |’. |/
-;;       ‘.   |              \       _,-’           |       ’’
-;;         ’._’               \   ’"\                .      |
-;;           |                ’     \                ‘._  ,’
-;;           |                 ’     \                 .’|
-;;           |                 .      \                | |
-;;           |                 |       L              ,’ |
-;;            ‘                 |       |             /   ’
-;;             \                |       |           ,’   /
-;;           ,’ \               |  _.._ ,-..___,..-’    ,’
-;;          /     .             .      ‘!             ,j’
-;;         /       ‘.          /        .           .’/
-;;        .          ‘.       /         |        _.’.’
-;;         ‘.          7‘’---’          |------"’_.’
-;;        _,.‘,_     _’                ,’’-----"’
-;;    _,-_    ’       ‘.     .’      ,\
-;;    -" /‘.         _,’     | _  _  _.|
-;;     ""--’---"""""’        ‘’ ’! |! /
-
-(require 'argparse)
-
-;; (add-to-list 'load-path "~/p/emacs-org-server/")
-;; (add-to-list 'load-path "./")
-;; (add-to-list 'load-path "~/.emacs.d/elpa/")
-
 (require 'package)
 (unless package--initialized (package-initialize))
 (unless (require 'web-server nil :noerror)
   (package-install 'web-server)
   (require 'web-server))
-
 (require 'el-log)
+(require 'argparse)
 (require 'url)
 (require 'org)
-
 
 ;; TODO: disable 'would you like to reread file? (yes/no)' message
 ;; dangerous :)
@@ -324,10 +275,6 @@ b.onclick = () => { oldF(); refreshF(); };
 			 ))))
 	(error (el-log "caught error %s" (error-message-string err)))))
 
-(defmacro assert (test-form)
-  `(when (not ,test-form)
-     (error "Assertion failed: %s" (format "%s" ',test-form))))
-
 (defun filename-in-docroot (full)
   (let ((filename (substring full (length docroot))))
 	;; (print (format "root %S base %S" (concat docroot filename) full))
@@ -383,7 +330,6 @@ b.onclick = () => { oldF(); refreshF(); };
 		 (setq ,SYM v))))
 
 (defun web-server-org-main ()
-  ;; TODO: move argparse and vars to main
   ;; scan for '--' to skip emacs args
   (let* ((argv-2 (cdr (argparse-scan-argv "--" argv)))
 		 (argp-opts
