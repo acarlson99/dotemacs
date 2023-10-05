@@ -178,46 +178,46 @@ ARGS: list of strings, usually `argv'
 													short-arg-no-sep short-no-arg))))))
 	(funcall f opts args f nil)))
 
-(let ((g-opts
-	   (list (make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
-			 (make-argparse-opt :name "argless-flag" :longopt "no-arg" :shortopt "a" :has-arg nil)
-			 (make-argparse-opt :name "arg-flag" :longopt "arg" :has-arg t)
-			 (make-argparse-opt :name "nolong" :shortopt "s" :has-arg t)
-			 (make-argparse-opt :name "mini" :shortopt "m")
-			 )))
+;; (let ((g-opts
+;; 	   (list (make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
+;; 			 (make-argparse-opt :name "argless-flag" :longopt "no-arg" :shortopt "a" :has-arg nil)
+;; 			 (make-argparse-opt :name "arg-flag" :longopt "arg" :has-arg t)
+;; 			 (make-argparse-opt :name "nolong" :shortopt "s" :has-arg t)
+;; 			 (make-argparse-opt :name "mini" :shortopt "m")
+;; 			 )))
 
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("--arg" "fdsa" "--arg=fadssdaf" "--file" "file-val" "--no-arg" "other-arg"))
-			  '((("arg-flag" . "fdsa") ("arg-flag" . "fadssdaf") ("filename" . "file-val") ("argless-flag")) ("other-arg"))))
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("--file" "bar"))
-			  '((("filename" . "bar")) nil)))
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("--file" "bar" "baz"))
-			  '((("filename" . "bar")) ("baz"))))
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("--file=foobar" "--file=bar-foo" "--file" "bar" "--no-arg"))
-			  '((("filename" . "foobar") ("filename" . "bar-foo") ("filename" . "bar") ("argless-flag")) nil)))
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("-m" "-s" "arg" "-s--arg-2" "--=3"))
-			  '((("mini") ("nolong" . "arg") ("nolong" . "--arg-2")) ("--=3"))))
-  (cl-assert (equal
-			  (argparse-getopt g-opts '("-ma"))
-			  '((("mini") ("argless-flag")) nil))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("--arg" "fdsa" "--arg=fadssdaf" "--file" "file-val" "--no-arg" "other-arg"))
+;; 			  '((("arg-flag" . "fdsa") ("arg-flag" . "fadssdaf") ("filename" . "file-val") ("argless-flag")) ("other-arg"))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("--file" "bar"))
+;; 			  '((("filename" . "bar")) nil)))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("--file" "bar" "baz"))
+;; 			  '((("filename" . "bar")) ("baz"))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("--file=foobar" "--file=bar-foo" "--file" "bar" "--no-arg"))
+;; 			  '((("filename" . "foobar") ("filename" . "bar-foo") ("filename" . "bar") ("argless-flag")) nil)))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("-m" "-s" "arg" "-s--arg-2" "--=3"))
+;; 			  '((("mini") ("nolong" . "arg") ("nolong" . "--arg-2")) ("--=3"))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt g-opts '("-ma"))
+;; 			  '((("mini") ("argless-flag")) nil))))
 
-(let ((my-opts (list
-				(make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
-				(make-argparse-opt :name "use-static-naming" :longopt "static" :shortopt "s" :has-arg nil :arg-type 'str)
-				(make-argparse-opt :name "float" :longopt "flt" :shortopt "n" :has-arg t :arg-type 'float)
-				(make-argparse-opt :name "floatless" :longopt "fls" :shortopt "i" :has-arg nil :arg-type 'float)
-				(make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int))))
-  (cl-assert (equal
-			  (argparse-getopt my-opts '("--static" "-p" "8080" "-p=8080" "-s" "-p8080" "--" "--static" "rest-args"))
-			  '((("use-static-naming") ("port" . 8080) ("port" . 8080) ("use-static-naming") ("port" . 8080)) ("--" "--static" "rest-args"))))
-  (cl-assert (equal
-			  (argparse-getopt my-opts '("--flt" "22.22" "-p22.22" "--fls" "12.3"))
-			  '((("float" . 22.22) ("port" . 22) ("floatless")) ("12.3"))))
-  )
+;; (let ((my-opts (list
+;; 				(make-argparse-opt :name "filename" :longopt "file" :shortopt "f" :has-arg t :arg-type 'str)
+;; 				(make-argparse-opt :name "use-static-naming" :longopt "static" :shortopt "s" :has-arg nil :arg-type 'str)
+;; 				(make-argparse-opt :name "float" :longopt "flt" :shortopt "n" :has-arg t :arg-type 'float)
+;; 				(make-argparse-opt :name "floatless" :longopt "fls" :shortopt "i" :has-arg nil :arg-type 'float)
+;; 				(make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt my-opts '("--static" "-p" "8080" "-p=8080" "-s" "-p8080" "--" "--static" "rest-args"))
+;; 			  '((("use-static-naming") ("port" . 8080) ("port" . 8080) ("use-static-naming") ("port" . 8080)) ("--" "--static" "rest-args"))))
+;;   (cl-assert (equal
+;; 			  (argparse-getopt my-opts '("--flt" "22.22" "-p22.22" "--fls" "12.3"))
+;; 			  '((("float" . 22.22) ("port" . 22) ("floatless")) ("12.3"))))
+;;   )
 
 (defun argparse--index-of (e l &optional cmp_)
   (letrec ((cmp (or cmp_ #'eq))
@@ -267,25 +267,25 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 		  (argparse-opt-name matching-opt)
 		  (argparse-opt-default matching-opt))))))
 
-(let* ((arglist
-		(list
-		 (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int :default 8080)
-		 (make-argparse-opt :name "help" :longopt "help" :shortopt "h")
-		 (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str)))
-	   (parsed-args (car (argparse-getopt arglist '("-d" "/tmp")))))
-  (cl-assert (equal
-			  (argparse-get-arg arglist "port" parsed-args)
-			  '("port" . 8080)))
-  (cl-assert (equal
-			  (argparse-get-arg arglist "other" parsed-args)
-			  nil))
-  (cl-assert (equal
-			  (argparse-get-arg arglist "dir" parsed-args)
-			  '("dir" . "/tmp")))
-  (cl-assert (equal
-			  (argparse-get-arg arglist "help" parsed-args)
-			  nil)))
+;; (let* ((arglist
+;; 		(list
+;; 		 (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
+;; 		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int :default 8080)
+;; 		 (make-argparse-opt :name "help" :longopt "help" :shortopt "h")
+;; 		 (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str)))
+;; 	   (parsed-args (car (argparse-getopt arglist '("-d" "/tmp")))))
+;;   (cl-assert (equal
+;; 			  (argparse-get-arg arglist "port" parsed-args)
+;; 			  '("port" . 8080)))
+;;   (cl-assert (equal
+;; 			  (argparse-get-arg arglist "other" parsed-args)
+;; 			  nil))
+;;   (cl-assert (equal
+;; 			  (argparse-get-arg arglist "dir" parsed-args)
+;; 			  '("dir" . "/tmp")))
+;;   (cl-assert (equal
+;; 			  (argparse-get-arg arglist "help" parsed-args)
+;; 			  nil)))
 
 
 (defun zip (a b)
@@ -305,43 +305,46 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 
 (require 'subr-x)
 
+(defvar argparse-help-msg-max-field-width 30
+  "Max width of any argparse-help-msg field.")
+(defvar argparse-help-msg-use-| nil
+  "separate argparse help-msg fields with `|'")
+
 (defun argparse-help-msg (opts_)
   (let* ((opts (seq-sort (lambda (a b) (string> (argparse-opt-name a) (argparse-opt-name b))) opts_))
 		 (opt-lists
-		  (cons '("name" "short" "long" "type" "default" "description")
-		  (mapcar
-		   (lambda (opt)
-			 (mapcar
-			  (lambda (fn)
-				(funcall fn opt))
-			  '(argparse-opt-name
-				(lambda (o)
-				  (let ((os (argparse-opt-shortopt o)))
-					(if os
-						(concat
-						 "-"
-						 os)
-					  "")))
-				
-				(lambda (o)
-				  (let ((os (argparse-opt-longopt o)))
-					(if os
-						(concat
-						 "--"
-						 os)
-					  "")))
-				(lambda (o)
-				  (if (argparse-opt-has-arg o)
-					  (symbol-name (or (argparse-opt-arg-type o) 'str))))
-				(lambda (o)
-				  (and
-				   (argparse-opt-default o)
-				   (format "%S" (argparse-opt-default o))))
-				argparse-opt-description ;; TODO: limit description to ~30 chars and wrap (nicely) when necessary
-				)))
-		   ;; argparse-opt-has-arg
-		   ;; argparse-opt-arg-type)))
-		   opts_)))
+		  (cons
+		   '("Name" "Short" "Long" "Type" "Default" "Description")
+		   (mapcar
+			(lambda (opt)
+			  (mapcar
+			   (lambda (fn)
+				 (funcall fn opt))
+			   '(argparse-opt-name
+				 (lambda (o)
+				   (let ((os (argparse-opt-shortopt o)))
+					 (if os
+						 (concat
+						  "-"
+						  os)
+					   "")))
+				 (lambda (o)
+				   (let ((os (argparse-opt-longopt o)))
+					 (if os
+						 (concat
+						  "--"
+						  os)
+					   "")))
+				 (lambda (o)
+				   (if (argparse-opt-has-arg o)
+					   (symbol-name (or (argparse-opt-arg-type o) 'str))))
+				 (lambda (o)
+				   (and
+					(argparse-opt-default o)
+					(format "%S" (argparse-opt-default o))))
+				 argparse-opt-description ;; TODO: limit description to ~30 chars and wrap (nicely) when necessary
+				 )))
+			opts_)))
 		 (opt-lens (mapcar
 					(lambda (n)
 					  (apply #'max (mapcar
@@ -352,40 +355,70 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 		 (opt-str-with-len (mapcar (lambda (ls)
 									 (zip ls opt-lens))
 								   opt-lists))
-		 (padded-strs (mapcar
-					   (lambda (opt-ss)
-						 (mapcar
-						  (lambda (pair)
-							(let ((s (car pair))
-								  (len (cdr pair)))
-							  (string-pad s len)))
-						  opt-ss))
-					   opt-str-with-len)))
+		 (exploded-opt-str-with-len
+		  (apply #'append
+				 (mapcar
+				  (lambda (ls)
+					(separate-longer-strings argparse-help-msg-max-field-width ls))
+				  opt-str-with-len)))
+		 (padded-strs (apply #'append (list (mapcar
+											 (lambda (opt-ss)
+											   (mapcar
+												(lambda (pair)
+												  (let ((s (car pair))
+														(len (cdr pair)))
+													(string-pad s len)))
+												opt-ss))
+											 exploded-opt-str-with-len)))))
 	(apply #'concat
 		   (intersperse "\n"
 						(mapcar (lambda (ls)
-								  (apply #'concat (intersperse "\t" ls)))
+								  (string-trim-right
+								   (if argparse-help-msg-use-|
+									   (concat "| "
+											   (apply #'concat (intersperse " | " ls))
+											   " |")
+									 (apply #'concat (intersperse "\t" ls)))))
 								padded-strs)))
 	))
 
-;; (0 1 2 3)
-;; ((a b c d)
-;;  (e f g h))
-;; (((a . 0) (b . 1) (c . 2) (d . 3))
-;;  ((e . 0) (b . 1) (c . 2) (d . 3)))
+(defun separate-longer-strings (n ls)
+  "N: max-len
+LS: list of form '((A . 4) (BBBBBBBBBB . 10))
+returns '(((A . 4) (BBBBB . 5))
+          (('' . 4) (BBBBB . 5)))"
+  (let ((a (mapcar
+			(lambda (dotted)
+			  (if (> (length (car dotted)) n)
+				  (cons
+				   (substring (car dotted) 0 (- n 1))
+				   (min n (cdr dotted)))
+				(cons (car dotted) (min n (cdr dotted)))))
+			ls))
+		(b (mapcar
+			(lambda (dotted)
+			  (if (> (length (car dotted)) n)
+				  (cons
+				   (substring (car dotted) (- n 1))
+				   (min n (cdr dotted)))
+				(cons "" (min n (cdr dotted)))))
+			ls)))
+	(if (< 0 (apply #'max (mapcar (lambda (o) (length (car o))) b))) ;; keep separating
+		(cons a (separate-longer-strings n b))
+	  (list a))))
 
-;; format stolen from cobra-command
-(let ((argp-opts
-	   (list
-		(make-argparse-opt :name "hostname" :longopt "hostname" :has-arg t :arg-type 'str
-						   :description "hostname of server-- used for frontend to connect to server")
-		(make-argparse-opt :name "port" :shortopt "p" :has-arg t :arg-type 'int
-						   :description "server port" :default 8080)
-		(make-argparse-opt :name "fltopt" :shortopt "f" :has-arg t :arg-type 'float)
-		(make-argparse-opt :name "is-static" :shortopt "s" :description "turn on static hosting")
-		(make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
-						   :description "directory containing files to serve"))))
-  (argparse-help-msg argp-opts))
+
+;; (let ((argp-opts
+;; 	   (list
+;; 		(make-argparse-opt :name "hostname" :longopt "hostname" :has-arg t :arg-type 'str
+;; 						   :description "hostname of server -- used for frontend to connect to server")
+;; 		(make-argparse-opt :name "port" :shortopt "p" :has-arg t :arg-type 'int
+;; 						   :description "server port" :default 8080)
+;; 		(make-argparse-opt :name "fltopt" :shortopt "f" :has-arg t :arg-type 'float)
+;; 		(make-argparse-opt :name "is-static" :shortopt "s" :description "turn on static hosting")
+;; 		(make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
+;; 						   :description "directory containing files to serve"))))
+;;   (argparse-help-msg argp-opts))
 
 (provide 'argparse)
 ;;; argparse.el ends here

@@ -154,5 +154,10 @@
 				t)
 			(el-log "No wipe; waiting %d seconds" (- (+ last-wipe-time week) current))))))))
 
+(defun url-to-file (filepath url)
+  (with-current-buffer
+	  (url-retrieve-synchronously url)
+	(write-file filepath)))
+
 (provide 'my-defs)
 ;;; my-defs.el ends here

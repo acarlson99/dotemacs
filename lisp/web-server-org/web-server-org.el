@@ -374,14 +374,13 @@ b.onclick = () => { oldF(); refreshF(); };
 
 ;; (ws-start 'org-server 9014)
 
-(require 'OwOify)
+(when (require 'OwOify nil :noerror)
+  (add-to-list 'el-log-middleware #'OwOify))
 
 (defmacro setq-if (SYM VAL)
   `(let ((v ,VAL))
 	 (if v
 		 (setq ,SYM v))))
-
-(add-to-list 'el-log-middleware #'OwOify)
 
 (defun web-server-org-main ()
   ;; TODO: move argparse and vars to main
@@ -409,7 +408,7 @@ b.onclick = () => { oldF(); refreshF(); };
 		(progn
 		  (message "Usage: ./web-server-org.el [OPTION]")
 		  (message "")
-		  (message (argparse-help-msg argp-opts)))
+		  (message "%s" (argparse-help-msg argp-opts)))
 	  (progn
 		(setq-if host-address (cdr (argparse-get-arg argp-opts "host-address" args)))
 		(let ((v (cdr (argparse-get-arg argp-opts "port" args))))
