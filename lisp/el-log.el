@@ -42,12 +42,25 @@ Logging to a loglvl not in this list produces no output")
 (defmacro el-log-lvl (loglvl format-string &rest args)
   `(let ((loglvl (or ,loglvl el-log-level-default)))
 	 (if (member loglvl el-log-levels)
-		 (message
-		  (string-join (list (el-log-msg-prefix loglvl) ,format-string))
-		  ,@args))))
+		 (message "%s"
+				  (string-join (list (el-log-msg-prefix loglvl)
+							   (cl-reduce
+								(lambda (s fn)
+								  (funcall fn s))
+								el-log-middleware
+								:initial-value (format ,format-string ,@args))))))))
+								   ;; (string-join (list (el-log-msg-prefix loglvl) ,format-string))
+								   ;; ,@args))))))
 
 (defmacro el-log (format-string &rest args)
   `(el-log-lvl el-log-level-default ,format-string ,@args))
+
+(defvar el-log-middleware '()
+  "intermediary string functions to run after message is formatted.
+Usually just silly.")
+
+;; (require 'OwOify)
+;; (add-to-list 'el-log-middleware #'OwOify)
 
 (provide 'el-log)
 ;;; el-log.el ends here

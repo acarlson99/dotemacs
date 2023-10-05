@@ -1,7 +1,7 @@
-;; ported (badly) from https://github.com/aqua-lzma/OwOify/blob/master/owoify.js
+;; ported (badly) from https://github.com/aqua-lzma/OwOify/blob/master/OwOify.js
 
-(defvar owoify-replaceWords t)
-(defvar owoify-wordMap '(("love" . "wuv")
+(defvar OwOify-replaceWords t)
+(defvar OwOify-wordMap '(("love" . "wuv")
 						 ("dog" . "doggo")
 						 ("cat" . "kitteh")
 						 ("hello" . "henwo")
@@ -16,14 +16,14 @@
 						 ("penis" . "peepee")
 						 ("damn" . "darn")
 						 ))
-(defvar owoify-rltow t)
-(defvar owoify-yaftern t)
-(defvar owoify-repeaty t)
-(defvar owoify-doStutter t)
-(defvar owoify-stutterChance 0.5)
-(defvar owoify-doPrefixes t)
-(defvar owoify-prefixChance 0.5)
-(defvar owoify-prefixes '("OwO" ;; TODO: literally what are these numbers
+(defvar OwOify-rltow t)
+(defvar OwOify-yaftern t)
+(defvar OwOify-repeaty t)
+(defvar OwOify-doStutter t)
+(defvar OwOify-stutterChance 0.5)
+(defvar OwOify-doPrefixes t)
+(defvar OwOify-prefixChance 0.5)
+(defvar OwOify-prefixes '("OwO" ;; TODO: literally what are these numbers
 						  "OwO whats this?"
 						  "*unbuttons shirt*"
 						  "*nuzzles*"
@@ -32,9 +32,9 @@
 						  "*blushes*"
 						  "*giggles*"
 						  "hehe"))
-(defvar owoify-doSuffixes t)
-(defvar owoify-suffixChance 0.8)
-(defvar owoify-suffixes '("(ﾉ´ з `)ノ"
+(defvar OwOify-doSuffixes t)
+(defvar OwOify-suffixChance 0.8)
+(defvar OwOify-suffixes '("(ﾉ´ з `)ノ"
 						  "( ´ ▽ ` ).｡ｏ♡"
 						  "(´,,•ω•,,)♡"
 						  "(*≧▽≦)"
@@ -58,14 +58,14 @@
 						  ))
 
 ;; TODO: rewrite this using `cl-reduce' and macros generating a lambda or `identity'
-(defun owoify (text)
+(defun OwOify (text)
   "OwOify the given text."
   (let ((text text))
 
-	(if owoify-replaceWords
+	(if OwOify-replaceWords
 		(setq text
-			  (owo-replace-all text owoify-wordMap)))
-	(if owoify-rltow
+			  (OwOify-replace-all text OwOify-wordMap)))
+	(if OwOify-rltow
 		(setq text
 			  (replace-regexp-in-string
 			   "[rl]"
@@ -74,7 +74,7 @@
 					 "W"
 				   "w"))
 			   text)))
-	(if owoify-yaftern
+	(if OwOify-yaftern
 		(setq text
 			  (replace-regexp-in-string
 			   "n[aeiou]"
@@ -85,7 +85,7 @@
 						   "y")
 						 (substring match 1)))
 			   text)))
-	(if owoify-repeaty
+	(if OwOify-repeaty
 		(setq text
 			  (replace-regexp-in-string
 			   "\\b(?=.*[aeiou])(?=[a-vx-z])[a-z]\\{4,\\}y\\b"
@@ -96,32 +96,32 @@
 						   "w")
 						 (substring (string-match "[aeiouy]" match) 0)))
 			   text)))
-	(if owoify-doStutter
+	(if OwOify-doStutter
 		(setq text
 			  (mapconcat
 			   (lambda (word)
 				 (if (or (= (length word) 0) (not (string-match "[a-z]" (substring word 0 1))))
 					 word
-				   (while (< (/ (random 100) 100.0) owoify-stutterChance)
+				   (while (< (/ (random 100) 100.0) OwOify-stutterChance)
 					 (setq word (concat (substring word 0 1) "-" word)))
 				   word))
 			   (split-string text " ")
 			   " ")))
-	(if owoify-doPrefixes
-		(if (< (/ (random 100) 100.0) owoify-prefixChance)
-			(setq text (concat (owo-weighted-random owoify-prefixes) " " text))))
-	(if owoify-doSuffixes
-		(if (< (/ (random 100) 100.0) owoify-suffixChance)
-			(setq text (concat text " " (owo-weighted-random owoify-suffixes)))))
+	(if OwOify-doPrefixes
+		(if (< (/ (random 100) 100.0) OwOify-prefixChance)
+			(setq text (concat (OwOify-weighted-random OwOify-prefixes) " " text))))
+	(if OwOify-doSuffixes
+		(if (< (/ (random 100) 100.0) OwOify-suffixChance)
+			(setq text (concat text " " (OwOify-weighted-random OwOify-suffixes)))))
 	text))
 
-(defun owo-replace-all (text owoify-wordMap)
+(defun OwOify-replace-all (text OwOify-wordMap)
   "Replace words in TEXT based on WORDMAP."
-  (dolist (entry owoify-wordMap)
+  (dolist (entry OwOify-wordMap)
     (setq text (replace-regexp-in-string (car entry) (cdr entry) text)))
   text)
 
-(defun owo-weighted-random (list)
+(defun OwOify-weighted-random (list)
   (let* ((maxN (apply #'max (mapcar #'length list)))
 		 (acc 0)
 		 (dotted-str-weights (mapcar
@@ -133,11 +133,11 @@
 			   (and (< random (cdr dsw)) (car dsw)))
 			 dotted-str-weights)))
 
-;; (owo-weighted-random '((1 . 1) (2 . 2) (3 . 3) (4 . 4) (5 . 5)))
+;; (OwOify-weighted-random '((1 . 1) (2 . 2) (3 . 3) (4 . 4) (5 . 5)))
 
 ;; ;; Example usage:
 ;; (setq inputText "Hello, world! This is a test.")
-;; (setq outputText (owoify inputText))
+;; (setq outputText (OwOify inputText))
 ;; (print outputText)
 
-(provide 'owoify)
+(provide 'OwOify)

@@ -322,7 +322,7 @@ b.onclick = () => { oldF(); refreshF(); };
 						(ws-send-file process path))))
 			 (t (ws-send-404 process))
 			 ))))
-		  (error (el-log "caught error %s" (error-message-string err)))))
+	(error (el-log "caught error %s" (error-message-string err)))))
 
 (defmacro assert (test-form)
   `(when (not ,test-form)
@@ -374,12 +374,14 @@ b.onclick = () => { oldF(); refreshF(); };
 
 ;; (ws-start 'org-server 9014)
 
-(require 'owoify)
+(require 'OwOify)
 
 (defmacro setq-if (SYM VAL)
   `(let ((v ,VAL))
 	 (if v
 		 (setq ,SYM v))))
+
+(add-to-list 'el-log-middleware #'OwOify)
 
 (defun web-server-org-main ()
   ;; TODO: move argparse and vars to main
@@ -405,7 +407,7 @@ b.onclick = () => { oldF(); refreshF(); };
 		 (args (car argp-v)))
 	(if (argparse-get-arg argp-opts "help" args)
 		(progn
-		  (message "Usage: emacs --batch -l web-server-org.el -f web-server-org-main -- [OPTION]")
+		  (message "Usage: ./web-server-org.el [OPTION]")
 		  (message "")
 		  (message (argparse-help-msg argp-opts)))
 	  (progn
@@ -425,9 +427,8 @@ b.onclick = () => { oldF(); refreshF(); };
 		;; TODO: https support
 		;; TODO: (require 'ox) org mode export theme customization
 		;; TODO: css
-		(message "%s" (owoify "Hello, server is running"))
-		(message "%s" (owoify (format "Serving HTML and ORG files in directory %S" docroot)))
-		(message "%s" (owoify (format "Servicing you, sir, at %s:%s" host-address host-port)))
-		(message (owoify "... ~nyaa"))
+		(el-log "Hello, server is running at %s:%s" host-address host-port)
+		(el-log "Serving HTML and ORG files in directory %S" docroot)
+		(el-log "... ~nyaa")
 		(defvar block (while t (sleep-for 99999999)))
 		(ws-stop-all)))))
