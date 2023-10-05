@@ -99,6 +99,7 @@ ARGS: list of strings, usually `argv'
 						  (if (and
 							   (argparse-opt-longopt opt)
 							   (argparse-opt-has-arg opt)
+							   (> (length arg1) 2)
 							   (string= "--" (substring arg1 0 2))
 							   (string= (concat "--" (argparse-opt-longopt opt)) arg1))
 							  (list (append (list (argparse-opt-name opt)) arg2))))))
@@ -118,6 +119,7 @@ ARGS: list of strings, usually `argv'
 						 (if (and
 							  (argparse-opt-longopt opt)
 							  (not (argparse-opt-has-arg opt))
+							  (> (length arg1) 1)
 							  (string= "--" (substring arg1 0 2))
 							  (string= (concat "--" (argparse-opt-longopt opt)) arg1))
 							 (list (list (argparse-opt-name opt)))))))
@@ -127,6 +129,7 @@ ARGS: list of strings, usually `argv'
 						   (if (and
 								(argparse-opt-shortopt opt)
 								(argparse-opt-has-arg opt)
+								(> (length arg1) 1)
 								(string= arg1 (concat "-" (argparse-opt-shortopt opt))))
 							   (list (append (list (argparse-opt-name opt)) arg2))))))
 										; '-f=filename'
@@ -155,9 +158,9 @@ ARGS: list of strings, usually `argv'
 						  (if (and
 							   (argparse-opt-shortopt opt)
 							   (not (argparse-opt-has-arg opt))
+							   (> (length arg1) 1)
 							   (string= "-" (substring arg1 0 1))
 							   (not (string= "--" (substring arg1 0 2)))
-							   ;; (string= (concat "-" (argparse-opt-shortopt opt)) arg1)
 							   (string= (concat "-" (argparse-opt-shortopt opt)) (substring arg1 0 2)))
 							  (list (list (argparse-opt-name opt)))))
 						(lambda (ls)
