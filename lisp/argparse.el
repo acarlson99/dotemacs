@@ -37,7 +37,7 @@ HAS-ARG: whether this option should expect an argument (e.g. `--flag=arg')
 ARG-TYPE: 'int 'str 'float
 DESCRIPTION: flag description string
 "
-  name longopt shortopt has-arg arg-type description default-arg)
+  name longopt shortopt has-arg arg-type description default)
 
 (defun argparse--num-lambda-args (lmb)
   (cl-assert (equal (car lmb) 'lambda))
@@ -259,15 +259,16 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 		   (lambda (opt)
 			 (and (string= k (argparse-opt-name opt)) opt))
 		   opts)))
-	 (if matching-opt
+	 (if (and matching-opt (argparse-opt-default matching-opt))
 		 (cons
 		  (argparse-opt-name matching-opt)
-		  (argparse-opt-default-arg matching-opt))))))
+		  (argparse-opt-default matching-opt))))))
 
 (let* ((arglist
 		(list
 		 (make-argparse-opt :name "hostname" :longopt "host" :shortopt "h" :has-arg t :arg-type 'str)
-		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int :default-arg 8080)
+		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int :default 8080)
+		 (make-argparse-opt :name "help" :longopt "help" :shortopt "h")
 		 (make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str)))
 	   (parsed-args (car (argparse-getopt arglist '("-d" "/tmp")))))
   (cl-assert (equal
@@ -278,7 +279,10 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 			  nil))
   (cl-assert (equal
 			  (argparse-get-arg arglist "dir" parsed-args)
-			  '("dir" . "/tmp"))))
+			  '("dir" . "/tmp")))
+  (cl-assert (equal
+			  (argparse-get-arg arglist "help" parsed-args)
+			  nil)))
 
 
 (defun zip (a b)
@@ -301,6 +305,7 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 (defun argparse-help-msg (opts_)
   (let* ((opts (seq-sort (lambda (a b) (string> (argparse-opt-name a) (argparse-opt-name b))) opts_))
 		 (opt-lists
+		  (cons '("name" "short" "long" "type" "default" "description")
 		  (mapcar
 		   (lambda (opt)
 			 (mapcar
@@ -327,13 +332,13 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 					  (symbol-name (or (argparse-opt-arg-type o) 'str))))
 				(lambda (o)
 				  (and
-				   (argparse-opt-default-arg o)
-				   (format "Default: %S" (argparse-opt-default-arg o))))
-				argparse-opt-description
+				   (argparse-opt-default o)
+				   (format "%S" (argparse-opt-default o))))
+				argparse-opt-description ;; TODO: limit description to ~30 chars and wrap (nicely) when necessary
 				)))
 		   ;; argparse-opt-has-arg
 		   ;; argparse-opt-arg-type)))
-		   opts_))
+		   opts_)))
 		 (opt-lens (mapcar
 					(lambda (n)
 					  (apply #'max (mapcar
@@ -372,7 +377,7 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 		(make-argparse-opt :name "hostname" :longopt "hostname" :has-arg t :arg-type 'str
 						   :description "hostname of server-- used for frontend to connect to server")
 		(make-argparse-opt :name "port" :shortopt "p" :has-arg t :arg-type 'int
-						   :description "server port" :default-arg 8080)
+						   :description "server port" :default 8080)
 		(make-argparse-opt :name "fltopt" :shortopt "f" :has-arg t :arg-type 'float)
 		(make-argparse-opt :name "is-static" :shortopt "s" :description "turn on static hosting")
 		(make-argparse-opt :name "dir" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str

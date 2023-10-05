@@ -1,4 +1,4 @@
-:; emacs --batch -l "$0" -f web-server-org-main -- "$@"
+:; emacs --batch -l "$0" -f web-server-org-main -- "$@" && exit
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
@@ -45,35 +45,11 @@
 
 (require 'argparse)
 
-;; TODO: move argparse and vars to main
-;; scan for '--' to skip emacs args
-(let* ((argv-2 (cdr (argparse-scan-argv "--" argv)))
-	   (argp-opts
-		(list
-		 (make-argparse-opt :name "help" :longopt "help" :shortopt "h" :description "Help msg")
-		 (make-argparse-opt :name "host-address" :longopt "host" :has-arg t :arg-type 'str
-							:description "Address for frontend to contact host")
-		 (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
-							:description "Port to bind and listen to")
-		 (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
-							:description "Fileserver root directory")))
-	   (argp-v
-		(argparse-getopt
-		 argp-opts
-		 argv-2)))
-  (defvar argv (cadr argp-v))
-  (defvar args (car argp-v))
-  (print args)
-  (if (argparse-get-arg argp-opts "help" args)
-	  (progn
-	  (message "Usage:")
-	  (message (argparse-help-msg argp-opts))))
-  )
-
 ;; (add-to-list 'load-path "~/p/emacs-org-server/")
 ;; (add-to-list 'load-path "./")
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
 
+(require 'package)
 (unless package--initialized (package-initialize))
 (unless (require 'web-server nil :noerror)
   (package-install 'web-server)
@@ -139,11 +115,12 @@
 
 ;; JS HTML stuff
 
-(defvar host-address (or (cdr (argparse-get-arg "host-address" args)) "http://localhost")
+(defvar host-address "http://localhost"
   "HOST-ADDRESS is the location to which frontend JS should send POST requests")
-(defvar host-port (int-to-string (or (cdr (argparse-get-arg "port" args)) 8080)))
+(defvar host-port (int-to-string 8080))
 
-(defvar js-embed-string (concat "
+(defun js-embed-string ()
+  (concat "
 function sendContent() {
   const content = document.getElementById('editable-content').value;
 
@@ -158,11 +135,11 @@ function sendContent() {
 
   // Define the POST request to 'localhost:8080'
   xhr.open('POST', '"
-								host-address
-								(if (not (or (equal nil host-port) (string-empty-p host-port)))
-									(concat ":" host-port)
-								  "")
-								"'+filepath, true);
+		  host-address
+		  (if (not (or (equal nil host-port) (string-empty-p host-port)))
+			  (concat ":" host-port)
+			"")
+		  "'+filepath, true);
 
   // Send the FormData object
   xhr.send(formData);
@@ -236,7 +213,7 @@ b.onclick = () => { oldF(); refreshF(); };
 	  (script ,(format "var filepath = %S;" (escape-js-special-characters filepath)))
 	  (script ,(format "var content = `%s`; console.log(content);" (escape-js-special-characters content)))
 	  (script ,js-onload-func)
-	  (script ,js-embed-string))
+	  (script ,(js-embed-string)))
 	 (body
 	  (h1 ,(format "Edit %S" filepath))
 	  (br)
@@ -249,7 +226,7 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (setq org-confirm-babel-evaluate nil)
 
-(defvar docroot (or (cdr (argparse-get-arg "docroot" args)) "/tmp/test/"))
+(defvar docroot "/tmp/test/")
 
 ;; serve GET requests for:
 ;; * FILE.html -- compile FILE.org to HTML and serve
@@ -399,21 +376,58 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (require 'owoify)
 
+(defmacro setq-if (SYM VAL)
+  `(let ((v ,VAL))
+	 (if v
+		 (setq ,SYM v))))
+
 (defun web-server-org-main ()
-  (el-log "preparing")
-  (defvar my-server (ws-start '(((:POST . ".*") . org-poster)
-								((:GET . ".*") . org-server))
-							  (string-to-number host-port)
-							  nil
-							  :host "0.0.0.0" ;; critical fix for Docker
-							  ))
-  ;; TODO: ^ add network args
-  ;; TODO: https support
-  ;; TODO: (require 'ox) org mode export theme customization
-  ;; TODO: css
-  (message "%s" (owoify "Hello, server is running"))
-  (message "%s" (owoify (format "Serving HTML and ORG files in directory %S" docroot)))
-  (message "%s" (owoify (format "Servicing you, sir, at %s:%s" host-address host-port)))
-  (message (owoify "... ~nyaa"))
-  (defvar block (while t (sleep-for 99999999)))
-  (ws-stop-all))
+  ;; TODO: move argparse and vars to main
+  ;; scan for '--' to skip emacs args
+  (let* ((argv-2 (cdr (argparse-scan-argv "--" argv)))
+		 (argp-opts
+		  (list
+		   (make-argparse-opt :name "help" :longopt "help" :shortopt "h" :description "Help msg")
+		   (make-argparse-opt :name "host-address" :longopt "host" :has-arg t :arg-type 'str
+							  :default "http://localhost"
+							  :description "Address for frontend to contact host")
+		   (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
+							  :default 8080
+							  :description "Port to bind and listen to")
+		   (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
+							  :default "/tmp/org-docroot/"
+							  :description "Fileserver root directory")))
+		 (argp-v
+		  (argparse-getopt
+		   argp-opts
+		   argv-2))
+		 (argv (cadr argp-v))
+		 (args (car argp-v)))
+	(if (argparse-get-arg argp-opts "help" args)
+		(progn
+		  (message "Usage: emacs --batch -l web-server-org.el -f web-server-org-main -- [OPTION]")
+		  (message "")
+		  (message (argparse-help-msg argp-opts)))
+	  (progn
+		(setq-if host-address (cdr (argparse-get-arg argp-opts "host-address" args)))
+		(let ((v (cdr (argparse-get-arg argp-opts "port" args))))
+		  (if v
+			  (setq host-port (int-to-string v))))
+		(setq-if docroot (cdr (argparse-get-arg argp-opts "docroot" args)))
+		(el-log "preparing")
+		(defvar my-server (ws-start '(((:POST . ".*") . org-poster)
+									  ((:GET . ".*") . org-server))
+									(string-to-number host-port)
+									nil
+									:host "0.0.0.0" ;; critical fix for Docker
+									))
+		;; TODO: ^ add network args
+		;; TODO: https support
+		;; TODO: (require 'ox) org mode export theme customization
+		;; TODO: css
+		(message "%s" (owoify "Hello, server is running"))
+		(message "%s" (owoify (format "Serving HTML and ORG files in directory %S" docroot)))
+		(message "%s" (owoify (format "Servicing you, sir, at %s:%s" host-address host-port)))
+		(message (owoify "... ~nyaa"))
+		(defvar block (while t (sleep-for 99999999)))
+		(ws-stop-all)))))
