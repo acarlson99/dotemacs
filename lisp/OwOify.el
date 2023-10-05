@@ -23,7 +23,7 @@
 (defvar OwOify-stutterChance 0.2)
 (defvar OwOify-doPrefixes t)
 (defvar OwOify-prefixChance 0.2)
-(defvar OwOify-prefixes '("OwO" ;; TODO: literally what are these numbers
+(defvar OwOify-prefixes '("OwO"
 						  "OwO whats this?"
 						  "*unbuttons shirt*"
 						  "*nuzzles*"
