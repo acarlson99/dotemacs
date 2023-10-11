@@ -95,6 +95,7 @@ ARGS: list of strings, usually `argv'
   (let* (
 										; '--flag' 'val'
 		 (with-sep-arg (argparse-parser-with-continuation
+						;; TODO: this does not find the right definition of `argparse--num-lambda-args'
 						(lambda (opt arg1 arg2)
 						  (if (and
 							   (argparse-opt-longopt opt)
