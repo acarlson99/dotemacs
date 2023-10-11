@@ -73,7 +73,8 @@
 ;; }"))
 
 (defun gptmacs-execute-on-region (start end msg)
-  "Sends marked code to gpt with a message from the user.  `START` and `END` represent the region, `MSG` is the message."
+  "Sends marked code to gpt with a message from the user.
+`START` and `END` represent the region, `MSG` is the message."
   (interactive "r\nsWhat is your message?? ")
   (if (region-active-p)
 	  (gptmacs-query-gpt
