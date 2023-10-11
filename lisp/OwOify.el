@@ -30,7 +30,7 @@
   :type 'boolean
   :group 'OwOify)
 (defcustom OwOify-repeaty t
-  "broken"
+  "Repeat words len>=4 ending in `y'"
   :type 'boolean
   :group 'OwOify)
 (defcustom OwOify-doStutter t
@@ -141,13 +141,14 @@
 (defun OwOify-repeaty-fn (text)
   (if OwOify-repeaty
       (replace-regexp-in-string
-       "\\b(?=.*[aeiou])(?=[a-vx-z])[a-z]\\{4,\\}y\\b"
+	   "\\b[a-z]\\{4,\\}y\\b"
        (lambda (match)
          (concat match
+				 " "
                  (if (< (string-to-char (substring match 0 1)) 97)
                      "W"
                    "w")
-                 (substring (string-match "[aeiouy]" match) 0)))
+				 (substring match (string-match "[aeiouy]" match nil t))))
        text)))
 
 (defun OwOify-doStutter-fn (text)
