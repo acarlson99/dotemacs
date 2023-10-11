@@ -25,6 +25,13 @@
 
 ;;; BEGIN MY CODE
 
+(byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
+(byte-recompile-directory
+ (concat
+  (file-name-directory (or load-file-name (buffer-file-name)))
+  "lisp/")
+ 0)
+
 (let* ((my-lisp-directory
 		(concat
 		 (file-name-directory (or load-file-name (buffer-file-name)))
