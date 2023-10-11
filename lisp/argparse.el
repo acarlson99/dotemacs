@@ -53,7 +53,7 @@ F: lambda which acts as the body of the created parser.  This cannot be a
 function, it MUST be a lambda.
 
 Parser consumes as many tokens as the function takes arguments.
-Specifically this uses the `argparse--num-lambda-args` function which does not
+Specifically this uses the `(length (cadr f))` function which does not
 properly handle `&optional' or `&rest' arguments.  In cases where a function
 with optional arguments is required please use the following form:
   (let ((parse-func (lambda (a b &optional c d)
@@ -61,7 +61,10 @@ with optional arguments is required please use the following form:
 	(argparse-parser-with-continuation (lambda (a b) (parse-func a b))))
 "
   `(lambda (opts args &optional continuation rargs)
-	 (let ((n-consumed ,(- (argparse--num-lambda-args f) 1)))
+	 (let ((n-consumed ,(- (or
+							(cl-assert (equal (car f) 'lambda))
+							(length (cadr f)))
+						   1)))
 	   (if (< (length args) n-consumed)
 		   (append (list rargs) (list args))
 		 (let* ((result (cl-some
@@ -95,7 +98,6 @@ ARGS: list of strings, usually `argv'
   (let* (
 										; '--flag' 'val'
 		 (with-sep-arg (argparse-parser-with-continuation
-						;; TODO: this does not find the right definition of `argparse--num-lambda-args'
 						(lambda (opt arg1 arg2)
 						  (if (and
 							   (argparse-opt-longopt opt)
@@ -312,7 +314,7 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
   "separate argparse help-msg fields with `|'")
 
 (defun argparse-help-msg (opts_)
-  (let* ((opts (seq-sort (lambda (a b) (string> (argparse-opt-name a) (argparse-opt-name b))) opts_))
+  (let* ((opts (seq-sort (lambda (a b) (string< (argparse-opt-name a) (argparse-opt-name b))) opts_))
 		 (opt-lists
 		  (cons
 		   '("Name" "Short" "Long" "Type" "Default" "Description")
@@ -343,9 +345,9 @@ ARGLIST: list of key/value pairs of form ((A . B) (C . D))
 				   (and
 					(argparse-opt-default o)
 					(format "%S" (argparse-opt-default o))))
-				 argparse-opt-description ;; TODO: limit description to ~30 chars and wrap (nicely) when necessary
+				 argparse-opt-description
 				 )))
-			opts_)))
+			opts)))
 		 (opt-lens (mapcar
 					(lambda (n)
 					  (apply #'max (mapcar
