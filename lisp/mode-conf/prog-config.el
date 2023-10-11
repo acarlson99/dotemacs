@@ -1,7 +1,7 @@
 (require 'my-defs)
 
 (defun prog-config ()
-  "For use in 'prog-mode-hook'."
+  "For use in `prog-mode-hook'."
   ;; moving text
   (local-set-key (kbd "C-x C-p") 'move-text-up)
   (local-set-key (kbd "C-x C-n") 'move-text-down)

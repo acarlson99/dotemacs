@@ -54,7 +54,7 @@
 	(el-log-lvl 'WARN "clang-format not found")))
 
 (defun c-config ()
-  "For use in 'c-mode-hook'."
+  "For use in `c-mode-hook'."
   ;; header protection
   (local-set-key (kbd "C-c C-p") 'c-protect-header)
   ;; (c-toggle-comment-style -1)							; Commented out for norminette

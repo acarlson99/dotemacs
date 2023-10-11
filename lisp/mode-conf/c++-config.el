@@ -64,7 +64,7 @@
 	  (c++-insert-exception-src name nest)))
 
 (defun c++-config ()
-  "For use in 'c++-mode-hook'."
+  "For use in `c++-mode-hook'."
   (when (require 'c-config nil 'noerror)
 	(c-config))
   ;; template exception insertion stuff from Steven

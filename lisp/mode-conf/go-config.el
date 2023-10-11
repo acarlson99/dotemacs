@@ -46,7 +46,7 @@
 (defvar gofmt-command "goreturns")
 
 (defun go-config ()
-  "For use in 'go-mode-hook'."
+  "For use in `go-mode-hook'."
   ;; (local-set-key (kbd "C-c f") 'go-run-goreturns)
   ;; These do the same thing, but the latter is probably better than my hack
   (add-hook 'before-save-hook 'gofmt-before-save)

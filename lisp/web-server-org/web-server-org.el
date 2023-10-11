@@ -177,7 +177,7 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (setq org-confirm-babel-evaluate nil)
 
-(defvar docroot "/tmp/test/")
+(defvar docroot "/tmp/test/") ;; TODO: add prefix e.g. `org-server-docroot'
 
 ;; serve GET requests for:
 ;; * FILE.html -- compile FILE.org to HTML and serve
@@ -375,5 +375,5 @@ b.onclick = () => { oldF(); refreshF(); };
 		(el-log "Hello, server is running at %s:%s" host-address host-port)
 		(el-log "Serving HTML and ORG files in directory %S" docroot)
 		(el-log "... ~nyaa")
-		(defvar block (while t (sleep-for 99999999)))
+		(defvar block (while t (sleep-for 99999999))) ;; TODO: add prefix
 		(ws-stop-all)))))

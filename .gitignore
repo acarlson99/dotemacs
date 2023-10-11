@@ -80,3 +80,5 @@ TAGS
 /request
 /.el-keystored-keys.el
 /org-persist
+
+*.elc
