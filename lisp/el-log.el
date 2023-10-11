@@ -24,9 +24,11 @@
 
 ;;; Code:
 
-(defvar el-log-levels '(INFO WARN ERROR FATAL)
+(defcustom el-log-levels '(INFO WARN ERROR FATAL)
   "Levels to display.
-Logging to a loglvl not in this list produces no output")
+Logging to a loglvl not in this list produces no output"
+  :type 'list
+  :group 'el-log)
 
 (defvar el-log-level-default 'INFO "Default value assigned to el-log calls if not specified.")
 
@@ -55,9 +57,11 @@ Logging to a loglvl not in this list produces no output")
 (defmacro el-log (format-string &rest args)
   `(el-log-lvl el-log-level-default ,format-string ,@args))
 
-(defvar el-log-middleware '()
+(defcustom el-log-middleware '()
   "intermediary string functions to run after message is formatted.
-Usually just silly.")
+Usually just silly."
+  :type 'list
+  :group 'el-log)
 
 ;; (require 'OwOify)
 ;; (add-to-list 'el-log-middleware #'OwOify)

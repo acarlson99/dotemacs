@@ -1,7 +1,9 @@
 ;; ported (badly) from https://github.com/aqua-lzma/OwOify/blob/master/OwOify.js
 
-(defvar OwOify-replaceWords t)
-(defvar OwOify-wordMap '(("love" . "wuv")
+(defcustom OwOify-replaceWords t "Whether or not to replace words in wordMap."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-wordMap '(("love" . "wuv")
 						 ("dog" . "doggo")
 						 ("cat" . "kitteh")
 						 ("hello" . "henwo")
@@ -15,15 +17,39 @@
 						 ("dick" . "peepee")
 						 ("penis" . "peepee")
 						 ("damn" . "darn")
-						 ))
-(defvar OwOify-rltow t)
-(defvar OwOify-yaftern t)
-(defvar OwOify-repeaty t)
-(defvar OwOify-doStutter t)
-(defvar OwOify-stutterChance 0.2)
-(defvar OwOify-doPrefixes t)
-(defvar OwOify-prefixChance 0.2)
-(defvar OwOify-prefixes '("OwO"
+						 )
+  "Words to replace."
+  :type 'list
+  :group 'OwOify)
+(defcustom OwOify-rltow t
+  "Replace `r' and `l' with `w'."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-yaftern t
+  "Insert `y' after `n' with vowel e.g. `no' -> `nyo'."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-repeaty t
+  "broken"
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-doStutter t
+  "S-S-Stutter."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-stutterChance 0.2
+  "Chance to stutter."
+  :type 'float
+  :group 'OwOify)
+(defcustom OwOify-doPrefixes t
+  "Add prefix to string."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-prefixChance 0.2
+  "Chance to add prefix to string."
+  :type 'float
+  :group 'OwOify)
+(defcustom OwOify-prefixes '("OwO"
 						  "OwO whats this?"
 						  "*unbuttons shirt*"
 						  "*nuzzles*"
@@ -31,10 +57,19 @@
 						  "*notices bulge*"
 						  "*blushes*"
 						  "*giggles*"
-						  "hehe"))
-(defvar OwOify-doSuffixes t)
-(defvar OwOify-suffixChance 0.3)
-(defvar OwOify-suffixes '("(ﾉ´ з `)ノ"
+						  "hehe")
+  "Prefixes to prepend to string."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-doSuffixes t
+  "Add suffix to end of string."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-suffixChance 0.3
+  "Chance to add suffix."
+  :type 'boolean
+  :group 'OwOify)
+(defcustom OwOify-suffixes '("(ﾉ´ з `)ノ"
 						  "( ´ ▽ ` ).｡ｏ♡"
 						  "(´,,•ω•,,)♡"
 						  "(*≧▽≦)"
@@ -55,7 +90,10 @@
 						  "murr~"
 						  "UwU"
 						  "*gwomps*"
-						  ))
+						  )
+  "Suffixes to add randomly."
+  :type 'boolean
+  :group 'OwOify)
 
 (defun OwOify (text)
   "OwOify the given text."
