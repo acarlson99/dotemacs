@@ -38,19 +38,26 @@ Logging to a loglvl not in this list produces no output"
 		   (current-time-string)
 		   (symbol-name ,loglvl)
 		   ;; TODO: FIX when run on init this produces "[INFO] *scratch*:1 -- "
-		   (or load-file-name (buffer-file-name) (buffer-name))
+		   ,(or load-file-name (buffer-file-name) (buffer-name))
 		   (line-number-at-pos)))
+
+(defcustom el-log-msg-prefix-fn nil
+  "Function to use to prefix message; if nil use `el-log-msg-prefix'."
+  :type 'function
+  :group 'el-log)
 
 (defmacro el-log-lvl (loglvl format-string &rest args)
   `(let ((loglvl (or ,loglvl el-log-level-default)))
 	 (if (member loglvl el-log-levels)
 		 (message "%s"
-				  (string-join (list (el-log-msg-prefix loglvl)
-							   (cl-reduce
-								(lambda (s fn)
-								  (funcall fn s))
-								el-log-middleware
-								:initial-value (format ,format-string ,@args))))))))
+				  (string-join (list (if (not el-log-msg-prefix-fn)
+										 (el-log-msg-prefix loglvl)
+									   (funcall el-log-msg-prefix-fn loglvl))
+									 (cl-reduce
+									  (lambda (s fn)
+										(funcall fn s))
+									  el-log-middleware
+									  :initial-value (format ,format-string ,@args))))))))
 								   ;; (string-join (list (el-log-msg-prefix loglvl) ,format-string))
 								   ;; ,@args))))))
 

@@ -1,6 +1,7 @@
 :; emacs --batch -l "$0" -f web-server-org-main -- "$@" && exit
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "/opt/web-server-org/") ;; in case of systemctl
 (require 'package)
 (unless package--initialized (package-initialize))
 (unless (require 'web-server nil :noerror)
@@ -341,6 +342,8 @@ b.onclick = () => { oldF(); refreshF(); };
 		   (make-argparse-opt :name "port" :longopt "port" :shortopt "p" :has-arg t :arg-type 'int
 							  :default 8080
 							  :description "Port to bind and listen to")
+		   (make-argparse-opt :name "short-log-prefix" :longopt "short-log-prefix"
+							  :description "Shorten server prefix")
 		   (make-argparse-opt :name "docroot" :longopt "dir" :shortopt "d" :has-arg t :arg-type 'str
 							  :default "/tmp/org-docroot/"
 							  :description "Fileserver root directory")))
@@ -356,6 +359,10 @@ b.onclick = () => { oldF(); refreshF(); };
 		  (message "")
 		  (message "%s" (argparse-help-msg argp-opts)))
 	  (progn
+		(if (argparse-get-arg argp-opts "short-log-prefix" args)
+			(setq el-log-msg-prefix-fn
+				  (lambda (lvl)
+					(format "[%s] " lvl))))
 		(setq-if host-address (cdr (argparse-get-arg argp-opts "host-address" args)))
 		(let ((v (cdr (argparse-get-arg argp-opts "port" args))))
 		  (if v
