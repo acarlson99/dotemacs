@@ -1,0 +1,12 @@
+# run web-server-org-setup.sh first
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStartPre=mkdir -p /etc/web-server-org/
+ExecStart=emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- --dir=/etc/web-server-org/ --short-log-prefix
+Restart=on-failure
+RestartSec=5s
+ExecReload=/bin/kill -HUP $MANPID
+
+TimeoutStopSec=10s
