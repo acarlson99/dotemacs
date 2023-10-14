@@ -1,12 +1,20 @@
-# run web-server-org-setup.sh first
+# systemd service for emacs web server
+# run `sudo ./web-server-org-setup.sh` first
 [Install]
 WantedBy=multi-user.target
 
 [Service]
-ExecStartPre=mkdir -p /etc/web-server-org/
+# ExecStartPre=mkdir -p /etc/web-server-org/
 ExecStart=emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- --dir=/etc/web-server-org/ --short-log-prefix
 Restart=on-failure
 RestartSec=5s
 ExecReload=/bin/kill -HUP $MANPID
 
 TimeoutStopSec=10s
+
+# Make /usr, /boot, /etc and possibly some more folders read-only...
+ProtectSystem=full
+# ... except /etc/web-server-org/
+# This merely retains r/w access rights, it does not add any new.
+# Must still be writable on the host!
+ReadWriteDirectories=/etc/web-server-org/
