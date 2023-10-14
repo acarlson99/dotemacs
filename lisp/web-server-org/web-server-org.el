@@ -1,6 +1,7 @@
 :; emacs --batch -l "$0" -f web-server-org-main -- "$@" && exit
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "/opt/web-server-org/") ;; in case of systemctl
 (require 'package)
 (unless package--initialized (package-initialize))
 (unless (require 'web-server nil :noerror)
