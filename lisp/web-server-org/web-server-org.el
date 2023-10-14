@@ -180,12 +180,16 @@ b.onclick = () => { oldF(); refreshF(); };
 
 (defvar docroot "/tmp/test/") ;; TODO: add prefix e.g. `org-server-docroot'
 
+(defun org-server-string-starts-with (prefix str)
+  (and
+   (>= (length str) (length prefix))
+   (string= (substring str 0 (length prefix)) prefix)))
+
 ;; serve GET requests for:
 ;; * FILE.html -- compile FILE.org to HTML and serve
 ;; * FILE.org -- serve org file in editable interface and allow updates
 ;; * path/dir/folder/ -- serve ORG/HTML files
 (defun org-server (request)
-  (el-log "reveiced request")
   (condition-case err
 	  (with-slots (process headers) request
 		(let ((path (ws-in-directory-p	; check if path is in docroot
@@ -294,8 +298,15 @@ b.onclick = () => { oldF(); refreshF(); };
 		(ws-response-header process 200 '("Content-type" . "text/plain"))
 		;; (print request)
 		;; (print headers)
-		(let* ((path (ws-in-directory-p ; check if path is in docroot
-					  docroot (substring (cdr (assoc :POST headers)) 1)))
+		(let* ((post-header (let ((s (substring (cdr (assoc :POST headers)) 1))
+								  (host-header (cdr (assoc :HOST headers))))
+							  ;; POST header sometimes looks like `HOST:PORT/path'
+							  ;; correction to remove prefix hostname
+							  (if (org-server-string-starts-with host-header s)
+								  (substring s (+ 1 (length host-header)))
+								s)))
+			   (path (ws-in-directory-p ; check if path is in docroot
+					  docroot post-header))
 			   (base (file-name-sans-extension path))
 			   (orig (concat base ".org")) ;; full filepath of doc to write
 			   (message-assoc (cdr (assoc "content" headers)))
@@ -303,7 +314,7 @@ b.onclick = () => { oldF(); refreshF(); };
 				(if (not (equal nil message-assoc))
 					(cdr (assoc 'content message-assoc))
 				  nil)))
-		  (el-log (format "root %S base %S" (concat docroot (filename-in-docroot orig)) orig))
+		  (el-log "root %S base %S" (concat docroot (filename-in-docroot orig)) orig)
 		  (if (not (equal nil message))
 			  (progn
 				(el-log "writing text to %S len %d" orig (length message))
@@ -368,6 +379,8 @@ b.onclick = () => { oldF(); refreshF(); };
 		  (if v
 			  (setq host-port (int-to-string v))))
 		(setq-if docroot (cdr (argparse-get-arg argp-opts "docroot" args)))
+		(if (> (length argv) 0)
+			(el-log-lvl 'WARN "Unconsumed args %S" argv))
 		(el-log "preparing")
 		(defvar my-server (ws-start '(((:POST . ".*") . org-poster)
 									  ((:GET . ".*") . org-server))
