@@ -27,7 +27,7 @@
 (defcustom el-log-levels '(INFO WARN ERROR FATAL)
   "Levels to display.
 Logging to a loglvl not in this list produces no output"
-  :type 'list
+  :type '(list symbol)
   :group 'el-log)
 
 (defvar el-log-level-default 'INFO "Default value assigned to el-log calls if not specified.")
@@ -67,7 +67,7 @@ Logging to a loglvl not in this list produces no output"
 (defcustom el-log-middleware '()
   "intermediary string functions to run after message is formatted.
 Usually just silly."
-  :type 'list
+  :type '(list symbol)
   :group 'el-log)
 
 ;; (require 'OwOify)
