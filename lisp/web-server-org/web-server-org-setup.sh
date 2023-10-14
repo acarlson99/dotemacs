@@ -14,4 +14,7 @@ EOF`
 cd /opt/web-server-org/ && \
 wget $FILES
 
+wget -O/lib/systemd/system/web-server-org.service \
+    https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/web-server-org.service
+
 emacs --script /opt/web-server-org/setup.el

@@ -23,8 +23,6 @@ docker run -d --restart=always bombblob/emacs-org-fileserver -p 8080:8080
 
 ```sh
 curl https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/web-server-org-setup.sh | sudo bash
-sudo wget -O/lib/systemd/system/web-server-org.service \
-    https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/web-server-org.service
 sudo systemctl enable web-server-org.service
 sudo systemctl start web-server-org.service
 ```

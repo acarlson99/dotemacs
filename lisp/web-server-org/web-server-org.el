@@ -14,9 +14,9 @@
 
 ;; TODO: disable 'would you like to reread file? (yes/no)' message
 ;; dangerous :)
-(defun ask-user-about-supersession-threat (fn)
+(defun ask-user-about-supersession-threat (filename)
   "blatantly ignore files that changed on disk"
-  )
+  nil)
 
 (require 'subr-x)
 
@@ -318,7 +318,7 @@ b.onclick = () => { oldF(); refreshF(); };
 		  (if (not (equal nil message))
 			  (progn
 				(el-log "writing text to %S len %d" orig (length message))
-				(el-log "msg %S" message)
+				;; (el-log "msg %S" message)
 				(if (not (file-directory-p (file-name-directory orig)))
 					(make-directory (file-name-directory orig) t))
 				(with-temp-buffer
@@ -382,6 +382,8 @@ b.onclick = () => { oldF(); refreshF(); };
 		(if (> (length argv) 0)
 			(el-log-lvl 'WARN "Unconsumed args %S" argv))
 		(el-log "preparing")
+		(global-auto-revert-mode t)
+		(setq auto-revert-verbose nil)
 		(defvar my-server (ws-start '(((:POST . ".*") . org-poster)
 									  ((:GET . ".*") . org-server))
 									(string-to-number host-port)

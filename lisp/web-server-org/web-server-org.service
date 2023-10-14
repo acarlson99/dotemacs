@@ -5,7 +5,7 @@ WantedBy=multi-user.target
 
 [Service]
 # ExecStartPre=mkdir -p /etc/web-server-org/
-ExecStart=emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- --dir=/etc/web-server-org/ --short-log-prefix
+ExecStart=bash -c 'yes yes|emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- --dir=/etc/web-server-org/ --short-log-prefix --host=localhost'
 Restart=on-failure
 RestartSec=5s
 ExecReload=/bin/kill -HUP $MANPID
