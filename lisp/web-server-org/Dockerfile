@@ -66,7 +66,7 @@ CMD ["emacs", "--batch", "-l", "~/.emacs.d/lisp/web-server-org/web-server-org.el
 # aws-ec2-hostname:9999
 # I would need to set the server's hostname to aws-ec2-hostname and port to 9999
 # and expose port 9999.
-# The change would similar to the following
+# The change would look similar to the following:
 ## EXPOSE 9999
 ## CMD ["emacs", "--batch", "-l", \
 ##      "~/.emacs.d/lisp/web-server-org/web-server-org.el", \

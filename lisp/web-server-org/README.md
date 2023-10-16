@@ -22,9 +22,20 @@ docker run -d --restart=always bombblob/emacs-org-fileserver -p 8080:8080
 ### systemctl
 
 ```sh
-curl https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/web-server-org-setup.sh | sudo bash
-# note that you may need to modify `/lib/systemd/system/web-server-org.service'
-# to set hostname
+curl https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/setup-systemd.sh | sudo bash
+# note that you may need to modify `/opt/web-server-org/env'
+# to set hostname, port, dir
 sudo systemctl enable web-server-org.service
 sudo systemctl start web-server-org.service
 ```
+
+# TODO
+
+This project has many incomplete features
+
+* [ ] Authentication
+  * There should be some authentication to edit files (e.g. OAuth2)
+* [ ] systemd setup should create a new user with restricted permissions
+  * Currently runs fileserver as root; this seems unwise
+* [ ] HTTPS support (currently only supports HTTP)
+* [ ] support drop-in CSS and/or org style themes (e.g. `(require 'ox)`)

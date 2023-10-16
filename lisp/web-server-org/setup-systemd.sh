@@ -1,5 +1,8 @@
 set -e
 
+# TODO: this should create a new user with restricted permissions
+# running fileserver as root seems like a bad idea
+
 # run this to populate files for web-server-org.service
 mkdir -p /etc/web-server-org/     # file host dir
 mkdir -p /opt/web-server-org/     # location for elisp files
@@ -21,7 +24,7 @@ wget -O/lib/systemd/system/web-server-org.service \
 
 emacs --script /opt/web-server-org/setup-pkg.el
 
-cat<<EOF>>/opt/web-server-org/env
+cat<<EOF>/opt/web-server-org/env
 ORG_SERVER_HOST=localhost
 ORG_SERVER_PORT=8002
 ORG_SERVER_FILE_DIRECTORY=/etc/web-server-org/
