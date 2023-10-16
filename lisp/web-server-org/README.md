@@ -39,3 +39,11 @@ This project has many incomplete features
   * Currently runs fileserver as root; this seems unwise
 * [ ] HTTPS support (currently only supports HTTP)
 * [ ] support drop-in CSS and/or org style themes (e.g. `(require 'ox)`)
+* [ ] Race conditions/versioning
+  * Currently there is no check when uploading a file; it just writes the POST request data to the file with no versioning or backups
+  * This can lead to accidentally overwriting important data
+  * A fix could be to include revisions numbers or timestamps e.g.
+    * A checkout file at revision 4
+    * B checkout rev. 4
+    * A upload rev. 4->5
+    * B upload rev. 4->5 which is out of date, so the file upload should be rejected with a warning
