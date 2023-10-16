@@ -32,13 +32,13 @@ RUN ./configure --with-cairo --with-xwidgets --with-x-toolkit=gtk3 && \
     make install
 
 # RUN git clone https://github.com/acarlson99/dotemacs.git ~/.emacs.d && \
-#     emacs --script ~/.emacs.d/lisp/web-server-org/setup.el
+#     emacs --script ~/.emacs.d/lisp/web-server-org/setup-pkg.el
 
 WORKDIR ~/
 RUN mkdir -p ~/.emacs.d/lisp/web-server-org/
 RUN cd ~/.emacs.d/lisp/web-server-org/ && \
     wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/web-server-org.el && \
-    wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/setup.el
+    wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/web-server-org/setup-pkg.el
 RUN cd ~/.emacs.d/lisp/ &&  \
     wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/el-log.el && \
     wget https://raw.githubusercontent.com/acarlson99/dotemacs/master/lisp/argparse.el && \
