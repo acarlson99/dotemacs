@@ -4,8 +4,16 @@
 WantedBy=multi-user.target
 
 [Service]
-# ExecStartPre=mkdir -p /etc/web-server-org/
-ExecStart=bash -c 'yes yes|emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- --dir=/etc/web-server-org/ --short-log-prefix --host=localhost'
+# env file to load dir, hostname, port
+EnvironmentFile=/opt/web-server-org/env
+# ensure directory exists
+ExecStartPre=bash -c 'if [ ! -d '"${ORG_SERVER_FILE_DIRECTORY}"' ];\
+then echo '"target directory ${ORG_SERVER_FILE_DIRECTORY} not found"';\
+exit 1; fi'
+ExecStart=bash -c 'yes yes|\
+emacs --batch -l /opt/web-server-org/web-server-org.el -f web-server-org-main -- \
+--short-log-prefix --dir='"${ORG_SERVER_FILE_DIRECTORY}"' \
+--host='"${ORG_SERVER_HOST}"' --port='"${ORG_SERVER_PORT}"
 Restart=on-failure
 RestartSec=5s
 ExecReload=/bin/kill -HUP $MANPID
