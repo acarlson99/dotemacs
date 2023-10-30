@@ -45,6 +45,7 @@
 (evil-set-initial-state 'smudge-device-select-mode 'emacs)
 (evil-set-initial-state 'smudge-playlist-search-mode 'emacs)
 (evil-set-initial-state 'smudge-track-search-mode 'emacs)
+(evil-set-initial-state 'agda2-mode 'emacs)
 
 (define-key evil-insert-state-map (kbd "C-a") 'evil-beginning-of-visual-line)
 
