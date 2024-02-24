@@ -1,7 +1,8 @@
 set -e
 
-# TODO: this should create a new user with restricted permissions
-# running fileserver as root seems like a bad idea
+useradd -r web-server-org
+mkdir /home/web-server-org
+chown -R web-server-org /home/web-server-org
 
 # run this to populate files for web-server-org.service
 mkdir -p /etc/web-server-org/     # file host dir
@@ -29,5 +30,8 @@ ORG_SERVER_HOST=localhost
 ORG_SERVER_PORT=8002
 ORG_SERVER_FILE_DIRECTORY=/etc/web-server-org/
 EOF
+
+chown -R web-server-org /etc/web-server-org/
+chown -R web-server-org /opt/web-server-org/
 
 echo 'installation complete; you may need to edit /opt/web-server-org/env to set hostname'
