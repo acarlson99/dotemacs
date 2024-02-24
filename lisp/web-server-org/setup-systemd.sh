@@ -1,8 +1,10 @@
 set -e
 
-useradd -r web-server-org
-mkdir /home/web-server-org
-chown -R web-server-org /home/web-server-org
+if id web-server-org >/dev/null 2>&1; then
+    useradd -r web-server-org
+    mkdir -p /home/web-server-org
+    chown -R web-server-org /home/web-server-org
+fi
 
 # run this to populate files for web-server-org.service
 mkdir -p /etc/web-server-org/     # file host dir
@@ -25,13 +27,16 @@ wget -O/lib/systemd/system/web-server-org.service \
 
 emacs --script /opt/web-server-org/setup-pkg.el
 
+if [ ! -f /opt/web-server-org/env ]; then
 cat<<EOF>/opt/web-server-org/env
 ORG_SERVER_HOST=localhost
 ORG_SERVER_PORT=8002
 ORG_SERVER_FILE_DIRECTORY=/etc/web-server-org/
 EOF
+fi
 
 chown -R web-server-org /etc/web-server-org/
 chown -R web-server-org /opt/web-server-org/
 
 echo 'installation complete; you may need to edit /opt/web-server-org/env to set hostname'
+echo 'and run `systemctl daemon-reload && systemctl enable web-server-org && systemctl start web-server-org`'
