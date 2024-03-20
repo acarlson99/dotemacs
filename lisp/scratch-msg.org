@@ -279,7 +279,7 @@
 ;;   \   `             `\ ;
 ;;  /       ,        ,    |
 ;; |      /         : O /_       Oh bother...
-;; |          O  .--;__   '.   Time to write more bugs than
+;; |          O  .--;__   '.   Time to write more bugs than live in
 ;; |                (  )`.  |  the Hundred Acre Wood on a hot summer day
 ;;  \                 `-` /  |
 ;;   \          ,_  _.-./`  /
@@ -549,59 +549,68 @@
 ;;                 d';lllllllloo;';x           XxlccxX
 #+end_text
 
+#+NAME: cromulon
+#+begin_text
+        ___
+    . -^   `--,
+   /# =========`-_
+  /# (--====___====\
+ /#   .- --.  . --.|
+/##   |  * ) (   * ),
+|##   \    /\ \    /|
+|###   ---   \ ---  |
+|####      ___)    #|
+|######           ##|
+ \##### ---------- /
+  \####           (
+   `\###          |
+     \###         |
+      \##        |
+       \###.    .)
+        `======/
+#+end_text
+
+
 #+NAME: lambda-char
 #+begin_text
 ;; λ
 #+end_text
 
-#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking
-(require 'subr-x)
-(let* ((l (list
-           shrek keanu-breathtaking
-		   ankylosaur plesiosaur corythosaur stegosaurus
-		   coffee pale-blue-dot earth
-		   gaetan-juvin pooh-bear tux dragon
-		   bulbasaur squirtle charmander
-		   dudeism grateful-dead dancing-bear lambda-char))
-	   (msg (nth (random (length l)) l)))
-  (setq initial-scratch-message
-        (string-join (list ";; " (user-full-name) " -- " (current-time-string) "\n" msg))))
-  ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
-  ;; (replace-regexp-in-string "^" ";; " s)
-  ;; (setq initial-scratch-message (car (reverse l))))
+#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char cromulon=cromulon squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking
+  (require 'subr-x)
+  (let* ((l (list
+             shrek keanu-breathtaking cromulon
+             ankylosaur plesiosaur corythosaur stegosaurus
+             coffee pale-blue-dot earth
+             gaetan-juvin pooh-bear tux dragon
+             bulbasaur squirtle charmander
+             dudeism grateful-dead dancing-bear lambda-char))
+         (msg (nth (random (length l)) l)))
+    (setq initial-scratch-message
+          (string-join (list ";; " (user-full-name) " -- " (current-time-string) "\n" msg))))
+    ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
+    ;; (replace-regexp-in-string "^" ";; " s)
+    ;; (setq initial-scratch-message (car (reverse l))))
 #+end_src
 
 #+RESULTS:
 #+begin_example
-;; chumshack -- Mon Jul 10 15:59:44 2023
-;;                            -:*vJzvvvlv1zxc>:-
-;;                       ‘^]O#qz?*|zyoZZoy}vvi\xakur-
-;;                    ,zDQNJriLumf?’-,?qNRRRW#QD2>^uQMu:
-;;                 -/MQB9`\6RqHKkXUq'   `RRRRRRR8NQkr'PBNt.
-;;               ’aQ#MD>`R$wwwwwwwwwD'  `7NRRRRRRRR88&r'ddBa,
-;;             ’FQNRNZ`RqwwwmmmmmmmwXM'  `ORRRRRRRRRRRB9'wKKBe-
-;;            ,NQRRNo;`Pwwmmmmmmmmmwwku'  `BRRRRRRRRRRRgN'mqUHB;
-;;           ^QNRRgj`QPwmmmmmmmmmmmmmwg'   `gRRRRRRRRRRRgg'O969Q7
-;;          ?QWRRR#’`kwwmmmmmmmmmmmmmXR'   `U&RRRRRRRRRRRRa'N6UUQF
-;;         ;@WRRRNv`BwwmmmmmmmmmmmmmwK'’;   `8RRRRRRRRRRR8Q'm6UUUQL
-;;        ‘QNRRRRB`UDwmmmmmmmmmmmmmwkP'`9e'  `RRRRRRRRRRRRQ'\O6UU9Q,
-;;        zQRRRRRQ`qDwmmmmmmmmmmmmwE9'`ww9u' `iNRRRRRRRRRRQ'|O666U89
-;;       ‘QNRRRRRQ`FgwmmmmmmmmmmwwUm'`XwmwH'  `ogRRRRRRRR8Q'j9666U6@.
-;;       ;@RRRRRRBc`QwwmmmmmmmmwXKF'`Pwmmww&'  `XWRRRRRRRgd'g6U66UUQ?
-;;       \@RRRRRRN`rFMXwmmmmmmwwdL'`$wmmmwwXH'  `ENRRRRR8Q'oO6U66U6#x
-;;       \@RRRRRR&`x/UDwwmmmwXwH?'`Kwwmmmmmwkm'  `yN8&RRQ?'R6U666U6#J
-;;       ;@8RRRRRRQ`ivkRXwwwwwH' `DwwmmmmmmwwO'   `egR&Q?'&666666U6Q*
-;;       ‘QNRRRRRRN@O`maN9wwXH' `RXwwmmmmmmmmwM'   `wBO'-g6UU666U6U@-
-;;        /QRRRRRRRQHZhJ`/dH9' `RwwwmmmmmmmmmwXH'  _;;,,eK6U6666UUWk
-;;         ##RRRRRRQR6$R   `zRBDXXwmmmmmmmmwwwXdRv/'  PrQ666666U6qQ’
-;;         ,QNRRRRRQxeK6R;    `>1Z$DRHdddDRdh27j'    ‘PvQ66666UUUQ=
-;;          ;QgRRRRgBezg@@QBBBBgqu^--:M|,_7eDBBQgwv=zRjkg666UUU6QJ
-;;           :QNRRRRR##Q@##QQ@Q####96‘‘  9NddKUejUDN@QWK6U66UU9Q/
-;;            -KQ8RRRR&@PQMq&^      |’ ‘         ‘9m]OUU6UUU6DN:
-;;              rBBRRRRNQHg#B;’     ’Q:q         rjdD666666HB{‘
-;;                \NQMRRRRWgNQBP\i  "Q*Q:  ./BDgBQBRUUU66D#J-
-;;                  ;6Q#8RRRR&Bqr#-  ‘     ~*Bg6U6U666KNDL‘
-;;                    ‘?XBQN8RNgjav|k\?;>>X\vN9UU69R#Kv,
-;;                        ,|oO#QQWq~D‘N‘F,DeQ&g#Hez;‘
-;;                             ‘,;?ctFy2yfz/r:’
+;; misterbuttstuff -- Tue Mar 19 20:26:42 2024
+        ___
+    . -^   `--,
+   /# =========`-_
+  /# (--====___====\
+ /#   .- --.  . --.|
+/##   |  * ) (   * ),
+|##   \    /\ \    /|
+|###   ---   \ ---  |
+|####      ___)    #|
+|######           ##|
+ \##### ---------- /
+  \####           (
+   `\###          |
+     \###         |
+      \##        |
+       \###.    .)
+        `======/
 #+end_example
