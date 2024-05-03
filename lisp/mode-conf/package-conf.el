@@ -107,4 +107,15 @@
 	  (setq tramp-default-method "ssh"))
   (el-log-lvl 'WARN "Loading tramp failed.  Make sure ~/.emacs.d/tramp/lisp/tramp.el and ~/.emacs.d/tramp/lisp/Makefile exist and that tramp and tramp-compat are available.  Perhaps run 'autoconf && ./configure && make'"))
 
+;; hs-minor-mode
+(with-eval-after-load 'hideshow
+  (progn
+	(define-key hs-minor-mode-map (kbd "C-c -") 'hs-hide-block)
+	(define-key hs-minor-mode-map (kbd "C-c =") 'hs-show-block)
+	(define-key hs-minor-mode-map (kbd "C-c C--") 'hs-hide-all)
+	(define-key hs-minor-mode-map (kbd "C-c C-=") 'hs-show-all)
+	(define-key hs-minor-mode-map (kbd "C-'") 'hs-toggle-hiding)
+	(define-key hs-minor-mode-map (kbd "C-c w") 'my/org-copy-visible)
+	(define-key hs-minor-mode-map (kbd "C-c C-w") 'my/org-copy-visible)))
+
 (provide 'package-conf)

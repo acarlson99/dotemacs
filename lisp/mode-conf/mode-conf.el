@@ -29,3 +29,4 @@
 (add-hook 'go-mode-hook 'go-config)
 ;; (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'org-mode-hook 'org-config)
+(add-hook 'elisp-byte-code-mode 'hs-minor-mode)

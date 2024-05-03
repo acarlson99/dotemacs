@@ -155,9 +155,40 @@
 			(el-log "No wipe; waiting %d seconds" (- (+ last-wipe-time week) current))))))))
 
 (defun url-to-file (filepath url)
+  "Save content at URL to FILEPATH."
   (with-current-buffer
 	  (url-retrieve-synchronously url)
 	(write-file filepath)))
+
+(defvar my/org-copy-visible-trunc-replacement " ... ")
+
+;; yoinked from org-copy-visible
+;; purpose is to replace invisible sections with truncated text e.g. "<...>"
+(defun my/org-copy-visible (beg end)
+  "Copy the visible parts of the region."
+  (interactive "r")
+  (let ((result ""))
+    (while (/= beg end)
+      (if (eq org-fold-core-style 'text-properties)
+          (progn
+            (while (org-invisible-p beg)
+			  (setq beg (org-fold-next-visibility-change beg end)))
+            (let ((next (org-fold-next-visibility-change beg end)))
+			  (setq result (concat result (buffer-substring beg next)))
+			  (unless (= next end)
+				(setq result (concat result my/org-copy-visible-trunc-replacement)))
+			  (setq beg next)))
+        (when (invisible-p beg)
+		  (setq beg (next-single-char-property-change beg 'invisible nil end)))
+        (let ((next (next-single-char-property-change beg 'invisible nil end)))
+		  (setq result (concat result (buffer-substring beg next)))
+		  (setq beg next))))
+    ;; Prevent Emacs from adding full selected text to `kill-ring'
+    ;; when `select-enable-primary' is non-nil.  This special value of
+    ;; `deactivate-mark' only works since Emacs 29.
+    (setq deactivate-mark 'dont-save)
+    (kill-new result)
+    (message "Visible strings have been copied to the kill ring.")))
 
 (provide 'my-defs)
 ;;; my-defs.el ends here

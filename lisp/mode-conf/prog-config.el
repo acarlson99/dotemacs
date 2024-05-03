@@ -5,6 +5,7 @@
   ;; moving text
   (local-set-key (kbd "C-x C-p") 'move-text-up)
   (local-set-key (kbd "C-x C-n") 'move-text-down)
+  (local-set-key (kbd "C-c C-w") 'copy-region-as-kill)
 
   ;; Set fill column indicator defaults
   (setq fci-rule-column 80)
