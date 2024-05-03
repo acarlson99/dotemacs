@@ -11,6 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
+ '(evil-undo-system 'undo-tree)
  '(frame-brackground-mode 'dark)
  '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t)))
  '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
@@ -25,13 +26,6 @@
 
 ;;; BEGIN MY CODE
 
-(byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
-(byte-recompile-directory
- (concat
-  (file-name-directory (or load-file-name (buffer-file-name)))
-  "lisp/")
- 0)
-
 (let* ((my-lisp-directory
 		(concat
 		 (file-name-directory (or load-file-name (buffer-file-name)))
@@ -41,6 +35,13 @@
 	(let ((default-directory my-lisp-directory))
 	  (normal-top-level-add-subdirs-to-load-path))
 	))
+
+(byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
+(byte-recompile-directory
+ (concat
+  (file-name-directory (or load-file-name (buffer-file-name)))
+  "lisp/")
+ 0)
 
 (require 'el-log)
 (require 'cosmetic)
