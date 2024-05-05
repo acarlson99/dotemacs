@@ -36,12 +36,14 @@
 	  (normal-top-level-add-subdirs-to-load-path))
 	))
 
-(byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
-(byte-recompile-directory
- (concat
-  (file-name-directory (or load-file-name (buffer-file-name)))
-  "lisp/")
- 0)
+
+(with-eval-after-load 'bytecomp
+  (byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
+  (byte-recompile-directory
+   (concat
+	(file-name-directory (or load-file-name (buffer-file-name)))
+	"lisp/")
+   0))
 
 (require 'el-log)
 (require 'cosmetic)
