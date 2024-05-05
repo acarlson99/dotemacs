@@ -47,6 +47,7 @@
 (evil-set-initial-state 'smudge-track-search-mode 'emacs)
 (evil-set-initial-state 'agda2-mode 'emacs)
 (evil-set-initial-state 'fundamental-mode 'emacs)
+(evil-set-initial-state 'grep-mode 'emacs)
 
 (define-key evil-insert-state-map (kbd "C-a") 'evil-beginning-of-visual-line)
 
