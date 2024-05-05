@@ -2,6 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
+;; for emacs versions <29
+(unless (fboundp 'take)
+  (defun take (n l)
+    (cond
+     ((> n 0) (cons (car l) (take (- n 1) (cdr l))))
+     ((= n 0) nil)
+     (t (error "invalid argument for take: %d" n)))))
+
 ;; Text
 
 (defun move-text-internal (arg)
@@ -159,6 +167,8 @@
   (with-current-buffer
 	  (url-retrieve-synchronously url)
 	(write-file filepath)))
+
+(require 'org)
 
 (defvar my/org-copy-visible-trunc-replacement " ... ")
 
