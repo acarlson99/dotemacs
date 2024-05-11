@@ -30,3 +30,7 @@
 ;; (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'org-mode-hook 'org-config)
 (add-hook 'elisp-byte-code-mode 'hs-minor-mode)
+
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
+;; TODO: haskell-mode disable fci-mode bc it messes with LSP
