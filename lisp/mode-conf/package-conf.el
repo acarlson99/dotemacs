@@ -31,7 +31,8 @@
 
 ;; Turn on evil mode if it is installed
 (require 'evil nil 'noerror)
-(evil-mode 1)
+;; commented out because this is bad.  Just turn on flycheck in relevant buffers
+;; (evil-mode 1)
 (setq evil-undo-system 'undo-tree)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'emacs-lisp-mode 'emacs)
