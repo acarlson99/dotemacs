@@ -88,18 +88,6 @@
 (require 'hl-todo)
 (require 'escreen)
 (escreen-install)
-(require 'sql-upcase)
-
-(require 'prettier-js)
-
-(defvar agda-locate-command "agda-mode locate")
-(let ((exitCode (shell-command agda-locate-command)))
-  (cond
-   ((equal exitCode 127) (el-log-lvl 'WARN "agda-mode not found with command '%s'; exit code %d" agda-locate-command exitCode))
-   ((equal exitCode 0)
-	(load-file (let ((coding-system-for-read 'utf-8))
-				 (shell-command-to-string agda-locate-command))))
-   (t (el-log-lvl 'WARN "agda-mode unexpected error with command '%s' code %d; please check installation" agda-locate-command exitCode))))
 
 ;; default stuff
 (require 'my-defs)
