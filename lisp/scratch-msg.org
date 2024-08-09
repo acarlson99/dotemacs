@@ -279,8 +279,8 @@
 ;;   \   `             `\ ;
 ;;  /       ,        ,    |
 ;; |      /         : O /_       Oh bother...
-;; |          O  .--;__   '.   Time to write more bugs than live in
-;; |                (  )`.  |  the Hundred Acre Wood on a hot summer day
+;; |          O  .--;__   '.   Time to write more bugs than swarm the
+;; |                (  )`.  |  Hundred Acre Wood on a hot summer day
 ;;  \                 `-` /  |
 ;;   \          ,_  _.-./`  /
 ;;    \          \``-.(    /
