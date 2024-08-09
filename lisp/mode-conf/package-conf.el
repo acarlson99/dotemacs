@@ -70,6 +70,8 @@
 ;; Set global flycheck
 (require 'flycheck)
 (with-eval-after-load 'flycheck
+  ;; https://github.com/flycheck/flycheck/issues/1559
+  (setq-default flycheck-emacs-lisp-load-path 'inherit)
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 (global-flycheck-mode)
 

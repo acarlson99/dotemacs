@@ -26,6 +26,8 @@
 
 ;;; BEGIN MY CODE
 
+(setq load-prefer-newer t)
+
 (let* ((my-lisp-directory
 		(concat
 		 (file-name-directory (or load-file-name (buffer-file-name)))
