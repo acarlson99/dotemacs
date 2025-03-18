@@ -70,6 +70,8 @@
 ;; Set global flycheck
 (require 'flycheck)
 (with-eval-after-load 'flycheck
+  ;; https://github.com/flycheck/flycheck/issues/1559
+  (setq-default flycheck-emacs-lisp-load-path 'inherit)
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 (global-flycheck-mode)
 
@@ -119,5 +121,14 @@
 	(define-key hs-minor-mode-map (kbd "C-'") 'hs-toggle-hiding)
 	(define-key hs-minor-mode-map (kbd "C-c w") 'my/org-copy-visible)
 	(define-key hs-minor-mode-map (kbd "C-c C-w") 'my/org-copy-visible)))
+
+(defvar agda-locate-command "agda-mode locate")
+(let ((exitCode (shell-command agda-locate-command)))
+  (cond
+   ((equal exitCode 127) (el-log-lvl 'WARN "agda-mode not found with command '%s'; exit code %d" agda-locate-command exitCode))
+   ((equal exitCode 0)
+	(load-file (let ((coding-system-for-read 'utf-8))
+				 (shell-command-to-string agda-locate-command))))
+   (t (el-log-lvl 'WARN "agda-mode unexpected error with command '%s' code %d; please check installation" agda-locate-command exitCode))))
 
 (provide 'package-conf)
