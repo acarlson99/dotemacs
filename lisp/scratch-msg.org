@@ -577,20 +577,51 @@
 look out,kittnm, daddys beerdrunk and sloshing about in emacs again
 #+end_text
 
+#+NAME: pattern
+#+begin_text
+;; #.# \ / #.# \ /     \ / #.# \ / #.# 
+;; .X.  X  .X.  X   X   X  .X.  X  .X. 
+;; #.# / \ #.# / \     / \ #.# / \ #.# 
+;; \ /     \ /     #.#     \ /     \ / 
+;;  X   X   X   X  .X.  X   X   X   X  
+;; / \     / \     #.#     / \     / \ 
+;; #.# \ / #.# \ /     \ / #.# \ / #.# 
+;; .X.  X  .X.  X   X   X  .X.  X  .X. 
+;; #.# / \ #.# / \     / \ #.# / \ #.# 
+;; \ /     \ /     #.#     \ /     \ / 
+;;  X   X   X   X  .X.  X   X   X   X  
+;; / \     / \     #.#     / \     / \ 
+;;     #.#     #.# \ / #.#     #.#     
+;;  X  .X.  X  .X.  X  .X.  X  .X.  X  
+;;     #.#     #.# / \ #.#     #.#     
+;; \ /     \ /     #.#     \ /     \ / 
+;;  X   X   X   X  .X.  X   X   X   X  
+;; / \     / \     #.#     / \     / \ 
+;; #.# \ / #.# \ /     \ / #.# \ / #.# 
+;; .X.  X  .X.  X   X   X  .X.  X  .X. 
+;; #.# / \ #.# / \     / \ #.# / \ #.# 
+;; \ /     \ /     #.#     \ /     \ / 
+;;  X   X   X   X  .X.  X   X   X   X  
+;; / \     / \     #.#     / \     / \ 
+;; #.# \ / #.# \ /     \ / #.# \ / #.# 
+;; .X.  X  .X.  X   X   X  .X.  X  .X. 
+;; #.# / \ #.# / \     / \ #.# / \ #.#
+#+end_text
+
 
 #+NAME: lambda-char
 #+begin_text
 ;; λ
 #+end_text
 
-#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char cromulon=cromulon squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking msg=msg
+#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char cromulon=cromulon squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking msg=msg pattern=pattern
   (require 'subr-x)
   (let* ((l (list
              shrek keanu-breathtaking cromulon
              ankylosaur plesiosaur corythosaur stegosaurus
              coffee pale-blue-dot earth
              gaetan-juvin pooh-bear tux dragon
-             bulbasaur squirtle charmander msg
+             bulbasaur squirtle charmander msg pattern
              dudeism grateful-dead dancing-bear lambda-char))
          (msg (nth (random (length l)) l)))
     (setq initial-scratch-message
