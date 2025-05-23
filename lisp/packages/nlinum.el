@@ -45,8 +45,6 @@
 
 ;;; Code:
 
-(require 'linum)                        ;For its face
-
 (defgroup nlinum nil
   "Show line numbers in the margin, (hopefully) more efficiently."
   :group 'convenience
@@ -60,6 +58,11 @@
 When non-nil, the current line number is highlighted in `nlinum-current-line'
 face."
   :type 'boolean)
+
+(defface linum
+  '((t :inherit (shadow default)))
+  "Face for displaying line numbers in the display margin."
+  :group 'linum)
 
 (defface nlinum-current-line
   '((t :inherit linum :weight bold))
@@ -317,7 +320,8 @@ it may cause the margin to be resized and line numbers to be recomputed.")
   (save-excursion
     ;; Text may contain those nasty intangible properties, but
     ;; that shouldn't prevent us from counting those lines.
-    (let ((inhibit-point-motion-hooks t))
+	(progn
+	  (cursor-intangible-mode t)
       (goto-char start)
       (unless (bolp) (forward-line 1))
       (remove-overlays (point) limit 'nlinum t)
