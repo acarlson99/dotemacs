@@ -76,10 +76,6 @@
 				(package-refresh-contents)
 				(mapc 'package-install missing-packages)))))))
 
-;; TODO: find better way to determine filesystem
-;; oh no nfs
-(defvar on-nfs-p (string-match "/nfs/" (getenv "HOME")))
-
 ;; append shell (SHELL) path to path and exec-path.  Set path
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
 (if (require 'exec-path-from-shell nil 'noerror)

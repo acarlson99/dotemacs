@@ -24,6 +24,8 @@
 ;; go get -u github.com/rogpeppe/godef
 ;; go get -u github.com/sqs/goreturns
 
+(require 'my-defs)
+
 (defun go-errcatch ()
   "Insert go error catch."
   (interactive)
