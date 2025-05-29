@@ -81,4 +81,8 @@ TAGS
 /.el-keystored-keys.el
 /org-persist
 
+# compiled elisp
 *.elc
+
+# modules
+/module/*.so

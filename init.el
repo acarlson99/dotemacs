@@ -13,7 +13,7 @@
    '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
  '(evil-undo-system 'undo-tree)
  '(frame-brackground-mode 'dark)
- '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t)))
+ '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t) (glsl . t)))
  '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
  '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
@@ -26,28 +26,35 @@
 
 ;;; BEGIN MY CODE
 
+(defvar el-init-start-time (current-time))
+
 (setq load-prefer-newer t)
 
+(defun el-current-file () (or load-file-name (buffer-file-name)))
+
+(defvar my-init-file-path (el-current-file))
+(defvar my-emacs-d-path
+  (file-name-directory my-init-file-path))
+
 (let* ((my-lisp-directory
-		(concat
-		 (file-name-directory (or load-file-name (buffer-file-name)))
-		 "lisp/")))
+		(concat my-emacs-d-path "lisp/"))
+	   (my-module-directory
+		(concat my-emacs-d-path "module/")))
   (progn
-	(setq load-path (append (list my-lisp-directory) load-path))
+	(setq load-path (append (list my-lisp-directory my-module-directory) load-path))
 	(let ((default-directory my-lisp-directory))
 	  (normal-top-level-add-subdirs-to-load-path))
 	))
 
-
 (with-eval-after-load 'bytecomp
-  (byte-recompile-file (or load-file-name (buffer-file-name)) nil 0)
+  (byte-recompile-file my-init-file-path nil 0)
   (byte-recompile-directory
-   (concat
-	(file-name-directory (or load-file-name (buffer-file-name)))
-	"lisp/")
+   (concat my-emacs-d-path "lisp/")
    0))
 
 (require 'el-log)
+(require 'my-defs)
+(require 'mod-init)
 (require 'cosmetic)
 
 (let ((req-packages
@@ -76,8 +83,7 @@
 ;; append shell (SHELL) path to path and exec-path.  Set path
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run
 (if (require 'exec-path-from-shell nil 'noerror)
-	(let ((exec-path-from-shell-check-startup-files))
-	  (exec-path-from-shell-initialize))
+	(exec-path-from-shell-initialize)
   (progn
 	(el-log-lvl 'WARN "exec-path-from-shell not found.  Loading weird janky version")
 	(let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -c 'echo $PATH'"))))
@@ -92,7 +98,6 @@
 (escreen-install)
 
 ;; default stuff
-(require 'my-defs)
 (prune-backups)
 
 (require 'defaults)
@@ -108,6 +113,11 @@
 
 (when (require 'el-keystore nil 'noerror)
   (el-keystore-load-keys))
+
+(let* ((el-init-end-time (current-time))
+	   (init-load-duration
+		(float-time (time-subtract el-init-end-time el-init-start-time))))
+  (el-log-lvl 'INFO "Loaded emacs config in %d seconds" init-load-duration))
 
 (if (< emacs-major-version 30)
 	(el-log-lvl 'WARN "Low emacs version; please update"))

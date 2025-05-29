@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun el-current-file () (or load-file-name (buffer-file-name)))
+
 ;; for emacs versions <29
 (unless (fboundp 'take)
   (defun take (n l)
@@ -124,7 +126,7 @@
 (defun prune-backups ()
   "Set backup directory to `~/.emacs.d/backups' and clear directory weekly"
   (progn
-	(let ((backupdir (string-join (list user-emacs-directory "backups") ""))
+    (let ((backupdir (string-join (list user-emacs-directory "backups") ""))
 		  (wipefile (string-join (list user-emacs-directory ".lastIwiped") "")))
 
 	  ;; Make sure backup directory exists
