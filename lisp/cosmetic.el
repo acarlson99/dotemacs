@@ -5,7 +5,13 @@
 (defvar my-default-dark-theme 'manoj-dark)
 (defvar my-default-light-theme 'adwaita)
 
-(load-theme my-default-dark-theme t)
+(defun dark-mode ()
+  (interactive)
+  (load-theme my-default-dark-theme t))
+(defun light-mode ()
+  (interactive)
+  (load-theme my-default-light-theme t))
+(dark-mode)
 
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
