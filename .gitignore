@@ -74,7 +74,6 @@ TAGS
 /var
 /projectile*
 /transient
-/lisp/scratch-msg.el
 
 /.lastIwiped
 /request
@@ -83,6 +82,9 @@ TAGS
 
 # compiled elisp
 *.elc
+
+# generated files
+/lisp/scratch-msg.el
 
 # modules
 /module/*.so

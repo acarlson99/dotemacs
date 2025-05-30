@@ -43,14 +43,15 @@
   (progn
 	(setq load-path (append (list my-lisp-directory my-module-directory) load-path))
 	(let ((default-directory my-lisp-directory))
-	  (normal-top-level-add-subdirs-to-load-path))
-	))
+	  (normal-top-level-add-subdirs-to-load-path))))
 
 (with-eval-after-load 'bytecomp
-  (byte-recompile-file my-init-file-path nil 0)
-  (byte-recompile-directory
-   (concat my-emacs-d-path "lisp/")
-   0))
+  (let ((noninteractive t)
+		(init-el-path (concat my-emacs-d-path "init.el")))
+	(when (file-exists-p init-el-path)
+	  (byte-recompile-file init-el-path nil 0))
+	(byte-recompile-directory
+	 (concat my-emacs-d-path "lisp/") 0)))
 
 (require 'el-log)
 (require 'my-defs)
@@ -75,10 +76,6 @@
 			  (progn
 				(package-refresh-contents)
 				(mapc 'package-install missing-packages)))))))
-
-;; TODO: find better way to determine filesystem
-;; oh no nfs
-(defvar on-nfs-p (string-match "/nfs/" (getenv "HOME")))
 
 ;; append shell (SHELL) path to path and exec-path.  Set path
 ;; NOTE: not run in interactive mode, so only /etc/profile, ~/.profile, etc. is run

@@ -202,5 +202,9 @@
     (kill-new result)
     (message "Visible strings have been copied to the kill ring.")))
 
+;; TODO: find better way to determine filesystem
+;; oh no nfs
+(defvar on-nfs-p (string-match "/nfs/" (getenv "HOME")))
+
 (provide 'my-defs)
 ;;; my-defs.el ends here

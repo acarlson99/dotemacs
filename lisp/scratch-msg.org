@@ -614,21 +614,31 @@ look out,kittnm, daddys beerdrunk and sloshing about in emacs again
 ;; λ
 #+end_text
 
-#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char cromulon=cromulon squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking msg=msg pattern=pattern
-  (require 'subr-x)
-  (let* ((l (list
-             shrek keanu-breathtaking cromulon
-             ankylosaur plesiosaur corythosaur stegosaurus
-             coffee pale-blue-dot earth
-             gaetan-juvin pooh-bear tux dragon
-             bulbasaur squirtle charmander msg pattern
-             dudeism grateful-dead dancing-bear lambda-char))
-         (msg (nth (random (length l)) l)))
-    (setq initial-scratch-message
-          (string-join (list ";; " (user-full-name) " -- " (current-time-string) "\n" msg))))
-    ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
-    ;; (replace-regexp-in-string "^" ";; " s)
-    ;; (setq initial-scratch-message (car (reverse l))))
+#+NAME: kbd
+#+begin_text
+;; ` 1 2 3 4 5 6 7 8 9 0 - = DEL
+;;    q`w'e R t`y'U I o p [ ] \
+;;     a s D F g h J k l ; '
+;;      z x C v b N M , . /
+;; `C-'M- s           s M-
+#+end_text
+
+#+begin_src emacs-lisp :var shrek=shrek ankylosaur=ankylosaur plesiosaur=plesiosaur corythosaur=corythosaur stegosaurus=stegosaurus coffee=coffee gaetan-juvin=gaetan-juvin pale-blue-dot=pale-blue-dot dragon=dragon pooh-bear=pooh-bear tux=tux bulbasaur=bulbasaur earth=earth dudeism=dudeism grateful-dead=grateful-dead dancing-bear=dancing-bear lambda-char=lambda-char cromulon=cromulon squirtle=squirtle charmander=charmander keanu-breathtaking=keanu-breathtaking msg=msg pattern=pattern kbd=kbd
+    (require 'subr-x)
+    (let* ((l (list
+               shrek keanu-breathtaking cromulon
+               ankylosaur plesiosaur corythosaur stegosaurus
+               coffee pale-blue-dot earth
+               gaetan-juvin pooh-bear tux dragon
+               bulbasaur squirtle charmander
+               msg pattern kbd
+               dudeism grateful-dead dancing-bear lambda-char))
+           (msg (nth (random (length l)) l)))
+      (setq initial-scratch-message
+            (string-join (list ";; " (user-full-name) " -- " (current-time-string) "\n" msg))))
+      ;; (setq initial-scratch-message (replace-regexp-in-string "^\\(.\\)" ";; \\1" (nth (random (length l)) l))))
+      ;; (replace-regexp-in-string "^" ";; " s)
+      ;; (setq initial-scratch-message (car (reverse l))))
 #+end_src
 
 #+RESULTS:
