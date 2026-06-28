@@ -22,8 +22,6 @@
     ("incl" "include" nil 1)
     ("rtn" "return" nil 0)
     ("unsg" "unsigned" nil 0)
-    ("i" "ii" nil 0)
-    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'c-mode-abbrev-table
@@ -32,8 +30,6 @@
     ("incl" "include" nil 17)
     ("rtn" "return" nil 3)
     ("unsg" "unsigned" nil 7)
-    ("i" "ii" nil 0)
-    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'change-log-mode-abbrev-table '())
@@ -90,8 +86,6 @@
 (define-abbrev-table 'go-mode-abbrev-table
   '(
     ("rtn" "return" nil 1)
-    ("i" "ii" nil 0)
-    ("j" "jj" nil 0)
    ))
 
 (define-abbrev-table 'godoc-mode-abbrev-table '())
