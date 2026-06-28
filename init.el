@@ -13,8 +13,13 @@
    '("47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "11e57648ab04915568e558b77541d0e94e69d09c9c54c06075938b6abc0189d8" default))
  '(evil-undo-system 'undo-tree)
  '(frame-brackground-mode 'dark)
- '(org-babel-load-languages '((python . t) (shell . t) (emacs-lisp . t) (dot . t) (glsl . t)))
- '(package-selected-packages '(auto-complete evil evil-numbers flycheck))
+ '(org-babel-load-languages
+   '((python . t)
+	 (shell . t)
+	 (emacs-lisp . t)
+	 (dot . t)
+	 (glsl . t)))
+ '(package-selected-packages '(glsl-mode auto-complete evil evil-numbers flycheck))
  '(send-mail-function 'mailclient-send-it)
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -121,3 +126,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)

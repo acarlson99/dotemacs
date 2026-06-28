@@ -11,6 +11,7 @@
 (require 'sql-config)
 (require 'go-config)
 (require 'org-config)
+(require 'image-config)
 (require 'package-conf)
 
 ;; Set mode hooks
@@ -18,6 +19,7 @@
 ;; commented out in favor of fci-mode
 (add-hook 'prog-mode-hook 'prog-config)
 (add-hook 'c-mode-hook 'c-config)
+(add-hook 'glsl-mode-hook 'c-config)
 (add-hook 'c++-mode-hook 'c++-config)
 (add-hook 'ruby-mode-hook 'ruby-config)
 (add-hook 'term-mode-hook 'term-config)
@@ -29,6 +31,7 @@
 (add-hook 'go-mode-hook 'go-config)
 ;; (add-hook 'org-mode-hook 'font-lock-mode)
 (add-hook 'org-mode-hook 'org-config)
+(add-hook 'image-mode-hook 'my/image-mode-hook)
 (add-hook 'elisp-byte-code-mode 'hs-minor-mode)
 
 (add-hook 'haskell-mode-hook #'lsp)

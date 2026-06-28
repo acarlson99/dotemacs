@@ -53,6 +53,11 @@
 		  (error "Unsupported style.  Use llvm,google,chromium,mozilla,webkit,file")))
 	(el-log-lvl 'WARN "clang-format not found")))
 
+(defun indent-whole-buffer (&optional args)
+  (interactive "^P")
+  (save-mark-and-excursion
+	(c-indent-region (buffer-end -1) (buffer-end 1) t)))
+
 (defun c-config ()
   "For use in `c-mode-hook'."
   ;; header protection
@@ -68,6 +73,7 @@
   ;; clang-format on save
   (if (executable-find "clang-format")
 	  (add-hook 'before-save-hook 'clang-format-buffer nil t))
+  (local-set-key (kbd "C-M-<return>") 'indent-whole-buffer)
   ;; whitespace cleanup
   (local-set-key (kbd "C-c w") 'whitespace-cleanup))
 
